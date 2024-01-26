@@ -6,4 +6,5 @@ This project is designed to characterize some of the important tasks and project
 complex tasks can feel overwhelming; this application will solve some of those problems by provide organization and structure to your life.
 
 
-[Back to top](#https://github.com/jonathan9-9/project-manager/new/main?filename=README.md)
+<a class="top-link hide" href="#top">↑</a>
+<a name="top"></a>
