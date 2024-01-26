@@ -7,4 +7,4 @@ complex tasks can feel overwhelming; this application will solve some of those p
 
 
 <a class="top-link hide" href="#top">↑</a>
-<a name="top">https://github.com/jonathan9-9/project-manager/blob/main/README.md</a>
+<a name="top">[Back to top](https://github.com/jonathan9-9/project-manager/blob/main/README.md)</a>
