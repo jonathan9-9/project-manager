@@ -74,8 +74,6 @@ Should you have any suggestions to improve this project, please consider forking
 + Name: Jonathan Cornejo
 + Linkedin: https://www.linkedin.com/in/jonathan-cornejo/
 
-<a class="top-link hide" href="#top">↑</a>
-<a name="top">[Back to top](https://github.com/jonathan9-9/project-manager/blob/main/README.md)</a>
 
 ## Acknowledgments
 
