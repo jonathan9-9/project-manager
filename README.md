@@ -6,12 +6,9 @@ This project is designed to characterize some of the important tasks and project
 complex tasks can feel overwhelming; this application will solve some of those problems by provide organization and structure to your life.
 
 
-<a class="top-link hide" href="#top">↑</a>
-<a name="top">[Back to top](https://github.com/jonathan9-9/project-manager/blob/main/README.md)</a>
-
 ## Built With
 
-This project is built with the following technologies, frameworks and libraries too bootstrap the project:
+This project is built with the following technologies, frameworks and libraries to bootstrap the project:
 
 + ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
 * ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
@@ -24,7 +21,7 @@ This project is built with the following technologies, frameworks and libraries 
 
 ## Getting Started
 
-To bring down this project to your local machine follow the the following instructions
+To bring down this project to your local machine follow the following instructions
 
 ## Prerequisites
 
@@ -52,7 +49,7 @@ If you have an existing database schema the following is relevant.
 1. To run database introspection for possibly existing data from raw SQL commands into a data model in your prisma schema you can run the command: `npx prisma db pull`
 1. In order to use `prisma migrate dev` for an introspected database you need to baseline your database you can create a migrations directory using: `mkdir -p prisma/migrations/0_init`
 1. Generate the migration file using: `npx prisma migrate diff --from-empty --to-schema-data model prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql`
-1. Install prisma client npm `install @prisma/client`
+1. Install prisma client `npm install @prisma/client`
 1. Then generate the prisma client with the command: `npx prisma generate`; this will modify each time the ‘./prisma/client’ folder to generate a new prisma client instance each time you run the npx prisma generate command to make the latest queries to your database
 
 ## Resources
@@ -77,6 +74,8 @@ Should you have any suggestions to improve this project, please consider forking
 + Name: Jonathan Cornejo
 + Linkedin: https://www.linkedin.com/in/jonathan-cornejo/
 
+<a class="top-link hide" href="#top">↑</a>
+<a name="top">[Back to top](https://github.com/jonathan9-9/project-manager/blob/main/README.md)</a>
 
 ## Acknowledgments
 
