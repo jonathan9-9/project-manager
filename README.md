@@ -20,3 +20,29 @@ This project is built with the following technologies, frameworks and libraries 
 + ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
 + ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
 + ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+
+
+## Getting Started
+
+To bring down this project to your local machine follow the the following instructions
+
+## Prerequisites
+
+In order to work on this project you must have Node.js installed
++ npm
+  `npm install -g npm`
+
+## Installation
+
+1. CD into your working directory
+1. git clone <<github url>>
+1. Run the application on your local machine and open it up on VSCode with command: code .
+1. Install NPM packages
+   `npm install`
+1. Run the application on a development server https://localhost:3000 using npm run dev
+
+## Database Migrations
+
+1. To run database migrations using Prisma ORM use the command: `prisma migrate dev` to apply the changes to your database
+1. To run database introspection for possibly existing data from raw SQL commands into a data model in your prisma schema you can run the command: `npx prisma db pull`
+  
