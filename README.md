@@ -46,6 +46,41 @@ In order to work on this project you must have Node.js installed
 
 ## Database Migrations
 
+If you have an existing database schema the following is relevant.
+
 1. To run database migrations using Prisma ORM use the command: `prisma migrate dev` to apply the changes to your database
 1. To run database introspection for possibly existing data from raw SQL commands into a data model in your prisma schema you can run the command: `npx prisma db pull`
+1. In order to use `prisma migrate dev` for an introspected database you need to baseline your database you can create a migrations directory using: `mkdir -p prisma/migrations/0_init`
+2. Generate the migration file using: `npx prisma migrate diff --from-empty --to-schema-data model prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql`
+3. Install prisma client npm
+```
+install @prisma/client
+```
+1. Then generate the prisma client with the command: `npx prisma generate`; this will modify each time the ‘./prisma/client’ folder to generate a new prisma client instance each time you run the npx prisma generate command to make the latest queries to your database
+
+## Resources
+
++ Trello Board:
+  + https://trello.com/b/JBwUiAeE/main-board-todo-app
+
+## Contributions
+
+In the vibrant open-source community, contributions play a pivotal role in fostering a space for learning, inspiration, and collaborative creation. Your input is truly appreciated.
+
+Should you have any suggestions to improve this project, please consider forking the repository and initiating a pull request. Another option is to open an issue with the "enhancement" tag. And, of course, a star for the project would be a fantastic way to express your support! Thank you once again for being a part of this journey.
+
+1. Fork the Project
+2. Create your feature branch (`git branch -b featureName`)
+3. Commit your changes (`git commit -m 'Add an feature description'`)
+4. Push to the branch (`git push origin feature`)
+5. Open a PR
+
+## Contact
+
+Name - Jonathan Cornejo
+Linkedin - https://www.linkedin.com/in/jonathan-cornejo/
+
+
+## Acknowledgments
+
   
