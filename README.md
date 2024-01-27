@@ -38,7 +38,7 @@ In order to work on this project you must have Node.js installed
 ## Installation
 
 1. CD into your working directory
-1. git clone <<github url>>
+1. git clone ``` https://github.com/jonathan9-9/project-manager.git ```
 1. Run the application on your local machine and open it up on VSCode with command: code .
 1. Install NPM packages
    `npm install`
@@ -51,8 +51,8 @@ If you have an existing database schema the following is relevant.
 1. To run database migrations using Prisma ORM use the command: `prisma migrate dev` to apply the changes to your database
 1. To run database introspection for possibly existing data from raw SQL commands into a data model in your prisma schema you can run the command: `npx prisma db pull`
 1. In order to use `prisma migrate dev` for an introspected database you need to baseline your database you can create a migrations directory using: `mkdir -p prisma/migrations/0_init`
-2. Generate the migration file using: `npx prisma migrate diff --from-empty --to-schema-data model prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql`
-3. Install prisma client npm
+1. Generate the migration file using: `npx prisma migrate diff --from-empty --to-schema-data model prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql`
+1. Install prisma client npm
 ```
 install @prisma/client
 ```
@@ -77,8 +77,8 @@ Should you have any suggestions to improve this project, please consider forking
 
 ## Contact
 
-Name - Jonathan Cornejo
-Linkedin - https://www.linkedin.com/in/jonathan-cornejo/
++ Name: Jonathan Cornejo
++ Linkedin: https://www.linkedin.com/in/jonathan-cornejo/
 
 
 ## Acknowledgments
