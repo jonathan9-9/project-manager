@@ -52,10 +52,7 @@ If you have an existing database schema the following is relevant.
 1. To run database introspection for possibly existing data from raw SQL commands into a data model in your prisma schema you can run the command: `npx prisma db pull`
 1. In order to use `prisma migrate dev` for an introspected database you need to baseline your database you can create a migrations directory using: `mkdir -p prisma/migrations/0_init`
 1. Generate the migration file using: `npx prisma migrate diff --from-empty --to-schema-data model prisma/schema.prisma --script > prisma/migrations/0_init/migration.sql`
-1. Install prisma client npm
-```
-install @prisma/client
-```
+1. Install prisma client npm `install @prisma/client`
 1. Then generate the prisma client with the command: `npx prisma generate`; this will modify each time the ‘./prisma/client’ folder to generate a new prisma client instance each time you run the npx prisma generate command to make the latest queries to your database
 
 ## Resources
