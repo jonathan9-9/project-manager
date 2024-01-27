@@ -30,7 +30,8 @@ To bring down this project to your local machine follow the the following instru
 
 In order to work on this project you must have Node.js installed
 + npm
-  `npm install -g npm`
+
+  ```npm install -g npm```
 
 ## Installation
 
