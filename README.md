@@ -5,19 +5,19 @@
 This project is designed to characterize some of the important tasks and projects users can organize into their daily lives in a structured manner. It is engineered with the idea that large,
 complex tasks can feel overwhelming; this application will solve some of those problems by providing organization and structure to your life.
 
-
 ## Built With
 
 This project is built with the following technologies, frameworks and libraries to bootstrap the project:
 
-+ ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
-* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
-+ ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
-+ ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-+ ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
-+ ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
-+ ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
+- ![Chakra](https://img.shields.io/badge/chakra-%234ED1C5.svg?style=for-the-badge&logo=chakraui&logoColor=white)
 
+* ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+
+- ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+- ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
+- ![NestJS](https://img.shields.io/badge/nestjs-%23E0234E.svg?style=for-the-badge&logo=nestjs&logoColor=white)
+- ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
+- ![Prisma](https://img.shields.io/badge/Prisma-3982CE?style=for-the-badge&logo=Prisma&logoColor=white)
 
 ## Getting Started
 
@@ -26,7 +26,8 @@ To bring down this project to your local machine follow the following instructio
 ## Prerequisites
 
 In order to work on this project you must have Node.js installed
-+ npm
+
+- npm
 
   ```
   npm install -g npm
@@ -35,11 +36,13 @@ In order to work on this project you must have Node.js installed
 ## Installation
 
 1. CD into your working directory
-1. git clone ``` https://github.com/jonathan9-9/project-manager.git ```
+1. git clone `https://github.com/jonathan9-9/project-manager.git`
 1. Run the application on your local machine and open it up on VSCode with command: code .
 1. Install NPM packages
    `npm install`
-1. Run the application on a development server https://localhost:3000 using npm run dev
+1. Run the application on a development server http://localhost:5000 using npm run dev by changing the default port via package.json file
+1. Install the nestjs CLI using the command: `npm i -g @nestjs/cli`
+1. Run the development server via `npm run start:dev` on http://localhost:3000
 
 ## Database Migrations
 
@@ -54,8 +57,8 @@ If you have an existing database schema the following is relevant.
 
 ## Resources
 
-+ Trello Board:
-  + https://trello.com/b/JBwUiAeE/main-board-todo-app
+- Trello Board:
+  - https://trello.com/b/JBwUiAeE/main-board-todo-app
 
 ## Contributions
 
@@ -71,10 +74,7 @@ Should you have any suggestions to improve this project, please consider forking
 
 ## Contact
 
-+ Name: Jonathan Cornejo
-+ Linkedin: https://www.linkedin.com/in/jonathan-cornejo/
-
+- Name: Jonathan Cornejo
+- Linkedin: https://www.linkedin.com/in/jonathan-cornejo/
 
 ## Acknowledgments
-
-  
