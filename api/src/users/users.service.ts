@@ -7,7 +7,7 @@ export class UsersService {
   constructor(private readonly prisma: DatabaseService) {}
 
   async create(createUserDto: Prisma.UserCreateInput): Promise<User> {
-    console.log(createUserDto);
+    console.log('USER CREATED:', createUserDto);
     return this.prisma.user.create({
       data: createUserDto,
     });
@@ -18,7 +18,11 @@ export class UsersService {
   }
 
   async findOne(id: number) {
-    return `This action returns a #${id} user`;
+    return this.prisma.user.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
   async update(id: number, updateUserDto: Prisma.UserUpdateInput) {
