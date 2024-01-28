@@ -1,11 +1,10 @@
-import { Button, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import CreateUser from "./components/CreateUser";
 
 function App() {
   return (
-    <Box bg="black" borderRadius="md" p={2} m={10}>
-      <Button colorScheme="pink" width="20%">
-        Submit todo
-      </Button>
+    <Box bg="gray" borderRadius="md" p={2} m={10}>
+      <CreateUser />
     </Box>
   );
 }
