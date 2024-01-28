@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Prisma } from '@prisma/client';
+import { Prisma, User as UserModel } from '@prisma/client';
 
 @Controller('users')
 export class UsersController {
@@ -41,7 +41,9 @@ export class UsersController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+  remove(@Param('id') id: string): Promise<UserModel> {
+    return this.usersService.remove({
+      id: +id,
+    });
   }
 }

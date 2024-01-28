@@ -36,7 +36,9 @@ export class UsersService {
     });
   }
 
-  async remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(where: Prisma.UserWhereUniqueInput) {
+    return this.prisma.user.delete({
+      where,
+    });
   }
 }
