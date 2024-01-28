@@ -14,7 +14,7 @@ export class UsersService {
   }
 
   async findAll() {
-    return `This action returns all users`;
+    return this.prisma.user.findMany();
   }
 
   async findOne(id: number) {
@@ -25,9 +25,15 @@ export class UsersService {
     });
   }
 
-  async update(id: number, updateUserDto: Prisma.UserUpdateInput) {
-    console.log(updateUserDto);
-    return `This action updates a #${id} user`;
+  async updateUser(params: {
+    updateUserDto: Prisma.UserUpdateInput;
+    where: Prisma.UserWhereUniqueInput;
+  }): Promise<User> {
+    const { updateUserDto, where } = params;
+    return this.prisma.user.update({
+      data: updateUserDto,
+      where,
+    });
   }
 
   async remove(id: number) {
