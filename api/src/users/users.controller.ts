@@ -24,9 +24,13 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string): Promise<UserModel | undefined> {
-    return this.usersService.findOne(+id);
+  // @Get(':id')
+  // findOne(@Param('id') id: string): Promise<UserModel | undefined> {
+  //   return this.usersService.findOne(+id);
+  // }
+  @Get(':username')
+  findOne(@Param('id') username: string): Promise<UserModel | undefined> {
+    return this.usersService.findOne(username);
   }
 
   @Put(':id')

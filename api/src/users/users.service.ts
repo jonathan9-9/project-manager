@@ -17,10 +17,17 @@ export class UsersService {
     return this.prisma.user.findMany();
   }
 
-  async findOne(id: number) {
-    return this.prisma.user.findUnique({
+  // async findOne(id: number) {
+  //   return this.prisma.user.findUnique({
+  //     where: {
+  //       id,
+  //     },
+  //   });
+  // }
+  async findOne(username: string) {
+    return this.prisma.user.findFirstOrThrow({
       where: {
-        id,
+        username: username,
       },
     });
   }
