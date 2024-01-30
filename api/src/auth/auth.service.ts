@@ -9,6 +9,7 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // add bcrypt to hash password and compare input pass with stored password
   async signIn(
     username: string,
     pass: string,
