@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Prisma, User as UserModel } from '@prisma/client';
+// import { SkipAuth } from 'src/auth/auth.module';
 
 @Controller('users')
 export class UsersController {
@@ -44,6 +45,8 @@ export class UsersController {
     });
   }
 
+  // decorator to make an unprotected resource; void of auth
+  // @SkipAuth()
   @Delete(':id')
   remove(@Param('id') id: string): Promise<UserModel> {
     return this.usersService.remove({
