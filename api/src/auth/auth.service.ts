@@ -1,6 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
+import { User as UserModel } from '@prisma/client';
 
 @Injectable()
 export class AuthService {
@@ -24,5 +25,22 @@ export class AuthService {
     return {
       access_token: await this.jwtService.signAsync(payload),
     };
+  }
+
+  async signUp(
+    username: string,
+    password: string,
+    email: string,
+    name: string,
+    photo: string,
+  ): Promise<UserModel> {
+    const createdUser = await this.usersService.create({
+      username,
+      password,
+      email,
+      name,
+      photo,
+    });
+    return createdUser;
   }
 }

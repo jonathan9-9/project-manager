@@ -6,6 +6,7 @@ import { DatabaseService } from 'src/database/database.service';
 export class UsersService {
   constructor(private readonly prisma: DatabaseService) {}
 
+  // sign up the user
   async create(createUserDto: Prisma.UserCreateInput): Promise<User> {
     console.log('USER CREATED:', createUserDto);
     return this.prisma.user.create({
