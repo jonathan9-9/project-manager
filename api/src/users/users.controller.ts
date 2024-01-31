@@ -15,6 +15,7 @@ import { Public } from 'src/auth/decorators/public.decorator';
 export class UsersController {
   constructor(private usersService: UsersService) {}
 
+  @Public()
   @Post()
   create(@Body() createUserDto: Prisma.UserCreateInput) {
     return this.usersService.create(createUserDto);
@@ -26,11 +27,13 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
+  @Public()
   @Get(':username')
   findOne(@Param('id') username: string): Promise<UserModel | undefined> {
     return this.usersService.findOne(username);
   }
 
+  @Public()
   @Put(':id')
   update(
     @Param('id') id: string,
@@ -42,8 +45,6 @@ export class UsersController {
     });
   }
 
-  // decorator to make an unprotected resource; void of auth
-  // @SkipAuth()
   @Delete(':id')
   remove(@Param('id') id: string): Promise<UserModel> {
     return this.usersService.remove({

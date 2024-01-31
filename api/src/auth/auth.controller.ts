@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 import { User as UserModel } from '@prisma/client';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import * as bcrypt from 'bcrypt';
+import { Public } from './decorators/public.decorator';
 
 class SignInDto {
   @IsString()
@@ -25,6 +26,10 @@ class SignUpDto {
   @IsString()
   username: UserModel['username'];
 
+  @IsString()
+  @IsNotEmpty()
+  password: UserModel['password'];
+
   @IsEmail()
   @IsNotEmpty()
   email: UserModel['email'];
@@ -32,10 +37,6 @@ class SignUpDto {
   @IsString()
   @IsNotEmpty()
   name: UserModel['name'];
-
-  @IsString()
-  @IsNotEmpty()
-  password: UserModel['password'];
 
   @IsString()
   @IsNotEmpty()
@@ -52,19 +53,21 @@ export class AuthController {
   signIn(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
+  //inside auth controller public decorator enables user creation
 
+  @Public()
   @Post('signup')
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   async createUser(@Body() signUpDto: SignUpDto) {
-    const { username, email, password, name, photo } = signUpDto;
+    const { username, password, email, name, photo } = signUpDto;
 
     const saltOrRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltOrRounds);
 
     const result = await this.authService.signUp(
       username,
-      email,
       hashedPassword,
+      email,
       name,
       photo,
     );

@@ -11,11 +11,6 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  // add bcrypt to hash password and compare input pass with stored password
-
-  // if (user?.password !== pass) {
-  //   throw new UnauthorizedException();
-  // }
   async signIn(
     username: string,
     pass: string,
