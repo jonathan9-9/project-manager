@@ -6,7 +6,6 @@ import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
-import { SetMetadata } from '@nestjs/common';
 
 @Module({
   controllers: [AuthController],
@@ -28,6 +27,3 @@ import { SetMetadata } from '@nestjs/common';
   ],
 })
 export class AuthModule {}
-
-export const IS_PUBLIC_KEY = 'isPublic';
-export const SkipAuth = () => SetMetadata(IS_PUBLIC_KEY, true);

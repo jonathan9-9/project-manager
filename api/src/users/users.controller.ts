@@ -9,26 +9,23 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Prisma, User as UserModel } from '@prisma/client';
-// import { SkipAuth } from 'src/auth/auth.module';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
   @Post()
   create(@Body() createUserDto: Prisma.UserCreateInput) {
     return this.usersService.create(createUserDto);
   }
 
+  @Public()
   @Get()
   findAll(): Promise<UserModel[]> {
     return this.usersService.findAll();
   }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string): Promise<UserModel | undefined> {
-  //   return this.usersService.findOne(+id);
-  // }
   @Get(':username')
   findOne(@Param('id') username: string): Promise<UserModel | undefined> {
     return this.usersService.findOne(username);

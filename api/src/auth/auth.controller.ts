@@ -39,7 +39,7 @@ class SignUpDto {
 
   @IsString()
   @IsNotEmpty()
-  photoUrl: UserModel['photo'];
+  photo: UserModel['photo'];
 }
 
 @Controller('auth')
@@ -53,10 +53,10 @@ export class AuthController {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
 
-  @Post('/signup')
+  @Post('signup')
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
   async createUser(@Body() signUpDto: SignUpDto) {
-    const { username, email, password, name, photoUrl } = signUpDto;
+    const { username, email, password, name, photo } = signUpDto;
 
     const saltOrRounds = 10;
     const hashedPassword = await bcrypt.hash(password, saltOrRounds);
@@ -66,8 +66,9 @@ export class AuthController {
       email,
       hashedPassword,
       name,
-      photoUrl,
+      photo,
     );
+    console.log(result);
 
     return {
       message: 'User was created successfully',
