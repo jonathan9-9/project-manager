@@ -29,7 +29,7 @@ export class UsersController {
 
   @Public()
   @Get(':username')
-  findOne(@Param('id') username: string): Promise<UserModel | undefined> {
+  findOne(@Param('username') username: string): Promise<UserModel | undefined> {
     return this.usersService.findOne(username);
   }
 
@@ -45,6 +45,7 @@ export class UsersController {
     });
   }
 
+  @Public()
   @Delete(':id')
   remove(@Param('id') id: string): Promise<UserModel> {
     return this.usersService.remove({

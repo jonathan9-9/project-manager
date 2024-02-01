@@ -47,6 +47,7 @@ class SignUpDto {
 export class AuthController {
   constructor(private authService: AuthService) {}
 
+  @Public()
   @HttpCode(HttpStatus.OK)
   @Post('login')
   @UsePipes(new ValidationPipe({ whitelist: true, transform: true }))
@@ -71,7 +72,6 @@ export class AuthController {
       name,
       photo,
     );
-    console.log(result);
 
     return {
       message: 'User was created successfully',
