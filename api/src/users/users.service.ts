@@ -15,11 +15,11 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.prisma.user.findMany();
+    return await this.prisma.user.findMany();
   }
 
   async findOne(username: string) {
-    const user = this.prisma.user.findFirst({
+    const user = await this.prisma.user.findFirst({
       where: {
         username: username,
       },

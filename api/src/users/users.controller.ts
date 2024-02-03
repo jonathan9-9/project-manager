@@ -10,6 +10,7 @@ import {
 import { UsersService } from './users.service';
 import { Prisma, User as UserModel } from '@prisma/client';
 import { Public } from 'src/auth/decorators/public.decorator';
+import { request } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -21,19 +22,25 @@ export class UsersController {
     return this.usersService.create(createUserDto);
   }
 
-  @Public()
   @Get()
   findAll(): Promise<UserModel[]> {
     return this.usersService.findAll();
   }
 
-  @Public()
   @Get(':username')
-  findOne(@Param('username') username: string): Promise<UserModel | undefined> {
-    return this.usersService.findOne(username);
+  async findOne(
+    @Param('username') username: string,
+  ): Promise<UserModel | undefined> {
+    try {
+      const user = await this.usersService.findOne(username);
+      console.log('token payload', request['user']);
+      return user;
+    } catch (error) {
+      console.log('error extracting payload from token', error.message);
+      throw error;
+    }
   }
 
-  @Public()
   @Put(':id')
   update(
     @Param('id') id: string,
@@ -45,7 +52,6 @@ export class UsersController {
     });
   }
 
-  @Public()
   @Delete(':id')
   remove(@Param('id') id: string): Promise<UserModel> {
     return this.usersService.remove({
