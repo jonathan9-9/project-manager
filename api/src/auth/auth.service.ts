@@ -1,4 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  BadRequestException,
+  HttpException,
+  Injectable,
+  InternalServerErrorException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { User as UserModel } from '@prisma/client';
@@ -16,19 +22,34 @@ export class AuthService {
     username: string,
     pass: string,
   ): Promise<{ access_token: string }> {
-    const user = await this.usersService.findOne(username);
+    try {
+      if (!username || !pass) {
+        throw new BadRequestException('something went wrong', {
+          cause: new Error(),
+          description: 'Username and password are both required',
+        });
+      }
+      const user = await this.usersService.findOne(username);
 
-    const passwordMatch = await bcrypt.compare(pass, user?.password);
-    if (!passwordMatch) {
-      throw new UnauthorizedException('Invalid Credentials');
+      const passwordMatch = await bcrypt.compare(pass, user?.password);
+      if (!passwordMatch) {
+        throw new UnauthorizedException('Invalid Credentials');
+      }
+      const payload = { sub: user.id, username: user.username };
+
+      return {
+        access_token: await this.jwtService.signAsync(payload, {
+          secret: jwtConstants.secret,
+        }),
+      };
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      } else {
+        console.error('Unexpected error at sign in', error);
+        throw new InternalServerErrorException('Something went wrong!');
+      }
     }
-    const payload = { sub: user.id, username: user.username };
-
-    return {
-      access_token: await this.jwtService.signAsync(payload, {
-        secret: jwtConstants.secret,
-      }),
-    };
   }
 
   async signUp(

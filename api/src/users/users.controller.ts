@@ -10,7 +10,6 @@ import {
 import { UsersService } from './users.service';
 import { Prisma, User as UserModel } from '@prisma/client';
 import { Public } from 'src/auth/decorators/public.decorator';
-import { request } from 'express';
 
 @Controller('users')
 export class UsersController {
@@ -33,7 +32,6 @@ export class UsersController {
   ): Promise<UserModel | undefined> {
     try {
       const user = await this.usersService.findOne(username);
-      console.log('token payload', request['user']);
       return user;
     } catch (error) {
       console.log('error extracting payload from token', error.message);
