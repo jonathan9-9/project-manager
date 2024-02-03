@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { User, Prisma } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
@@ -6,6 +6,7 @@ import { DatabaseService } from 'src/database/database.service';
 export class UsersService {
   constructor(private readonly prisma: DatabaseService) {}
 
+  // sign up the user
   async create(createUserDto: Prisma.UserCreateInput): Promise<User> {
     console.log('USER CREATED:', createUserDto);
     return this.prisma.user.create({
@@ -14,15 +15,20 @@ export class UsersService {
   }
 
   async findAll() {
-    return this.prisma.user.findMany();
+    return await this.prisma.user.findMany();
   }
 
-  async findOne(id: number) {
-    return this.prisma.user.findUnique({
+  async findOne(username: string) {
+    const user = await this.prisma.user.findFirst({
       where: {
-        id,
+        username: username,
       },
     });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return user;
   }
 
   async updateUser(params: {
@@ -42,3 +48,11 @@ export class UsersService {
     });
   }
 }
+
+// async findOne(id: number) {
+//   return this.prisma.user.findUnique({
+//     where: {
+//       id,
+//     },
+//   });
+// }

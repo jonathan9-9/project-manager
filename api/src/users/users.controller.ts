@@ -9,11 +9,13 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Prisma, User as UserModel } from '@prisma/client';
+import { Public } from 'src/auth/decorators/public.decorator';
 
 @Controller('users')
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(private usersService: UsersService) {}
 
+  @Public()
   @Post()
   create(@Body() createUserDto: Prisma.UserCreateInput) {
     return this.usersService.create(createUserDto);
@@ -24,9 +26,17 @@ export class UsersController {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string): Promise<UserModel | undefined> {
-    return this.usersService.findOne(+id);
+  @Get(':username')
+  async findOne(
+    @Param('username') username: string,
+  ): Promise<UserModel | undefined> {
+    try {
+      const user = await this.usersService.findOne(username);
+      return user;
+    } catch (error) {
+      console.log('error extracting payload from token', error.message);
+      throw error;
+    }
   }
 
   @Put(':id')
