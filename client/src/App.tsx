@@ -6,11 +6,11 @@ import { Outlet } from "react-router-dom";
 function App() {
   return (
     <>
-      <Header />
-      <Box bg="lightblue" borderRadius="md" p={2} m={10}>
+      <Box display="flex" flexDirection="column" minHeight="100vh">
+        <Header />
+        <Outlet />
         <Footer />
       </Box>
-      <Outlet />
     </>
   );
 }

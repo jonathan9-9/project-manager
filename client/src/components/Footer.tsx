@@ -1,5 +1,5 @@
 const CreateUser = () => {
-  return <div>My Footer</div>;
+  return <div id="footer">My Footer</div>;
 };
 
 export default CreateUser;
