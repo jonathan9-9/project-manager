@@ -1,11 +1,17 @@
 import { Box } from "@chakra-ui/react";
-import CreateUser from "./components/CreateUser";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
-    <Box bg="gray" borderRadius="md" p={2} m={10}>
-      <CreateUser />
-    </Box>
+    <>
+      <Header />
+      <Box bg="lightblue" borderRadius="md" p={2} m={10}>
+        <Footer />
+      </Box>
+      <Outlet />
+    </>
   );
 }
 
