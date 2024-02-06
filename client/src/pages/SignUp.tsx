@@ -51,7 +51,7 @@ const SignUp = () => {
     setPasswordInput((e.target as HTMLInputElement).value);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submit button clicked");
 
@@ -72,6 +72,24 @@ const SignUp = () => {
     } else {
       console.log("form submit successfully");
 
+      const data = {
+        nameInput,
+        emailInput,
+        usernameInput,
+        photoInput,
+        passwordInput,
+      };
+
+      const response = await fetch("http://localhost:3000/api/auth/signup", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(data),
+      });
+
+      console.log("response", response);
+
       setNameInput("");
       setEmailInput("");
       setUsernameInput("");
@@ -83,6 +101,8 @@ const SignUp = () => {
       setClickedSubmitUsername(false);
       setClickedSubmitPhoto(false);
       setClickedSubmitPassword(false);
+
+      return response.json();
     }
   };
 
@@ -166,7 +186,7 @@ const SignUp = () => {
             width="150px"
             p={3}
             type="submit"
-            onClick={handleSubmit}
+            onClick={handleSignUpSubmit}
           >
             Create account
           </Button>
