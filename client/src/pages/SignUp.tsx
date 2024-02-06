@@ -73,11 +73,11 @@ const SignUp = () => {
       console.log("form submit successfully");
 
       const data = {
-        nameInput,
-        emailInput,
-        usernameInput,
-        photoInput,
-        passwordInput,
+        nameInput: nameInput,
+        emailInput: emailInput,
+        usernameInput: usernameInput,
+        photoInput: photoInput,
+        passwordInput: passwordInput,
       };
 
       const response = await fetch("http://localhost:3000/api/auth/signup", {
