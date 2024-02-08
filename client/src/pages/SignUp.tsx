@@ -154,7 +154,7 @@ const SignUp = () => {
             )}
           </FormControl>
           <FormControl isInvalid={isErrorPhoto} isRequired>
-            <FormLabel>Photo</FormLabel>
+            <FormLabel>Profile Photo</FormLabel>
             <Input
               type="text"
               value={photoInput}

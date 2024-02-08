@@ -73,6 +73,8 @@ export class AuthController {
       photo,
     );
 
+    console.log('signup user created');
+
     return {
       message: 'User was created successfully',
       userId: result.id,
