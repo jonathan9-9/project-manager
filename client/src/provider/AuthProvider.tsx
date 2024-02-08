@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import {
   ReactNode,
   createContext,
@@ -21,25 +20,38 @@ interface ReactProps {
 const AuthContext = createContext<UserContextType | undefined>(undefined);
 
 const AuthProvider = ({ children }: ReactProps) => {
-  const [currentUser, setCurrentUser] = useState<UserContextType>();
+  const [currentUser, setCurrentUser] = useState<UserContextType>({
+    username: null,
+    setToken: (token: string | null) => setToken(token),
+  });
 
   useEffect(() => {
-    const receivedToken = "{replace_with_token}";
+    const token = localStorage.getItem("token");
 
-    localStorage.setItem("token", receivedToken);
-
-    verifyAndDecodeToken(receivedToken);
+    setToken(token);
   }, []);
 
   function verifyAndDecodeToken(token: string) {
     try {
-      const jwt = require("jsonwebtoken");
-      const decodedToken: any = jwt.decode(token, jwtConstants.secret);
-      setCurrentUser(decodedToken);
+      if (token) {
+        const jwt = require("jsonwebtoken");
+        const decodedToken: any = jwt.verify(token, jwtConstants.secret);
+        setCurrentUser(decodedToken);
+      } else {
+        setCurrentUser({
+          username: null,
+          setToken: (token: string | null) => setToken(token),
+        });
+      }
     } catch (error) {
-      console.error("Unable to verify token");
+      console.error("Unable to verify or decode token", error);
     }
     console.error("Could not decode token");
+  }
+
+  function setToken(token: string | null) {
+    localStorage.setItem("token", token as string);
+    verifyAndDecodeToken(token as string);
   }
   return (
     <AuthContext.Provider value={currentUser}>{children}</AuthContext.Provider>
