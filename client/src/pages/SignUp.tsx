@@ -8,6 +8,7 @@ import {
   FormLabel,
   Input,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -18,17 +19,45 @@ const SignUp = () => {
   const [photoInput, setPhotoInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
+  const toast = useToast();
+
   const [clickedSubmitName, setClickedSubmitName] = useState(false);
   const [clickedSubmitEmail, setClickedSubmitEmail] = useState(false);
   const [clickedSubmitUsername, setClickedSubmitUsername] = useState(false);
   const [clickedSubmitPhoto, setClickedSubmitPhoto] = useState(false);
   const [clickedSubmitPassword, setClickedSubmitPassword] = useState(false);
 
-  const isErrorName = nameInput === "" && clickedSubmitName;
-  const isErrorEmail = emailInput === "" && clickedSubmitEmail;
-  const isErrorUsername = usernameInput === "" && clickedSubmitUsername;
-  const isErrorPhoto = photoInput === "" && clickedSubmitPhoto;
-  const isErrorPassword = passwordInput === "" && clickedSubmitPassword;
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const isErrorName = nameInput === "" && (clickedSubmitName || formSubmitted);
+  const isErrorEmail =
+    emailInput === "" && (clickedSubmitEmail || formSubmitted);
+  const isErrorUsername =
+    usernameInput === "" && (clickedSubmitUsername || formSubmitted);
+  const isErrorPhoto =
+    photoInput === "" && (clickedSubmitPhoto || formSubmitted);
+  const isErrorPassword =
+    passwordInput === "" && (clickedSubmitPassword || formSubmitted);
+
+  const resetForm = () => {
+    setClickedSubmitName(false);
+    setClickedSubmitEmail(false);
+    setClickedSubmitUsername(false);
+    setClickedSubmitPhoto(false);
+    setClickedSubmitPassword(false);
+
+    setNameInput("");
+    setEmailInput("");
+    setUsernameInput("");
+    setPhotoInput("");
+    setPasswordInput("");
+
+    setFormSubmitted(false);
+  };
+
+  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
+    string | null
+  >("");
 
   const handleNameInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setClickedSubmitName(true);
@@ -48,61 +77,100 @@ const SignUp = () => {
   };
   const handlePasswordInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     setClickedSubmitPassword(true);
-    setPasswordInput((e.target as HTMLInputElement).value);
+    const currentPassword = (e.target as HTMLInputElement).value;
+
+    setPasswordInput(currentPassword);
+
+    setPasswordErrorMessage(passwordCheck(currentPassword));
+  };
+
+  const passwordCheck = (password: string): string | null => {
+    if (password.length >= 7 && password.length <= 18) {
+      return null;
+    } else {
+      return "Password must be valid within 7 and 18 characters long.";
+    }
   };
 
   const handleSignUpSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Submit button clicked");
 
-    setClickedSubmitName(true);
-    setClickedSubmitEmail(true);
-    setClickedSubmitUsername(true);
-    setClickedSubmitPhoto(true);
-    setClickedSubmitPassword(true);
-
-    if (
-      nameInput === "" ||
-      emailInput === "" ||
-      usernameInput === "" ||
-      photoInput === "" ||
-      passwordInput === ""
-    ) {
-      console.log("All fields are required");
+    if (nameInput === "") {
+      setClickedSubmitName(true);
+    }
+    if (emailInput === "") {
+      setClickedSubmitEmail(true);
+    }
+    if (usernameInput === "") {
+      setClickedSubmitUsername(true);
+    }
+    if (photoInput === "") {
+      setClickedSubmitPhoto(true);
+    }
+    if (passwordInput === "") {
+      setClickedSubmitPassword(true);
     } else {
-      console.log("form submit successfully");
+      const passwordError = passwordCheck(passwordInput);
 
-      const data = {
-        nameInput: nameInput,
-        emailInput: emailInput,
-        usernameInput: usernameInput,
-        photoInput: photoInput,
-        passwordInput: passwordInput,
-      };
+      if (passwordError) {
+        console.error("Password error:", passwordError);
 
-      const response = await fetch("http://localhost:3000/api/auth/signup", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(data),
-      });
+        toast({
+          title: "Invalid Password",
+          description: passwordError,
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
+      } else {
+        const data = {
+          name: nameInput,
+          email: emailInput,
+          username: usernameInput,
+          photo: photoInput,
+          password: passwordInput,
+        };
 
-      console.log("response", response);
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/auth/signup",
+            {
+              headers: {
+                "Content-Type": "application/json",
+              },
+              method: "POST",
+              body: JSON.stringify(data),
+            }
+          );
 
-      setNameInput("");
-      setEmailInput("");
-      setUsernameInput("");
-      setPhotoInput("");
-      setPasswordInput("");
+          console.log("sign up response", response);
 
-      setClickedSubmitName(false);
-      setClickedSubmitEmail(false);
-      setClickedSubmitUsername(false);
-      setClickedSubmitPhoto(false);
-      setClickedSubmitPassword(false);
+          if (response.ok) {
+            toast({
+              title: "Account created",
+              description: "Successfully created user account",
+              status: "success",
+              duration: 5000,
+              isClosable: true,
+            });
+            resetForm();
+            return response.json();
+          } else {
+            console.error("server error", response.status, response.statusText);
+          }
+        } catch (error) {
+          console.error("fetch error", error);
 
-      return response.json();
+          toast({
+            title: "An error occurred",
+            description: "Unable to create a user account",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+          });
+        }
+      }
     }
   };
 
@@ -174,10 +242,17 @@ const SignUp = () => {
               onChange={handlePasswordInputChange}
             />
             {!isErrorPassword ? (
-              <FormHelperText>Enter your password</FormHelperText>
+              <FormHelperText>
+                Password must be within 7 and 18 characters long.
+              </FormHelperText>
             ) : (
               <FormErrorMessage>Password is required.</FormErrorMessage>
             )}
+            <FormErrorMessage>
+              {passwordCheck(passwordInput) !== null
+                ? passwordErrorMessage
+                : null}
+            </FormErrorMessage>
           </FormControl>
           <Button
             style={{ backgroundColor: "#3498db", color: "#FFFFFF" }}
