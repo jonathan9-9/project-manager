@@ -58,8 +58,8 @@ const Login = () => {
     e.preventDefault();
 
     const data = {
-      usernameInput: usernameInput,
-      passwordInput: passwordInput,
+      username: usernameInput,
+      password: passwordInput,
     };
 
     if (passwordInput === "") {
