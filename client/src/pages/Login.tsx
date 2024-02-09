@@ -20,10 +20,6 @@ const Login = () => {
   const [clickedSubmitPassword, setClickedSubmitPassword] =
     useState<boolean>(false);
 
-  const [passwordErrorMessage, setPasswordErrorMessage] = useState<
-    string | null
-  >("");
-
   const authContext = useAuth();
 
   const isErrorUsername = usernameInput === "" && clickedSubmitUsername;
@@ -39,8 +35,6 @@ const Login = () => {
     const currentPassword = (e.target as HTMLInputElement).value;
 
     setPasswordInput(currentPassword);
-
-    setPasswordErrorMessage(passwordCheck(currentPassword));
   };
 
   const passwordCheck = (password: string): string | null => {
@@ -129,12 +123,6 @@ const Login = () => {
           {!isErrorPassword ? null : (
             <FormErrorMessage>Password is required.</FormErrorMessage>
           )}
-
-          <FormErrorMessage>
-            {passwordCheck(passwordInput) !== null
-              ? passwordErrorMessage
-              : null}
-          </FormErrorMessage>
         </FormControl>
         <Button
           style={{ backgroundColor: "#3498db", color: "#FFFFFF" }}
