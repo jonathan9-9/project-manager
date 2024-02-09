@@ -9,6 +9,7 @@ import {
   FormLabel,
   Input,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 
 const Login = () => {
@@ -20,11 +21,17 @@ const Login = () => {
   const [clickedSubmitPassword, setClickedSubmitPassword] =
     useState<boolean>(false);
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   const authContext = useAuth();
 
-  const isErrorUsername = usernameInput === "" && clickedSubmitUsername;
+  const toast = useToast();
 
-  const isErrorPassword = passwordInput === "" && clickedSubmitPassword;
+  const isErrorUsername =
+    usernameInput === "" && (clickedSubmitUsername || formSubmitted);
+
+  const isErrorPassword =
+    passwordInput === "" && (clickedSubmitPassword || formSubmitted);
 
   const onUsernameChange = (e: React.FormEvent<HTMLInputElement>) => {
     setClickedSubmitUsername(true);
@@ -37,12 +44,14 @@ const Login = () => {
     setPasswordInput(currentPassword);
   };
 
-  const passwordCheck = (password: string): string | null => {
-    if (password.length >= 7 && password.length <= 18) {
-      return null;
-    } else {
-      return "Password must be valid within 7 and 18 characters long.";
-    }
+  const resetForm = () => {
+    setClickedSubmitUsername(false);
+    setClickedSubmitPassword(false);
+
+    setUsernameInput("");
+    setPasswordInput("");
+
+    setFormSubmitted(false);
   };
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
@@ -53,42 +62,51 @@ const Login = () => {
       passwordInput: passwordInput,
     };
 
-    try {
-      if (usernameInput === "" || passwordInput === "") {
-        return "All fields are required";
+    if (passwordInput === "") {
+      setClickedSubmitPassword(true);
+    }
+
+    if (usernameInput === "") {
+      setClickedSubmitUsername(true);
+    } else {
+      try {
+        const response = await fetch("http://localhost:3000/api/auth/login", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          resetForm();
+          toast({
+            title: "Log in",
+            description: "Successfully logged in!",
+            status: "success",
+            duration: 5000,
+            isClosable: true,
+          });
+          const responseData = await response.json();
+
+          console.log("RESPONSE DATA", responseData);
+
+          // retrieve access token after successful response
+          const receivedToken = responseData.access_token;
+
+          console.log("receivedToken:", receivedToken);
+
+          // set token to local storage
+          localStorage.setItem("token", receivedToken);
+
+          // pass received token to authContext provider via hook to authorize any future requests to the server
+          authContext.setToken(receivedToken);
+        } else {
+          console.error("error fetching token");
+        }
+      } catch (error) {
+        console.error("failed to fetch data", error);
       }
-
-      const response = await fetch("http://localhost:3000/api/auth/login", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      const passwordError = passwordCheck(passwordInput);
-
-      if (!passwordError && response.ok) {
-        const responseData = await response.json();
-
-        console.log("RESPONSE DATA", responseData);
-
-        const receivedToken = responseData.access_token;
-
-        localStorage.setItem("token", receivedToken);
-
-        setUsernameInput("");
-        setPasswordInput("");
-
-        setClickedSubmitUsername(true);
-        setClickedSubmitPassword(true);
-
-        authContext.setToken(receivedToken);
-      } else {
-        console.error("error fetching token");
-      }
-    } catch (error) {
-      console.error("failed to fetch data", error);
     }
   };
 
