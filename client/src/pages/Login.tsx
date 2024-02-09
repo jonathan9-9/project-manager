@@ -106,6 +106,13 @@ const Login = () => {
         }
       } catch (error) {
         console.error("failed to fetch data", error);
+        toast({
+          title: "An error occurred",
+          description: "Unable to log in",
+          status: "error",
+          duration: 5000,
+          isClosable: true,
+        });
       }
     }
   };
