@@ -126,43 +126,47 @@ const Login = () => {
           Log In
         </Text>
       </Center>
-      <Box w="42%" p="4" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
-        <FormControl isInvalid={isErrorUsername} isRequired>
-          <FormLabel>Username</FormLabel>
-          <Input
-            id="name"
-            type="text"
-            value={usernameInput}
-            onChange={onUsernameChange}
-          />
-          {!isErrorUsername ? null : (
-            <FormErrorMessage>Name is required.</FormErrorMessage>
-          )}
-        </FormControl>
-        <FormControl isInvalid={isErrorPassword} isRequired>
-          <FormLabel>Password</FormLabel>
-          <Input
-            id="password"
-            type="password"
-            value={passwordInput}
-            onChange={onPasswordChange}
-          />
-          {!isErrorPassword ? null : (
-            <FormErrorMessage>Password is required.</FormErrorMessage>
-          )}
-        </FormControl>
-        <Button
-          style={{ backgroundColor: "#3498db", color: "#FFFFFF" }}
-          size="md"
-          height="42px"
-          width="150px"
-          p={3}
-          type="submit"
-          onClick={handleLoginSubmit}
-        >
-          Login
-        </Button>
-      </Box>
+      <Center>
+        <Box w="42%" p="4" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
+          <FormControl isInvalid={isErrorUsername} isRequired>
+            <FormLabel>Username</FormLabel>
+            <Input
+              id="name"
+              type="text"
+              value={usernameInput}
+              onChange={onUsernameChange}
+            />
+            {!isErrorUsername ? null : (
+              <FormErrorMessage>Name is required.</FormErrorMessage>
+            )}
+          </FormControl>
+          <FormControl isInvalid={isErrorPassword} isRequired>
+            <FormLabel>Password</FormLabel>
+            <Input
+              id="password"
+              type="password"
+              value={passwordInput}
+              onChange={onPasswordChange}
+            />
+            {!isErrorPassword ? null : (
+              <FormErrorMessage>Password is required.</FormErrorMessage>
+            )}
+          </FormControl>
+          <Box mt={4}>
+            <Button
+              style={{ backgroundColor: "#3498db", color: "#FFFFFF" }}
+              size="md"
+              height="42px"
+              width="150px"
+              p={3}
+              type="submit"
+              onClick={handleLoginSubmit}
+            >
+              Login
+            </Button>
+          </Box>
+        </Box>
+      </Center>
     </>
   );
 };
