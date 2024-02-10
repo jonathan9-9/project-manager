@@ -86,10 +86,11 @@ const Login = () => {
             status: "success",
             duration: 5000,
             isClosable: true,
+            position: "top",
           });
           const responseData = await response.json();
 
-          console.log("RESPONSE DATA", responseData);
+          console.log("RESPONSE Login DATA", responseData);
 
           // retrieve access token after successful response
           const receivedToken = responseData.access_token;
@@ -112,6 +113,7 @@ const Login = () => {
           status: "error",
           duration: 5000,
           isClosable: true,
+          position: "top",
         });
       }
     }

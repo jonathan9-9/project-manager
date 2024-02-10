@@ -1,52 +1,37 @@
-import {
-  ReactNode,
-  createContext,
-  useEffect,
-  useState,
-  useContext,
-} from "react";
-
-import { jwtConstants } from "../constants";
+import { ReactNode, createContext, useState, useContext } from "react";
 
 interface UserContextType {
-  username: string | null;
-  setToken: (token: string | null) => void;
+  username: boolean | null;
+  setToken: (token: string) => void;
 }
 
 interface ReactProps {
   children: ReactNode;
 }
 
-const AuthContext = createContext<UserContextType | undefined>(undefined);
+const AuthContext = createContext<UserContextType>({
+  username: null,
+  setToken: () => {},
+});
 
 const AuthProvider = ({ children }: ReactProps) => {
   const [currentUser, setCurrentUser] = useState<UserContextType>({
     username: null,
-    setToken: (token: string | null) => setToken(token),
+    setToken: setToken,
   });
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    setToken(token);
-  }, []);
 
   function verifyAndDecodeToken(token: string) {
     try {
       if (token) {
-        const jwt = require("jsonwebtoken");
-        const decodedToken: any = jwt.verify(token, jwtConstants.secret);
-        setCurrentUser(decodedToken);
-      } else {
-        setCurrentUser({
-          username: null,
-          setToken: (token: string | null) => setToken(token),
-        });
+        const tokenComponents = token.split(".");
+        const payload = JSON.parse(atob(tokenComponents[1]));
+
+        const ttl = Math.floor(new Date().getTime() / 1000) < payload?.exp;
+        setCurrentUser({ username: ttl, setToken: setToken });
       }
     } catch (error) {
       console.error("Unable to verify or decode token", error);
     }
-    console.error("Could not decode token");
   }
 
   function setToken(token: string | null) {
