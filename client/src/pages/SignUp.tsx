@@ -41,6 +41,14 @@ const SignUp = () => {
     }
   };
 
+  const isInvalidPass2 = (password1: string, password2: string) => {
+    if (password1 !== password2) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   const isErrorName = nameInput === "" && (clickedSubmitName || formSubmitted);
   const isErrorEmail =
     (isInvalidEmail(emailInput) || emailInput === "") &&
@@ -52,7 +60,8 @@ const SignUp = () => {
   const isErrorPassword =
     passwordInput === "" && (clickedSubmitPassword || formSubmitted);
   const isErrorSecondPassword =
-    passwordInput === "" && (clickedSubmitSecondPassword || formSubmitted);
+    isInvalidPass2(passwordInput, secondPasswordInput) &&
+    clickedSubmitSecondPassword;
 
   const resetForm = () => {
     setClickedSubmitName(false);
@@ -60,12 +69,14 @@ const SignUp = () => {
     setClickedSubmitUsername(false);
     setClickedSubmitPhoto(false);
     setClickedSubmitPassword(false);
+    setClickedSubmitSecondPassword(false);
 
     setNameInput("");
     setEmailInput("");
     setUsernameInput("");
     setPhotoInput("");
     setPasswordInput("");
+    setSecondPasswordInput("");
 
     setFormSubmitted(false);
   };
@@ -135,6 +146,9 @@ const SignUp = () => {
     }
     if (passwordInput === "") {
       setClickedSubmitPassword(true);
+    }
+    if (passwordInput !== secondPasswordInput || secondPasswordInput === "") {
+      setClickedSubmitSecondPassword(true);
     } else {
       const passwordError = passwordCheck(passwordInput);
 
@@ -228,7 +242,7 @@ const SignUp = () => {
               onChange={handleEmailInputChange}
             />
             {!isErrorEmail ? (
-              <FormHelperText>Enter a valid email</FormHelperText>
+              <FormHelperText>Enter email</FormHelperText>
             ) : (
               <FormErrorMessage>Must enter a valid email</FormErrorMessage>
             )}
