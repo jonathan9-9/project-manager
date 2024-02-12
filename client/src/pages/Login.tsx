@@ -11,8 +11,11 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [usernameInput, setUsernameInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
 
@@ -102,6 +105,8 @@ const Login = () => {
 
           // pass received token to authContext provider via hook to authorize any future requests to the server
           authContext.setToken(receivedToken);
+
+          navigate("/projects");
         } else {
           console.error("error fetching token");
         }
