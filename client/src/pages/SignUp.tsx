@@ -280,14 +280,14 @@ const SignUp = () => {
             </FormErrorMessage>
           </FormControl>
           {/* second password entry  below*/}
-          <FormControl isInvalid={isErrorPassword} isRequired mb={7}>
+          <FormControl isInvalid={isErrorSecondPassword} isRequired mb={7}>
             <FormLabel>Re-enter password</FormLabel>
             <Input
               type="password"
               value={secondPasswordInput}
               onChange={handleSecondPasswordInputChange}
             />
-            {!isErrorPassword ? (
+            {!isErrorSecondPassword ? (
               <FormHelperText>
                 Password must be within 7 and 18 characters long.
               </FormHelperText>
