@@ -18,6 +18,7 @@ const SignUp = () => {
   const [usernameInput, setUsernameInput] = useState("");
   const [photoInput, setPhotoInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [secondPassword, setSecondPassword] = useState("");
 
   const toast = useToast();
 
@@ -246,6 +247,27 @@ const SignUp = () => {
           </FormControl>
           <FormControl isInvalid={isErrorPassword} isRequired mb={7}>
             <FormLabel>Password</FormLabel>
+            <Input
+              type="password"
+              value={passwordInput}
+              onChange={handlePasswordInputChange}
+            />
+            {!isErrorPassword ? (
+              <FormHelperText>
+                Password must be within 7 and 18 characters long.
+              </FormHelperText>
+            ) : (
+              <FormErrorMessage>Password is required.</FormErrorMessage>
+            )}
+            <FormErrorMessage>
+              {passwordCheck(passwordInput) !== null
+                ? passwordErrorMessage
+                : null}
+            </FormErrorMessage>
+          </FormControl>
+          {/* second password entry  below*/}
+          <FormControl isInvalid={isErrorPassword} isRequired mb={7}>
+            <FormLabel>Re-enter password</FormLabel>
             <Input
               type="password"
               value={passwordInput}
