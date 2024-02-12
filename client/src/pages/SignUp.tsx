@@ -18,7 +18,7 @@ const SignUp = () => {
   const [usernameInput, setUsernameInput] = useState("");
   const [photoInput, setPhotoInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [secondPassword, setSecondPassword] = useState("");
+  const [secondPasswordInput, setSecondPasswordInput] = useState("");
 
   const toast = useToast();
 
@@ -27,6 +27,8 @@ const SignUp = () => {
   const [clickedSubmitUsername, setClickedSubmitUsername] = useState(false);
   const [clickedSubmitPhoto, setClickedSubmitPhoto] = useState(false);
   const [clickedSubmitPassword, setClickedSubmitPassword] = useState(false);
+  const [clickedSubmitSecondPassword, setClickedSubmitSecondPassword] =
+    useState(false);
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
@@ -49,6 +51,8 @@ const SignUp = () => {
     photoInput === "" && (clickedSubmitPhoto || formSubmitted);
   const isErrorPassword =
     passwordInput === "" && (clickedSubmitPassword || formSubmitted);
+  const isErrorSecondPassword =
+    passwordInput === "" && (clickedSubmitSecondPassword || formSubmitted);
 
   const resetForm = () => {
     setClickedSubmitName(false);
@@ -91,6 +95,16 @@ const SignUp = () => {
     const currentPassword = (e.target as HTMLInputElement).value;
 
     setPasswordInput(currentPassword);
+
+    setPasswordErrorMessage(passwordCheck(currentPassword));
+  };
+  const handleSecondPasswordInputChange = (
+    e: React.FormEvent<HTMLInputElement>
+  ) => {
+    setClickedSubmitSecondPassword(true);
+    const currentPassword = (e.target as HTMLInputElement).value;
+
+    setSecondPasswordInput(currentPassword);
 
     setPasswordErrorMessage(passwordCheck(currentPassword));
   };
@@ -270,15 +284,15 @@ const SignUp = () => {
             <FormLabel>Re-enter password</FormLabel>
             <Input
               type="password"
-              value={passwordInput}
-              onChange={handlePasswordInputChange}
+              value={secondPasswordInput}
+              onChange={handleSecondPasswordInputChange}
             />
             {!isErrorPassword ? (
               <FormHelperText>
                 Password must be within 7 and 18 characters long.
               </FormHelperText>
             ) : (
-              <FormErrorMessage>Password is required.</FormErrorMessage>
+              <FormErrorMessage>Passwords must match.</FormErrorMessage>
             )}
             <FormErrorMessage>
               {passwordCheck(passwordInput) !== null
