@@ -29,9 +29,19 @@ const SignUp = () => {
 
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  const isInvalidEmail = (email: string) => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (email.match(emailPattern) && email.length > 0) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
   const isErrorName = nameInput === "" && (clickedSubmitName || formSubmitted);
   const isErrorEmail =
-    emailInput === "" && (clickedSubmitEmail || formSubmitted);
+    (isInvalidEmail(emailInput) || emailInput === "") &&
+    (clickedSubmitEmail || formSubmitted);
   const isErrorUsername =
     usernameInput === "" && (clickedSubmitUsername || formSubmitted);
   const isErrorPhoto =
@@ -99,7 +109,7 @@ const SignUp = () => {
     if (nameInput === "") {
       setClickedSubmitName(true);
     }
-    if (emailInput === "") {
+    if (emailInput === "" || isInvalidEmail(emailInput)) {
       setClickedSubmitEmail(true);
     }
     if (usernameInput === "") {
@@ -203,9 +213,9 @@ const SignUp = () => {
               onChange={handleEmailInputChange}
             />
             {!isErrorEmail ? (
-              <FormHelperText>Enter valid email.</FormHelperText>
+              <FormHelperText>Enter a valid email</FormHelperText>
             ) : (
-              <FormErrorMessage>Email is required.</FormErrorMessage>
+              <FormErrorMessage>Must enter a valid email</FormErrorMessage>
             )}
           </FormControl>
           <FormControl isInvalid={isErrorUsername} isRequired>
