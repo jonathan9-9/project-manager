@@ -10,6 +10,7 @@ import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import AuthProvider from "./provider/AuthProvider";
 import Projects from "./pages/Projects";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
       {
         path: "/projects",
         element: <Projects />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
