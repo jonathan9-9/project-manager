@@ -85,7 +85,7 @@ const Login = () => {
           resetForm();
           toast({
             title: "Log in",
-            description: "Successfully logged in!",
+            description: `Welcome back ${usernameInput}!`,
             status: "success",
             duration: 5000,
             isClosable: true,
