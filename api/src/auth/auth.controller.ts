@@ -86,7 +86,7 @@ export class AuthController {
 
   @Get('profile')
   getProfileInfo(@Request() req) {
-    console.log(req);
+    console.log('Request', req);
     return this.authService.getProfileInfo(req.user.username);
   }
 }
