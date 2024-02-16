@@ -20,14 +20,16 @@ const AuthProvider = ({ children }: ReactProps) => {
     setToken: setToken,
   });
 
+  console.log("CURRENT USER", currentUser);
   function verifyAndDecodeToken(token: string) {
     try {
       if (token) {
         const tokenComponents = token.split(".");
         const payload = JSON.parse(atob(tokenComponents[1]));
 
-        const ttl = Math.floor(new Date().getTime() / 1000) < payload?.exp;
-        setCurrentUser({ username: ttl, setToken: setToken });
+        // const ttl = Math.floor(new Date().getTime() / 1000) < payload?.exp;
+        const username = payload?.username;
+        setCurrentUser({ username: username, setToken: setToken });
       }
     } catch (error) {
       console.error("Unable to verify or decode token", error);

@@ -68,4 +68,16 @@ export class AuthService {
     });
     return createdUser;
   }
+
+  async getProfileInfo(username: string): Promise<object> {
+    console.log('USERNAME', username);
+    const user = await this.usersService.findOne(username);
+
+    return {
+      name: user.name,
+      email: user.email,
+      username: user.username,
+      photo: user.photo,
+    };
+  }
 }

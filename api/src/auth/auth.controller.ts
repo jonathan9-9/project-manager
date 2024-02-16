@@ -6,6 +6,8 @@ import {
   UsePipes,
   ValidationPipe,
   HttpStatus,
+  Get,
+  Request,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { User as UserModel } from '@prisma/client';
@@ -80,5 +82,11 @@ export class AuthController {
       userId: result.id,
       userName: result.username,
     };
+  }
+
+  @Get('profile')
+  getProfileInfo(@Request() req) {
+    console.log(req);
+    return this.authService.getProfileInfo(req.user.username);
   }
 }

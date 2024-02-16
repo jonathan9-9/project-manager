@@ -4,13 +4,18 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useLoaderData,
+} from "react-router-dom";
 import ErrorPage from "./error-page";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 import AuthProvider from "./provider/AuthProvider";
 import Projects from "./pages/Projects";
 import Profile from "./pages/Profile";
+import ProfileLoader from "./pages/ProfileLoader";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +38,7 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+        loader: () => <ProfileLoader />,
       },
     ],
   },
