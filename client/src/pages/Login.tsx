@@ -109,6 +109,14 @@ const Login = () => {
           navigate("/projects");
         } else {
           console.error("error fetching token");
+          toast({
+            title: "Unable to log in",
+            description: "Incorrect username or password",
+            status: "error",
+            duration: 5000,
+            isClosable: true,
+            position: "top",
+          });
         }
       } catch (error) {
         console.error("failed to fetch data", error);

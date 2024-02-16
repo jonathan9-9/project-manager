@@ -1,5 +1,5 @@
-import { Box, Button, Center, Text } from "@chakra-ui/react";
-import { useLoaderData } from "react-router";
+import { Box, Button, Center, Text, useToast } from "@chakra-ui/react";
+import { useLoaderData, useNavigate } from "react-router";
 
 interface UserProfileData {
   name: string;
@@ -10,8 +10,22 @@ interface UserProfileData {
 
 const Profile = () => {
   const data = useLoaderData() as UserProfileData;
-
+  const navigate = useNavigate();
+  const toast = useToast();
   console.log("Loader DATA", data);
+
+  const logOut = () => {
+    localStorage.removeItem("token");
+    navigate("/login");
+    toast({
+      title: "Success",
+      description: "You have been logged out of your account!",
+      status: "success",
+      duration: 3000,
+      isClosable: true,
+      position: "top",
+    });
+  };
   const { name, email, username, photo } = data;
 
   return (
@@ -27,7 +41,9 @@ const Profile = () => {
             <p>Username: {username}</p>
             <p>Photo: {photo}</p>
           </Box>
-          <Button color="red">Log out</Button>
+          <Button color="red" onClick={logOut}>
+            Log out
+          </Button>
         </Box>
       </Center>
     </>
