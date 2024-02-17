@@ -22,6 +22,33 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: async () => {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        try {
+          const response = await fetch(
+            "http://localhost:3000/api/auth/profile",
+            {
+              headers: { Authorization: `Bearer ${token}` },
+              method: "GET",
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          return data;
+        } catch (error) {
+          return {};
+        }
+      } else {
+        return {};
+      }
+    },
     errorElement: <ErrorPage />,
     children: [
       {

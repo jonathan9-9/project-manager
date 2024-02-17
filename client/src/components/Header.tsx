@@ -17,7 +17,7 @@ const Header = () => {
           fallbackSrc="https://via.placeholder.com/150"
           alt="puppy logo"
           borderRadius="50%"
-          boxSize="100px"
+          boxSize="70px"
         />
         <Heading fontSize="26px" mt={5} mx={2}>
           Project Management Tool
@@ -32,6 +32,7 @@ const Header = () => {
                 return {
                   fontWeight: isActive ? "bold" : "",
                   color: isPending ? "red" : "black",
+                  borderBottom: isActive ? "2px solid #0077B5" : "",
                 };
               }}
             >
