@@ -11,6 +11,8 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useOutletContext } from "react-router";
+import { Context } from "../App";
 
 const SignUp = () => {
   const [nameInput, setNameInput] = useState("");
@@ -21,6 +23,7 @@ const SignUp = () => {
   const [secondPasswordInput, setSecondPasswordInput] = useState("");
 
   const toast = useToast();
+  const context = useOutletContext() as Context;
 
   const [clickedSubmitName, setClickedSubmitName] = useState(false);
   const [clickedSubmitEmail, setClickedSubmitEmail] = useState(false);
@@ -194,6 +197,7 @@ const SignUp = () => {
               isClosable: true,
             });
             resetForm();
+            context.toggleAuthenticated();
             return response.json();
           } else {
             console.error("server error", response.status, response.statusText);

@@ -11,10 +11,12 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
+import { Context } from "../App";
 
 const Login = () => {
   const navigate = useNavigate();
+  const context = useOutletContext() as Context;
 
   const [usernameInput, setUsernameInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
@@ -103,6 +105,8 @@ const Login = () => {
           // set token to local storage
           localStorage.setItem("token", receivedToken);
 
+          // toggle login state
+          context.toggleAuthenticated();
           // pass received token to authContext provider via hook to authorize any future requests to the server
           authContext.setToken(receivedToken);
 

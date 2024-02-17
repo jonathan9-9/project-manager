@@ -2,13 +2,17 @@ import { Box, Heading, Image } from "@chakra-ui/react";
 import { NavLink } from "react-router-dom";
 
 const components = [
-  { name: "Log in", path: "/login" },
-  { name: "Create an Account", path: "/sign-up" },
-  { name: "Projects", path: "/projects" },
-  { name: "Account Details", path: "/profile" },
+  { name: "Log in", path: "/login", showWhenAuthenticated: false },
+  { name: "Create an Account", path: "/sign-up", showWhenAuthenticated: false },
+  { name: "Projects", path: "/projects", showWhenAuthenticated: true },
+  { name: "Account Details", path: "/profile", showWhenAuthenticated: true },
 ];
 
-const Header = () => {
+interface Props {
+  authenticated: boolean;
+}
+
+const Header = ({ authenticated }: Props) => {
   return (
     <Box display="flex" p={4} alignItems="center">
       <Box p={1} display="flex" alignItems="center">
@@ -25,29 +29,37 @@ const Header = () => {
       </Box>
       <Box display="flex" justifyContent="space-around" w="70%">
         {components.map((component) => {
-          return (
-            <NavLink
-              to={component.path}
-              style={({ isActive, isPending }) => {
-                return {
-                  fontWeight: isActive ? "bold" : "",
-                  color: isPending ? "red" : "black",
-                  borderBottom: isActive ? "2px solid #0077B5" : "",
-                };
-              }}
-            >
-              <Box
-                borderBottom="2px"
-                borderColor="transparent"
-                _hover={{
-                  borderColor: "#0077B5",
-                  transition: "border-color 0.5s ease-in-out",
+          if (
+            (authenticated && component.showWhenAuthenticated) ||
+            (!authenticated && !component.showWhenAuthenticated)
+          ) {
+            return (
+              <NavLink
+                to={component.path}
+                key={component.name}
+                style={({ isActive, isPending }) => {
+                  return {
+                    fontWeight: isActive ? "bold" : "",
+                    color: isPending ? "red" : "black",
+                    borderBottom: isActive ? "2px solid #0077B5" : "",
+                  };
                 }}
               >
-                {component.name}
-              </Box>
-            </NavLink>
-          );
+                <Box
+                  borderBottom="2px"
+                  borderColor="transparent"
+                  _hover={{
+                    borderColor: "#0077B5",
+                    transition: "border-color 0.5s ease-in-out",
+                  }}
+                >
+                  {component.name}
+                </Box>
+              </NavLink>
+            );
+          } else {
+            return null;
+          }
         })}
       </Box>
     </Box>
