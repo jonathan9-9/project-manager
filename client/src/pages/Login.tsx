@@ -135,12 +135,12 @@ const Login = () => {
   return (
     <>
       <Center>
-        <Text as="b" fontSize="22px" mb="4">
+        <Text as="b" fontSize="22px" mb="4" mt="-6">
           Log In
         </Text>
       </Center>
       <Center>
-        <Box w="42%" p="4" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
+        <Box w="40%" p="8" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
           <FormControl isInvalid={isErrorUsername} isRequired>
             <FormLabel>Username</FormLabel>
             <Input
@@ -166,12 +166,13 @@ const Login = () => {
             )}
           </FormControl>
           <Box mt={4}>
+            {/* #3498db */}
             <Button
-              style={{ backgroundColor: "#3498db", color: "#FFFFFF" }}
+              style={{ backgroundColor: "#0077B5", color: "#FFFFFF" }}
               size="md"
               height="42px"
-              width="150px"
-              p={3}
+              width="125px"
+              p={4}
               type="submit"
               onClick={handleLoginSubmit}
             >
