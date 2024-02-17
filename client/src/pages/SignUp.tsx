@@ -216,12 +216,12 @@ const SignUp = () => {
   return (
     <>
       <Center>
-        <Text as="b" fontSize="22px" mb="4">
+        <Text as="b" fontSize="22px" mb="4" mt="-10">
           Create an Account
         </Text>
       </Center>
       <Center>
-        <Box w="42%" p="4" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
+        <Box w="40%" mb={12} p="8" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
           <FormControl isInvalid={isErrorName} isRequired>
             <FormLabel>Name</FormLabel>
             <Input

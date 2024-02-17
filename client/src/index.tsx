@@ -39,6 +39,7 @@ const router = createBrowserRouter([
         element: <Profile />,
         loader: async () => {
           const token = localStorage.getItem("token");
+
           if (token) {
             try {
               const response = await fetch(
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
               return data;
             } catch (error) {
               console.error("Error fetching data:", error);
+
               return redirect("/login");
             }
           } else {
