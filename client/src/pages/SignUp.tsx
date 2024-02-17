@@ -216,7 +216,7 @@ const SignUp = () => {
   return (
     <>
       <Center>
-        <Text as="b" fontSize="22px" mb="4" mt="-10">
+        <Text as="b" fontSize="22px" mb="8" mt="2">
           Create an Account
         </Text>
       </Center>

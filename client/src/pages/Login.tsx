@@ -135,8 +135,8 @@ const Login = () => {
   return (
     <>
       <Center>
-        <Text as="b" fontSize="22px" mb="4" mt="-6">
-          Log In
+        <Text as="b" fontSize="22px" mb="4" mt="2">
+          Sign in
         </Text>
       </Center>
       <Center>
