@@ -28,7 +28,7 @@ const Header = () => {
           return (
             <NavLink
               to={component.path}
-              style={({ isActive, isPending, isTransitioning }) => {
+              style={({ isActive, isPending }) => {
                 return {
                   fontWeight: isActive ? "bold" : "",
                   color: isPending ? "red" : "black",
