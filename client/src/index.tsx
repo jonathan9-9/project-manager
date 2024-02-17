@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, createStandaloneToast } from "@chakra-ui/react";
 import {
   createBrowserRouter,
   redirect,
@@ -15,6 +15,8 @@ import Login from "./pages/Login";
 import AuthProvider from "./provider/AuthProvider";
 import Projects from "./pages/Projects";
 import Profile from "./pages/Profile";
+
+const { ToastContainer, toast } = createStandaloneToast();
 
 const router = createBrowserRouter([
   {
@@ -61,11 +63,26 @@ const router = createBrowserRouter([
               return data;
             } catch (error) {
               console.error("Error fetching data:", error);
-
+              toast({
+                title: "Session has expired",
+                description: "Please log in again.",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+                position: "top",
+              });
               return redirect("/login");
             }
           } else {
             console.log("NO TOKEN");
+            toast({
+              title: "Error",
+              description: "You must have an account to view this page",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+              position: "top",
+            });
             return redirect("/sign-up");
           }
         },
@@ -82,6 +99,7 @@ root.render(
     <ChakraProvider>
       <AuthProvider>
         <RouterProvider router={router} />
+        <ToastContainer />
       </AuthProvider>
     </ChakraProvider>
   </React.StrictMode>
