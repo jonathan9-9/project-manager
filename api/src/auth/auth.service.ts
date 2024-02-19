@@ -19,6 +19,11 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async hashPassword(password: string) {
+    const saltRounds = 10;
+    return await bcrypt.hash(password, saltRounds);
+  }
+
   async signIn(
     username: string,
     pass: string,
@@ -85,15 +90,14 @@ export class AuthService {
   async editAccountDetails(accountDetailsDto: AccountDetailsDto) {
     const user = await this.usersService.findOne(accountDetailsDto.username);
 
-    console.log(
-      `user info before ${accountDetailsDto.field} is ${user[accountDetailsDto.field]}`,
-    );
-    // Dynamically update the field based on the 'field' property in the DTO
-    user[accountDetailsDto.field] = accountDetailsDto.value;
-
-    console.log(
-      `user info after ${accountDetailsDto.field} is ${user[accountDetailsDto.field]}`,
-    );
+    if (accountDetailsDto.field === 'password') {
+      const unencryptedPassword = accountDetailsDto.value;
+      const hashedPassword = await this.hashPassword(unencryptedPassword);
+      user[accountDetailsDto.field] = hashedPassword;
+    } else {
+      // Dynamically update the field based on the 'field' property in the DTO
+      user[accountDetailsDto.field] = accountDetailsDto.value;
+    }
 
     // Save the field property value in the database
 
