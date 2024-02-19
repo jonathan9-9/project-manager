@@ -14,6 +14,8 @@ import { User as UserModel } from '@prisma/client';
 import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { Public } from './decorators/public.decorator';
+import { Transform } from 'class-transformer';
+import * as sanitizeHtml from 'sanitize-html';
 
 class SignInDto {
   @IsString()
@@ -43,6 +45,18 @@ class SignUpDto {
   @IsString()
   @IsNotEmpty()
   photo: UserModel['photo'];
+}
+
+export class AccountDetailsDto {
+  @IsNotEmpty()
+  username: string;
+
+  @IsNotEmpty()
+  field: string;
+
+  @IsNotEmpty()
+  @Transform((params) => sanitizeHtml(params.value))
+  value: string;
 }
 
 @Controller('auth')
@@ -88,5 +102,10 @@ export class AuthController {
   getProfileInfo(@Request() req) {
     console.log('Request', req);
     return this.authService.getProfileInfo(req.user.username);
+  }
+
+  @Post('edit-account-details')
+  editAccountDetails(@Body() accountDetailsDto: AccountDetailsDto) {
+    return this.authService.editAccountDetails(accountDetailsDto);
   }
 }

@@ -10,6 +10,7 @@ import { JwtService } from '@nestjs/jwt';
 import { User as UserModel } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { jwtConstants } from './constants';
+import { AccountDetailsDto } from './auth.controller';
 
 @Injectable()
 export class AuthService {
@@ -79,5 +80,9 @@ export class AuthService {
       username: user.username,
       photo: user.photo,
     };
+  }
+
+  async editAccountDetails(accountDetailsDto: AccountDetailsDto) {
+    console.log('ACCOUNT DETAIL DTO', accountDetailsDto);
   }
 }
