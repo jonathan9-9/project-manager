@@ -21,7 +21,7 @@ const UserDetails = ({ field, value, username }: Props) => {
   const handleCheckClick = async () => {
     const data = {
       username,
-      field,
+      field: field.toLowerCase(),
       value: valueState,
     };
 
@@ -43,7 +43,7 @@ const UserDetails = ({ field, value, username }: Props) => {
     );
     console.log("RESPONSE", response);
 
-    setEditField(false);
+    setEditField(!editField);
   };
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {

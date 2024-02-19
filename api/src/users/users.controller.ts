@@ -44,10 +44,7 @@ export class UsersController {
     @Param('id') id: string,
     @Body() updatedUserDto: Prisma.UserUpdateInput,
   ) {
-    return this.usersService.updateUser({
-      where: { id: +id },
-      updateUserDto: updatedUserDto,
-    });
+    return this.usersService.updateUser({ id: +id }, updatedUserDto);
   }
 
   @Delete(':id')

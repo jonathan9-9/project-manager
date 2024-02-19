@@ -83,6 +83,20 @@ export class AuthService {
   }
 
   async editAccountDetails(accountDetailsDto: AccountDetailsDto) {
-    console.log('ACCOUNT DETAIL DTO', accountDetailsDto);
+    const user = await this.usersService.findOne(accountDetailsDto.username);
+
+    console.log(
+      `user info before ${accountDetailsDto.field} is ${user[accountDetailsDto.field]}`,
+    );
+    // Dynamically update the field based on the 'field' property in the DTO
+    user[accountDetailsDto.field] = accountDetailsDto.value;
+
+    console.log(
+      `user info after ${accountDetailsDto.field} is ${user[accountDetailsDto.field]}`,
+    );
+
+    // Save the field property value in the database
+
+    return await this.usersService.updateUser({ id: user.id }, user);
   }
 }

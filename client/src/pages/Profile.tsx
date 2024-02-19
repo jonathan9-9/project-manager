@@ -56,15 +56,15 @@ const Profile = () => {
           </Avatar>
         </Box>
         <Box w="100%" display="flex" flexDirection="column" gap={6}>
-          <UserDetails value={name} field="Name:" username={username} />
+          <UserDetails value={name} field="Name" username={username} />
 
-          <UserDetails value={email} field="Email:" username={username} />
+          <UserDetails value={email} field="Email" username={username} />
 
-          <UserDetails value={username} field="Username:" username={username} />
+          <UserDetails value={username} field="Username" username={username} />
 
           <UserDetails
             value="***********"
-            field="Password:"
+            field="Password"
             username={username}
           />
 

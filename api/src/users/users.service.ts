@@ -6,7 +6,6 @@ import { DatabaseService } from 'src/database/database.service';
 export class UsersService {
   constructor(private readonly prisma: DatabaseService) {}
 
-  // sign up the user
   async create(createUserDto: Prisma.UserCreateInput): Promise<User> {
     console.log('USER CREATED:', createUserDto);
     return this.prisma.user.create({
@@ -31,13 +30,12 @@ export class UsersService {
     return user;
   }
 
-  async updateUser(params: {
-    updateUserDto: Prisma.UserUpdateInput;
-    where: Prisma.UserWhereUniqueInput;
-  }): Promise<User> {
-    const { updateUserDto, where } = params;
+  async updateUser(
+    where: Prisma.UserWhereUniqueInput,
+    data: Prisma.UserUpdateInput,
+  ): Promise<User> {
     return this.prisma.user.update({
-      data: updateUserDto,
+      data,
       where,
     });
   }
