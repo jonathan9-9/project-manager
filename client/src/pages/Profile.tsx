@@ -43,65 +43,63 @@ const Profile = () => {
 
   return (
     <Center>
-      <Box p={2}>
-        <Text textAlign="center" mb={4} fontSize={20}>
-          Account Details
-        </Text>
-        <Text textAlign="center" mb={8}>
-          Welcome, {name}! You can manage your account details here.
-        </Text>
-        <Flex align="center" justify="center">
-          <Box mr={8}>
-            <Avatar size="2xl" name={name} bg="blue.400" mb={4}>
-              <AvatarBadge bg="green.500" boxSize="1em" />
-            </Avatar>
-          </Box>
-          <Box px={8}>
-            <Box mb={2}>
-              <Flex mb={4} align="center">
-                <Text w="80%">Name:</Text>
-                <Text>{name}</Text>
-                <Box ml={8}>
-                  <FaUserEdit cursor="pointer" onClick={() => {}} />
-                </Box>
-              </Flex>
-              <Flex mb={4} align="center">
-                <Text w="80%">Email:</Text>
-                <Text>{email}</Text>
-                <Box ml={5}>
-                  <FaUserEdit cursor="pointer" onClick={() => {}} />
-                </Box>
-              </Flex>
-              <Flex mb={4} align="center">
-                <Text flex={1}>Username:</Text>
-                <Text>{username}</Text>
-                <Box ml={6}>
-                  <FaUserEdit
-                    cursor="pointer"
-                    onClick={() => console.log("Hello")}
-                  />
-                </Box>
-              </Flex>
-              <Box display="flex">
-                <Flex mb={4} align="center">
-                  <Text flex={1}>Password:</Text>
-                  <Text ml={20}>***********</Text>
-                  <Box ml={6}>
-                    <FaUserEdit cursor="pointer" onClick={() => {}} />
-                  </Box>
-                </Flex>
+      <Text textAlign="center" mb={4} fontSize={20}>
+        Account Details
+      </Text>
+      <Text textAlign="center" mb={8}>
+        Welcome, {name}! You can manage your account details here.
+      </Text>
+      <Box display="flex" w="60%" gap={10} m="0 auto" py={20}>
+        <Box mr={8}>
+          <Avatar size="2xl" name={name} bg="blue.400" mb={4}>
+            <AvatarBadge bg="green.500" boxSize="1em" />
+          </Avatar>
+        </Box>
+        <Box px={8}>
+          <Box mb={2}>
+            <Flex mb={4} align="center">
+              <Text w="80%">Name:</Text>
+              <Text>{name}</Text>
+              <Box ml={8}>
+                <FaUserEdit cursor="pointer" onClick={() => {}} />
               </Box>
-            </Box>
-            <Box display="flex" gap={4}>
-              <Button color="gray.900" onClick={() => {}}>
-                Log out
-              </Button>
-              <Button colorScheme="red" onClick={() => {}}>
-                Delete Account
-              </Button>
+            </Flex>
+            <Flex mb={4} align="center">
+              <Text w="80%">Email:</Text>
+              <Text>{email}</Text>
+              <Box ml={5}>
+                <FaUserEdit cursor="pointer" onClick={() => {}} />
+              </Box>
+            </Flex>
+            <Flex mb={4} align="center">
+              <Text flex={1}>Username:</Text>
+              <Text>{username}</Text>
+              <Box ml={6}>
+                <FaUserEdit
+                  cursor="pointer"
+                  onClick={() => console.log("Hello")}
+                />
+              </Box>
+            </Flex>
+            <Box display="flex">
+              <Flex mb={4} align="center">
+                <Text flex={1}>Password:</Text>
+                <Text ml={20}>***********</Text>
+                <Box ml={6}>
+                  <FaUserEdit cursor="pointer" onClick={() => {}} />
+                </Box>
+              </Flex>
             </Box>
           </Box>
-        </Flex>
+          <Box display="flex" gap={4}>
+            <Button color="gray.900" onClick={() => {}}>
+              Log out
+            </Button>
+            <Button colorScheme="red" onClick={() => {}}>
+              Delete Account
+            </Button>
+          </Box>
+        </Box>
       </Box>
     </Center>
   );
