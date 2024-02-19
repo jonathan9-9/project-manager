@@ -56,13 +56,17 @@ const Profile = () => {
           </Avatar>
         </Box>
         <Box w="100%" display="flex" flexDirection="column" gap={6}>
-          <UserDetails value={name} field="Name:" />
+          <UserDetails value={name} field="Name:" username={username} />
 
-          <UserDetails value={email} field="Email:" />
+          <UserDetails value={email} field="Email:" username={username} />
 
-          <UserDetails value={username} field="Username:" />
+          <UserDetails value={username} field="Username:" username={username} />
 
-          <UserDetails value="***********" field="Password:" />
+          <UserDetails
+            value="***********"
+            field="Password:"
+            username={username}
+          />
 
           <Box display="flex" gap={4} justifyContent="center">
             <Button color="gray.800" onClick={() => logOut()}>

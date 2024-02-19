@@ -5,11 +5,12 @@ import { FaUserEdit } from "react-icons/fa";
 import { GiCheckMark } from "react-icons/gi";
 
 interface Props {
+  username: string;
   field: string;
   value: string;
 }
 
-const UserDetails = ({ field, value }: Props) => {
+const UserDetails = ({ field, value, username }: Props) => {
   const [valueState, setValueState] = useState(value);
   const [editField, setEditField] = useState(false);
 
@@ -17,14 +18,45 @@ const UserDetails = ({ field, value }: Props) => {
     setEditField(!editField);
   };
 
+  const handleCheckClick = async () => {
+    const data = {
+      username,
+      field,
+      value: valueState,
+    };
+
+    const token = localStorage.getItem("token");
+
+    console.log("TOKEN", token);
+
+    const response = await fetch(
+      "http://localhost:3000/api/auth/edit-account-details",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+
+        method: "POST",
+        body: JSON.stringify(data),
+      }
+    );
+    console.log("RESPONSE", response);
+
+    setEditField(false);
+  };
+
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValueState(e.target.value);
   };
-  const onPressEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const onPressEnter = async (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       if (valueState.trim() === "") {
         console.error("Input cannot be empty. Please enter a value.");
       } else {
+        if (editField) {
+          await handleCheckClick();
+        }
         setEditField(false);
       }
     }
@@ -50,7 +82,7 @@ const UserDetails = ({ field, value }: Props) => {
       )}
       <Box ml={8}>
         {editField ? (
-          <GiCheckMark cursor="pointer" onClick={handleEditClick} />
+          <GiCheckMark cursor="pointer" onClick={handleCheckClick} />
         ) : (
           <FaUserEdit cursor="pointer" onClick={handleEditClick} />
         )}
