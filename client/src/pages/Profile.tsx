@@ -5,12 +5,12 @@ import {
   Button,
   Center,
   Flex,
-  SimpleGrid,
   Text,
   useToast,
 } from "@chakra-ui/react";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import { Context } from "../App";
+import { FaUserEdit } from "react-icons/fa";
 
 interface UserProfileData {
   name: string;
@@ -52,32 +52,54 @@ const Profile = () => {
         </Text>
         <Flex align="center" justify="center">
           <Box mr={8}>
-            <Avatar size="2xl" name={name} bg="purple.500" mb={4}>
+            <Avatar size="2xl" name={name} bg="blue.400" mb={4}>
               <AvatarBadge bg="green.500" boxSize="1em" />
             </Avatar>
           </Box>
           <Box px={8}>
             <Box mb={2}>
-              <Flex mb={4}>
+              <Flex mb={4} align="center">
                 <Text w="80%">Name:</Text>
                 <Text>{name}</Text>
+                <Box ml={8}>
+                  <FaUserEdit cursor="pointer" onClick={() => {}} />
+                </Box>
               </Flex>
-              <Flex mb={4}>
+              <Flex mb={4} align="center">
                 <Text w="80%">Email:</Text>
                 <Text>{email}</Text>
+                <Box ml={5}>
+                  <FaUserEdit cursor="pointer" onClick={() => {}} />
+                </Box>
               </Flex>
-              <Flex mb={4}>
-                <Text w="80%">Username:</Text>
+              <Flex mb={4} align="center">
+                <Text flex={1}>Username:</Text>
                 <Text>{username}</Text>
+                <Box ml={6}>
+                  <FaUserEdit
+                    cursor="pointer"
+                    onClick={() => console.log("Hello")}
+                  />
+                </Box>
               </Flex>
-              <Flex mb={4}>
-                <Text>Password:</Text>
-                <Text ml={20}>***********</Text>
-              </Flex>
+              <Box display="flex">
+                <Flex mb={4} align="center">
+                  <Text flex={1}>Password:</Text>
+                  <Text ml={20}>***********</Text>
+                  <Box ml={6}>
+                    <FaUserEdit cursor="pointer" onClick={() => {}} />
+                  </Box>
+                </Flex>
+              </Box>
             </Box>
-            <Button colorScheme="red" onClick={logOut}>
-              Log out
-            </Button>
+            <Box display="flex" gap={4}>
+              <Button color="gray.900" onClick={() => {}}>
+                Log out
+              </Button>
+              <Button colorScheme="red" onClick={() => {}}>
+                Delete Account
+              </Button>
+            </Box>
           </Box>
         </Flex>
       </Box>
