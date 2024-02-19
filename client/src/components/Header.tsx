@@ -21,9 +21,9 @@ const Header = ({ authenticated }: Props) => {
           fallbackSrc="https://via.placeholder.com/150"
           alt="puppy logo"
           borderRadius="50%"
-          boxSize="70px"
+          boxSize="60px"
         />
-        <Heading fontSize="26px" mt={5} mx={2}>
+        <Heading fontSize="24px" mt={5} mx={2}>
           Project Management Tool
         </Heading>
       </Box>
