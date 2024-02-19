@@ -50,7 +50,7 @@ const Header = ({ authenticated }: Props) => {
                   borderColor="transparent"
                   _hover={{
                     borderColor: "#0077B5",
-                    transition: "border-color 0.5s ease-in-out",
+                    transition: "border-color 0.9s ease-in-out",
                   }}
                 >
                   {component.name}

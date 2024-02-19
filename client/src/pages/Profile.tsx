@@ -43,7 +43,7 @@ const Profile = () => {
 
   return (
     <Center>
-      <Box p={8} maxW="xl">
+      <Box p={2}>
         <Text textAlign="center" mb={4} fontSize={20}>
           Account Details
         </Text>
@@ -56,21 +56,21 @@ const Profile = () => {
               <AvatarBadge bg="green.500" boxSize="1em" />
             </Avatar>
           </Box>
-          <Box>
-            <Box mb={4}>
-              <Flex mb={2}>
-                <Text>Name:</Text>
-                <Text ml={20}>{name}</Text>
+          <Box px={8}>
+            <Box mb={2}>
+              <Flex mb={4}>
+                <Text w="80%">Name:</Text>
+                <Text>{name}</Text>
               </Flex>
-              <Flex mb={2}>
-                <Text>Email:</Text>
-                <Text ml={20}>{email}</Text>
+              <Flex mb={4}>
+                <Text w="80%">Email:</Text>
+                <Text>{email}</Text>
               </Flex>
-              <Flex mb={2}>
-                <Text>Username:</Text>
-                <Text ml={20}>{username}</Text>
+              <Flex mb={4}>
+                <Text w="80%">Username:</Text>
+                <Text>{username}</Text>
               </Flex>
-              <Flex mb={2}>
+              <Flex mb={4}>
                 <Text>Password:</Text>
                 <Text ml={20}>***********</Text>
               </Flex>
