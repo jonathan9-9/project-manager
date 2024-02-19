@@ -3,14 +3,13 @@ import {
   AvatarBadge,
   Box,
   Button,
-  Center,
-  Flex,
   Text,
   useToast,
 } from "@chakra-ui/react";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import { Context } from "../App";
-import { FaUserEdit } from "react-icons/fa";
+
+import UserDetails from "../components/Profile/UserDetails";
 
 interface UserProfileData {
   name: string;
@@ -39,60 +38,34 @@ const Profile = () => {
       position: "top",
     });
   };
-  const { name, email, username, photo } = data;
+  const { name, email, username } = data;
 
   return (
-    <Center>
+    <Box>
       <Text textAlign="center" mb={4} fontSize={20}>
         Account Details
       </Text>
       <Text textAlign="center" mb={8}>
         Welcome, {name}! You can manage your account details here.
       </Text>
-      <Box display="flex" w="60%" gap={10} m="0 auto" py={20}>
-        <Box mr={8}>
+
+      <Box display="flex" w="60%" gap={10} m="0 auto" py={10}>
+        <Box display="flex" alignItems="center">
           <Avatar size="2xl" name={name} bg="blue.400" mb={4}>
             <AvatarBadge bg="green.500" boxSize="1em" />
           </Avatar>
         </Box>
-        <Box px={8}>
-          <Box mb={2}>
-            <Flex mb={4} align="center">
-              <Text w="80%">Name:</Text>
-              <Text>{name}</Text>
-              <Box ml={8}>
-                <FaUserEdit cursor="pointer" onClick={() => {}} />
-              </Box>
-            </Flex>
-            <Flex mb={4} align="center">
-              <Text w="80%">Email:</Text>
-              <Text>{email}</Text>
-              <Box ml={5}>
-                <FaUserEdit cursor="pointer" onClick={() => {}} />
-              </Box>
-            </Flex>
-            <Flex mb={4} align="center">
-              <Text flex={1}>Username:</Text>
-              <Text>{username}</Text>
-              <Box ml={6}>
-                <FaUserEdit
-                  cursor="pointer"
-                  onClick={() => console.log("Hello")}
-                />
-              </Box>
-            </Flex>
-            <Box display="flex">
-              <Flex mb={4} align="center">
-                <Text flex={1}>Password:</Text>
-                <Text ml={20}>***********</Text>
-                <Box ml={6}>
-                  <FaUserEdit cursor="pointer" onClick={() => {}} />
-                </Box>
-              </Flex>
-            </Box>
-          </Box>
-          <Box display="flex" gap={4}>
-            <Button color="gray.900" onClick={() => {}}>
+        <Box w="100%" display="flex" flexDirection="column" gap={6}>
+          <UserDetails value={name} field="Name:" />
+
+          <UserDetails value={email} field="Email:" />
+
+          <UserDetails value={username} field="Username:" />
+
+          <UserDetails value="***********" field="Password:" />
+
+          <Box display="flex" gap={4} justifyContent="center">
+            <Button color="gray.800" onClick={() => logOut()}>
               Log out
             </Button>
             <Button colorScheme="red" onClick={() => {}}>
@@ -101,7 +74,7 @@ const Profile = () => {
           </Box>
         </Box>
       </Box>
-    </Center>
+    </Box>
   );
 };
 
