@@ -24,7 +24,8 @@ const ForgotPasswordComp = ({ isOpen, onClose }: Props) => {
     setEmail(e.target.value);
   };
 
-  const onClickEmail = () => {
+  const onSubmitEmail = () => {
+    console.log("EMAIL", email);
     onClose();
   };
   return (
@@ -50,7 +51,7 @@ const ForgotPasswordComp = ({ isOpen, onClose }: Props) => {
           <Button
             style={{ backgroundColor: "#1877f2", color: "#FFFFFF" }}
             mr={3}
-            onClick={onClickEmail}
+            onClick={onSubmitEmail}
           >
             Search
           </Button>
