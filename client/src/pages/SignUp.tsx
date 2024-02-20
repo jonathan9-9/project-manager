@@ -14,6 +14,15 @@ import { useState } from "react";
 import { useOutletContext } from "react-router";
 import { Context } from "../App";
 
+export const isInvalidEmail = (email: string) => {
+  const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+  if (email.match(emailPattern) && email.length > 0) {
+    return false;
+  } else {
+    return true;
+  }
+};
+
 const SignUp = () => {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
@@ -34,15 +43,6 @@ const SignUp = () => {
     useState(false);
 
   const [formSubmitted, setFormSubmitted] = useState(false);
-
-  const isInvalidEmail = (email: string) => {
-    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (email.match(emailPattern) && email.length > 0) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
   const isInvalidPass2 = (password1: string, password2: string) => {
     if (password1 !== password2) {
@@ -162,7 +162,7 @@ const SignUp = () => {
           title: "Invalid Password",
           description: passwordError,
           status: "error",
-          duration: 5000,
+          duration: 3000,
           isClosable: true,
         });
       } else {

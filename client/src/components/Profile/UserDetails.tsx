@@ -1,8 +1,9 @@
-import { Box, Flex, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, Input, Text, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 
 import { FaUserEdit } from "react-icons/fa";
 import { GiCheckMark } from "react-icons/gi";
+import { isInvalidEmail } from "../../pages/SignUp";
 
 interface Props {
   username: string;
@@ -14,11 +15,36 @@ const UserDetails = ({ field, value, username }: Props) => {
   const [valueState, setValueState] = useState(value);
   const [editField, setEditField] = useState(false);
 
+  const toast = useToast();
+
   const handleEditClick = () => {
     setEditField(!editField);
   };
 
   const handleCheckClick = async () => {
+    if (field === "Email") {
+      if (isInvalidEmail(valueState)) {
+        toast({
+          title: "Invalid Password",
+          description: "Please enter a valid email address",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+    } else {
+      if (valueState === "") {
+        toast({
+          title: "Error",
+          description: "Enter a valid value",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        return;
+      }
+    }
     const data = {
       username,
       field: field.toLowerCase(),
@@ -42,6 +68,16 @@ const UserDetails = ({ field, value, username }: Props) => {
       }
     );
     console.log("RESPONSE", response);
+
+    if (response.ok) {
+      toast({
+        title: "Success",
+        description: `Successfully updated ${field.toLowerCase()}`,
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
 
     setEditField(!editField);
   };
@@ -74,10 +110,11 @@ const UserDetails = ({ field, value, username }: Props) => {
           onKeyDown={(e) => onPressEnter(e)}
           flex={1}
           height="28px"
+          type={field === "Password" ? "password" : "text"}
         />
       ) : (
         <Text lineHeight="32px" flex={1}>
-          {valueState}
+          {field === "Password" ? "***********" : valueState}
         </Text>
       )}
       <Box ml={8}>
