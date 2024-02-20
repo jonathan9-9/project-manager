@@ -24,65 +24,79 @@ const UserDetails = ({ field, value, username, setData }: Props) => {
   };
 
   const handleCheckClick = async () => {
-    if (field === "Email") {
-      if (isInvalidEmail(valueState)) {
+    try {
+      if (field === "Email") {
+        if (isInvalidEmail(valueState)) {
+          toast({
+            title: "Invalid Password",
+            description: "Please enter a valid email address",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+          return;
+        }
+      } else {
+        if (valueState === "") {
+          toast({
+            title: "Error",
+            description: "Enter a valid value",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+          return;
+        }
+      }
+      const data = {
+        username,
+        field: field.toLowerCase(),
+        value: valueState,
+      };
+
+      const token = localStorage.getItem("token");
+
+      console.log("TOKEN", token);
+
+      const response = await fetch(
+        "http://localhost:3000/api/auth/edit-account-details",
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+
+          method: "POST",
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        const res = await response.json();
         toast({
-          title: "Invalid Password",
-          description: "Please enter a valid email address",
-          status: "error",
+          title: "Success",
+          description: `Successfully updated ${field.toLowerCase()}`,
+          status: "success",
           duration: 3000,
           isClosable: true,
         });
-        return;
+        setData(res);
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData);
       }
-    } else {
-      if (valueState === "") {
-        toast({
-          title: "Error",
-          description: "Enter a valid value",
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-        });
-        return;
-      }
-    }
-    const data = {
-      username,
-      field: field.toLowerCase(),
-      value: valueState,
-    };
 
-    const token = localStorage.getItem("token");
-
-    console.log("TOKEN", token);
-
-    const response = await fetch(
-      "http://localhost:3000/api/auth/edit-account-details",
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-
-        method: "POST",
-        body: JSON.stringify(data),
-      }
-    );
-
-    if (response.ok) {
-      const res = await response.json();
+      setEditField(!editField);
+    } catch (error) {
+      console.log("Error", error);
       toast({
-        title: "Success",
-        description: `Successfully updated ${field.toLowerCase()}`,
-        status: "success",
+        title: "Error",
+        description: "An error occurred. Please try again",
+        status: "error",
         duration: 3000,
         isClosable: true,
       });
-      setData(res);
     }
-
-    setEditField(!editField);
   };
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {

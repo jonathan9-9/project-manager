@@ -1,5 +1,5 @@
-const CreateUser = () => {
-  return <div id="footer">My Footer</div>;
+const Footer = () => {
+  return <div id="footer">Footer</div>;
 };
 
-export default CreateUser;
+export default Footer;
