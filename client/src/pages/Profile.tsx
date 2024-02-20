@@ -10,8 +10,9 @@ import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import { Context } from "../App";
 
 import UserDetails from "../components/Profile/UserDetails";
+import { useState } from "react";
 
-interface UserProfileData {
+export interface UserProfileData {
   name: string;
   email: string;
   username: string;
@@ -19,7 +20,10 @@ interface UserProfileData {
 }
 
 const Profile = () => {
-  const data = useLoaderData() as UserProfileData;
+  const loaderData = useLoaderData() as UserProfileData;
+
+  const [data, setData] = useState(loaderData);
+
   const navigate = useNavigate();
   const toast = useToast();
   const context = useOutletContext() as Context;
@@ -51,21 +55,37 @@ const Profile = () => {
 
       <Box display="flex" w="60%" gap={10} m="0 auto" py={10}>
         <Box display="flex" alignItems="center">
-          <Avatar size="2xl" name={name} bg="blue.400" mb={4}>
+          <Avatar size="2xl" name={name} bg="pink.400" mb={4}>
             <AvatarBadge bg="green.500" boxSize="1em" />
           </Avatar>
         </Box>
         <Box w="100%" display="flex" flexDirection="column" gap={6}>
-          <UserDetails value={name} field="Name" username={username} />
+          <UserDetails
+            value={name}
+            field="Name"
+            username={username}
+            setData={setData}
+          />
 
-          <UserDetails value={email} field="Email" username={username} />
+          <UserDetails
+            value={email}
+            field="Email"
+            username={username}
+            setData={setData}
+          />
 
-          <UserDetails value={username} field="Username" username={username} />
+          <UserDetails
+            value={username}
+            field="Username"
+            username={username}
+            setData={setData}
+          />
 
           <UserDetails
             value="***********"
             field="Password"
             username={username}
+            setData={setData}
           />
 
           <Box display="flex" gap={4} justifyContent="center">

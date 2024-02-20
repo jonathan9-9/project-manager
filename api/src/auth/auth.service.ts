@@ -101,6 +101,15 @@ export class AuthService {
 
     // Save the field property value in the database
 
-    return await this.usersService.updateUser({ id: user.id }, user);
+    const updatedUser = await this.usersService.updateUser(
+      { id: user.id },
+      user,
+    );
+
+    return {
+      name: updatedUser.name,
+      email: updatedUser.email,
+      username: updatedUser.username,
+    };
   }
 }

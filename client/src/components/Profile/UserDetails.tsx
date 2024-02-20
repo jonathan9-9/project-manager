@@ -4,14 +4,16 @@ import { useState } from "react";
 import { FaUserEdit } from "react-icons/fa";
 import { GiCheckMark } from "react-icons/gi";
 import { isInvalidEmail } from "../../pages/SignUp";
+import { UserProfileData } from "../../pages/Profile";
 
 interface Props {
   username: string;
   field: string;
   value: string;
+  setData: React.Dispatch<React.SetStateAction<UserProfileData>>;
 }
 
-const UserDetails = ({ field, value, username }: Props) => {
+const UserDetails = ({ field, value, username, setData }: Props) => {
   const [valueState, setValueState] = useState(value);
   const [editField, setEditField] = useState(false);
 
@@ -67,9 +69,9 @@ const UserDetails = ({ field, value, username }: Props) => {
         body: JSON.stringify(data),
       }
     );
-    console.log("RESPONSE", response);
 
     if (response.ok) {
+      const res = await response.json();
       toast({
         title: "Success",
         description: `Successfully updated ${field.toLowerCase()}`,
@@ -77,6 +79,7 @@ const UserDetails = ({ field, value, username }: Props) => {
         duration: 3000,
         isClosable: true,
       });
+      setData(res);
     }
 
     setEditField(!editField);
