@@ -319,7 +319,7 @@ const SignUp = () => {
             </FormErrorMessage>
           </FormControl>
           <Button
-            style={{ backgroundColor: "#0077B5", color: "#FFFFFF" }}
+            style={{ backgroundColor: "#3BB143", color: "#FFFFFF" }}
             size="md"
             height="42px"
             width="150px"

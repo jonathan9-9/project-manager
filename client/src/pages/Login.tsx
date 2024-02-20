@@ -9,14 +9,17 @@ import {
   FormLabel,
   Input,
   Text,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import { useNavigate, useOutletContext } from "react-router";
 import { Context } from "../App";
+import ForgotPasswordComp from "../components/Login/ForgotPasswordComp";
 
 const Login = () => {
   const navigate = useNavigate();
   const context = useOutletContext() as Context;
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [usernameInput, setUsernameInput] = useState<string>("");
   const [passwordInput, setPasswordInput] = useState<string>("");
@@ -169,10 +172,11 @@ const Login = () => {
               <FormErrorMessage>Password is required.</FormErrorMessage>
             )}
           </FormControl>
+
           <Box mt={4}>
             {/* #3498db */}
             <Button
-              style={{ backgroundColor: "#0077B5", color: "#FFFFFF" }}
+              style={{ backgroundColor: "#1877f2", color: "#FFFFFF" }}
               size="md"
               height="42px"
               width="125px"
@@ -182,7 +186,17 @@ const Login = () => {
             >
               Login
             </Button>
+            <Box display="flex" mt={2}>
+              <Text
+                textColor="#1877f2"
+                _hover={{ textDecoration: "underline", cursor: "pointer" }}
+                onClick={onOpen}
+              >
+                Forgot account?
+              </Text>
+            </Box>
           </Box>
+          <ForgotPasswordComp isOpen={isOpen} onClose={onClose} />
         </Box>
       </Center>
     </>
