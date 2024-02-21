@@ -58,13 +58,23 @@ const ForgotPasswordComp = ({ isOpen, onClose }: Props) => {
         })
         .catch((error) => {
           console.log("ERROR", error);
-          toast({
-            title: "Error",
-            description: error.response.data.message[0],
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-          });
+          if (error.response.data.message === "email not found") {
+            toast({
+              title: "Success",
+              description: "Check your email for further instructions.",
+              status: "success",
+              duration: 3000,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: "Error",
+              description: error.response.data.message,
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+            });
+          }
         });
     }
 

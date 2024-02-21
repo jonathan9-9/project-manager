@@ -24,6 +24,18 @@ export class AuthService {
     return await bcrypt.hash(password, saltRounds);
   }
 
+  async createAccessToken(user: UserModel, secret?: string) {
+    const payload = { sub: user.id };
+    if (secret) {
+      return this.jwtService.signAsync(payload, {
+        secret,
+        expiresIn: '5m',
+      });
+    } else {
+      return await this.jwtService.signAsync(payload);
+    }
+  }
+
   async signIn(
     username: string,
     pass: string,
@@ -118,7 +130,9 @@ export class AuthService {
     console.log('USER', user);
 
     if (!user) {
-      throw new BadRequestException('Email not found');
+      throw new BadRequestException('email not found');
     }
+    const token = await this.createAccessToken(user, user.password);
+    console.log('token', token);
   }
 }
