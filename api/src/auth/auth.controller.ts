@@ -117,7 +117,8 @@ export class AuthController {
 
   @Public()
   @Post('reset-password')
-  resetPasswordByEmail(@Body() email: EmailDto) {
-    console.log('email', email);
+  resetPasswordByEmail(@Body() body: EmailDto) {
+    console.log('email', body);
+    return this.authService.resetPasswordByEmail(body.email);
   }
 }

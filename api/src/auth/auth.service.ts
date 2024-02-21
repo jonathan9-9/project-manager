@@ -112,4 +112,13 @@ export class AuthService {
       username: updatedUser.username,
     };
   }
+
+  async resetPasswordByEmail(email: string) {
+    const user = await this.usersService.findUserByEmail(email);
+    console.log('USER', user);
+
+    if (!user) {
+      throw new BadRequestException('Email not found');
+    }
+  }
 }
