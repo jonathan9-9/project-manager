@@ -11,7 +11,9 @@ import {
   ModalOverlay,
   useToast,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useState } from "react";
+import { isInvalidEmail } from "../../pages/SignUp";
 
 interface Props {
   isOpen: boolean;
@@ -28,38 +30,45 @@ const ForgotPasswordComp = ({ isOpen, onClose }: Props) => {
 
   const onSubmitEmail = async () => {
     console.log("EMAIL", email);
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/auth/reset-password",
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(email),
-        }
-      );
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      setEmail("");
-      console.log("response", response);
-      onClose();
-      return data;
-    } catch (error) {
-      console.error("ERR", error);
+    if (isInvalidEmail(email)) {
       toast({
-        title: "Error",
-        description: String(error),
+        title: "Invalid email",
+        description: "Please enter a valid email address",
         status: "error",
         duration: 3000,
         isClosable: true,
       });
+      onClose();
+    } else {
+      axios
+        .post("http://localhost:3000/api/auth/reset-password", {
+          email,
+        })
+        .then((response) => {
+          console.log("response", response);
+          setEmail("");
+          toast({
+            title: "Success",
+            description: "Check your email for further instructions.",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+          });
+        })
+        .catch((error) => {
+          console.log("ERROR", error);
+          toast({
+            title: "Error",
+            description: error.response.data.message[0],
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+          });
+        });
     }
+
+    onClose();
   };
 
   return (

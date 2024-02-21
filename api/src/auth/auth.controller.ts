@@ -60,8 +60,7 @@ export class AccountDetailsDto {
 }
 
 export class EmailDto {
-  @IsEmail()
-  @IsNotEmpty()
+  @IsEmail(undefined, { message: 'Please enter a valid email address' })
   @Transform((params) => sanitizeHtml(params.value))
   email: string;
 }
@@ -118,7 +117,7 @@ export class AuthController {
 
   @Public()
   @Post('reset-password')
-  resetPasswordByEmail(@Body('email') email: EmailDto) {
+  resetPasswordByEmail(@Body() email: EmailDto) {
     console.log('email', email);
   }
 }
