@@ -59,6 +59,13 @@ export class AccountDetailsDto {
   value: string;
 }
 
+export class EmailDto {
+  @IsEmail()
+  @IsNotEmpty()
+  @Transform((params) => sanitizeHtml(params.value))
+  email: string;
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -107,5 +114,11 @@ export class AuthController {
   @Post('edit-account-details')
   editAccountDetails(@Body() accountDetailsDto: AccountDetailsDto) {
     return this.authService.editAccountDetails(accountDetailsDto);
+  }
+
+  @Public()
+  @Post('reset-password')
+  resetPasswordByEmail(@Body('email') email: EmailDto) {
+    console.log('email', email);
   }
 }

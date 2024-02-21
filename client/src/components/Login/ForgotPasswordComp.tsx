@@ -9,6 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 
@@ -19,15 +20,48 @@ interface Props {
 
 const ForgotPasswordComp = ({ isOpen, onClose }: Props) => {
   const [email, setEmail] = useState("");
+  const toast = useToast();
 
   const onChangeEmail = (e: any) => {
     setEmail(e.target.value);
   };
 
-  const onSubmitEmail = () => {
+  const onSubmitEmail = async () => {
     console.log("EMAIL", email);
-    onClose();
+    try {
+      const response = await fetch(
+        "http://localhost:3000/api/auth/reset-password",
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify(email),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      setEmail("");
+      console.log("response", response);
+      onClose();
+      return data;
+    } catch (error) {
+      console.error("ERR", error);
+      toast({
+        title: "Error",
+        description: String(error),
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    }
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
