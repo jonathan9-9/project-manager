@@ -11,12 +11,14 @@ import { User as UserModel } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { jwtConstants } from './constants';
 import { AccountDetailsDto } from './auth.controller';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
+    private mailService: MailService,
   ) {}
 
   async hashPassword(password: string) {
@@ -127,12 +129,12 @@ export class AuthService {
 
   async resetPasswordByEmail(email: string) {
     const user = await this.usersService.findUserByEmail(email);
-    console.log('USER', user);
 
     if (!user) {
       throw new BadRequestException('email not found');
     }
     const token = await this.createAccessToken(user, user.password);
-    console.log('token', token);
+
+    return this.mailService.sendPasswordResetEmail(user, token);
   }
 }
