@@ -145,6 +145,15 @@ export class AuthService {
       secret: user.password,
     });
 
-    console.log('PAYLOAD', payload);
+    if (payload) {
+      const hashedPassword = await this.hashPassword(newPassword);
+
+      user.password = hashedPassword;
+
+      return await this.usersService.updateUser(
+        { id: user.id },
+        { password: hashedPassword },
+      );
+    }
   }
 }
