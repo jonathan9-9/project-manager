@@ -139,21 +139,27 @@ export class AuthService {
   }
 
   async saveNewPassword(newPassword: string, id: number, token: string) {
-    const user = await this.usersService.findUserById(id);
+    try {
+      const user = await this.usersService.findUserById(id);
 
-    const payload = await this.jwtService.verifyAsync(token, {
-      secret: user.password,
-    });
+      const payload = await this.jwtService.verifyAsync(token, {
+        secret: user.password,
+      });
 
-    if (payload) {
-      const hashedPassword = await this.hashPassword(newPassword);
+      if (payload) {
+        const hashedPassword = await this.hashPassword(newPassword);
 
-      user.password = hashedPassword;
+        user.password = hashedPassword;
 
-      return await this.usersService.updateUser(
-        { id: user.id },
-        { password: hashedPassword },
-      );
+        return await this.usersService.updateUser(
+          { id: user.id },
+          { password: hashedPassword },
+        );
+      } else {
+        throw new Error('Invalid token');
+      }
+    } catch (error) {
+      throw new Error('Failed to save new password');
     }
   }
 }
