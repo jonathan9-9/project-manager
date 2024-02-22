@@ -28,7 +28,7 @@ export interface UserProfileData {
 const Profile = () => {
   const loaderData = useLoaderData() as UserProfileData;
   const [data, setData] = useState(loaderData);
-  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false); // State for managing modal visibility
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
 
   const navigate = useNavigate();
   const toast = useToast();
@@ -149,7 +149,6 @@ const Profile = () => {
         </Box>
       </Box>
 
-      {/* Delete Confirmation Modal */}
       <Modal isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
         <ModalOverlay />
         <ModalContent>
@@ -161,7 +160,7 @@ const Profile = () => {
             </Text>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="purple" mr={3} onClick={closeDeleteModal}>
+            <Button colorScheme="gray" mr={3} onClick={closeDeleteModal}>
               Cancel
             </Button>
             <Button colorScheme="red" onClick={() => deleteProfile()}>

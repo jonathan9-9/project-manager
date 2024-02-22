@@ -19,7 +19,7 @@ const Header = ({ authenticated }: Props) => {
         <Image
           src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/vecteezy_watercolor-paintings-of-a-black-crow-bird-ai-generated_33053087.png?alt=media&token=a5b0f204-b95b-44e3-8db5-fbfef6a4719c"
           fallbackSrc="https://via.placeholder.com/150"
-          alt="puppy logo"
+          alt="black crow"
           borderRadius="50%"
           boxSize="60px"
         />
