@@ -138,7 +138,13 @@ export class AuthService {
     return this.mailService.sendPasswordResetEmail(user, token);
   }
 
-  async saveNewPassword(newPassword: string) {
-    console.log('New Password', newPassword);
+  async saveNewPassword(newPassword: string, id: number, token: string) {
+    const user = await this.usersService.findUserById(id);
+
+    const payload = await this.jwtService.verifyAsync(token, {
+      secret: user.password,
+    });
+
+    console.log('PAYLOAD', payload);
   }
 }

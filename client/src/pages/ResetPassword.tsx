@@ -49,8 +49,7 @@ const ResetPassword = () => {
 
     if (password === "") {
       setSubmitPassword(true);
-    }
-    if (secondPassword === "") {
+    } else if (secondPassword === "") {
       setSubmitSecondPassword(true);
     } else {
       try {

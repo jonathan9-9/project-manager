@@ -46,6 +46,15 @@ export class UsersService {
     return user;
   }
 
+  async findUserById(id: number) {
+    const user = await this.prisma.user.findUnique({
+      where: {
+        id: +id,
+      },
+    });
+    return user;
+  }
+
   async updateUser(
     where: Prisma.UserWhereUniqueInput,
     data: Prisma.UserUpdateInput,

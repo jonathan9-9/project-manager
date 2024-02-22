@@ -69,6 +69,12 @@ export class NewPassDto {
   @IsNotEmpty()
   @Transform((params) => sanitizeHtml(params.value))
   newPassword: string;
+
+  @IsNotEmpty()
+  id: number;
+
+  @IsNotEmpty()
+  token: string;
 }
 
 @Controller('auth')
@@ -131,7 +137,11 @@ export class AuthController {
   @Public()
   @Post('save-new-password')
   saveNewPassword(@Body() body: NewPassDto) {
-    console.log('email', body.newPassword);
-    return this.authService.saveNewPassword(body.newPassword);
+    console.log('NEW PASSWORD', body.newPassword);
+    return this.authService.saveNewPassword(
+      body.newPassword,
+      body.id,
+      body.token,
+    );
   }
 }
