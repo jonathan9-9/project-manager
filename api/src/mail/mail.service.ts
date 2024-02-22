@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { User as UserModel } from '@prisma/client';
 import { sendEmail } from './mail';
+import { resetPasswordTemplate } from './email-pass-reset-template';
 
 @Injectable()
 export class MailService {
@@ -11,7 +12,7 @@ export class MailService {
         from: 'jonathan3060@gmail.com',
         to: user.email,
         subject: 'Rest your password',
-        text: 'This is a test email sent using Nodemailer.',
+        html: resetPasswordTemplate(token, user.id),
       },
       () => {
         console.log('Email sent for password reset');
