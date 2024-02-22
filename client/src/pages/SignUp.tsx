@@ -11,7 +11,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useOutletContext } from "react-router";
+import { useNavigate, useOutletContext } from "react-router";
 import { Context } from "../App";
 
 export const isInvalidEmail = (email: string) => {
@@ -33,6 +33,7 @@ const SignUp = () => {
 
   const toast = useToast();
   const context = useOutletContext() as Context;
+  const navigate = useNavigate();
 
   const [clickedSubmitName, setClickedSubmitName] = useState(false);
   const [clickedSubmitEmail, setClickedSubmitEmail] = useState(false);
@@ -197,6 +198,7 @@ const SignUp = () => {
               isClosable: true,
             });
             resetForm();
+            navigate("/login");
             context.toggleAuthenticated();
             return response.json();
           } else {

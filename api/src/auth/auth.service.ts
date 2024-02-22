@@ -162,4 +162,8 @@ export class AuthService {
       throw new Error('Failed to save new password');
     }
   }
+
+  async deleteUser(id: number) {
+    return await this.usersService.remove(id);
+  }
 }

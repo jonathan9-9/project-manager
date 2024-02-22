@@ -144,4 +144,9 @@ export class AuthController {
       body.token,
     );
   }
+
+  @Post('delete-user')
+  deleteUser(@Request() req) {
+    return this.authService.deleteUser(req.user.sub);
+  }
 }
