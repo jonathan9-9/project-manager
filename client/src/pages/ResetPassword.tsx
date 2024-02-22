@@ -6,12 +6,16 @@ import {
   FormLabel,
   Input,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const ResetPassword = () => {
   const { id, token } = useParams();
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const [password, setPassword] = useState("");
   const [secondPassword, setSecondPassword] = useState("");
 
@@ -70,16 +74,27 @@ const ResetPassword = () => {
         );
         if (response.ok) {
           resetForm();
-          console.log("response", response);
-
+          navigate("/login");
+          toast({
+            title: "Success",
+            description: "Your password has been successfully reset!",
+            status: "success",
+            duration: 4000,
+            isClosable: true,
+            position: "top-right",
+          });
           const responseData = await response.json();
           return responseData;
-        } else {
-          // toast message here
-          console.error("error saving new password");
         }
       } catch (error) {
-        // toast message here
+        toast({
+          title: "Password reset failed",
+          description: "We cannot reset your password at this moment.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
         console.log("error saving new password", error);
       }
     }
