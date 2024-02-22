@@ -44,7 +44,7 @@ const ResetPassword = () => {
     setFormSubmitted(false);
   };
 
-  const onSubmitPassword = (e: React.FormEvent) => {
+  const onSubmitPassword = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password === "") {
@@ -53,7 +53,36 @@ const ResetPassword = () => {
     if (secondPassword === "") {
       setSubmitSecondPassword(true);
     } else {
-      resetForm();
+      try {
+        const data = {
+          newPassword: password,
+          id: id,
+          token: token,
+        };
+        const response = await fetch(
+          "http://localhost:3000/api/auth/save-new-password",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(data),
+          }
+        );
+        if (response.ok) {
+          resetForm();
+          console.log("response", response);
+
+          const responseData = await response.json();
+          return responseData;
+        } else {
+          // toast message here
+          console.error("error saving new password");
+        }
+      } catch (error) {
+        // toast message here
+        console.log("error saving new password", error);
+      }
     }
 
     console.log("password", password);
