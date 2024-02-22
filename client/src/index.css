@@ -45,9 +45,13 @@ code {
 
 #footer {
   background-color: #333;
-  color: #0077b5;
+  color: #ffffff;
   padding: 20px;
   margin-top: auto;
   width: 100%;
   text-align: center;
+}
+
+.purple-text {
+  color: #9147ff;
 }

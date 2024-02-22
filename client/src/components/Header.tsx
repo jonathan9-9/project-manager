@@ -23,10 +23,16 @@ const Header = ({ authenticated }: Props) => {
           borderRadius="50%"
           boxSize="60px"
         />
-        <Heading fontSize="24px" mt={5} mx={2}>
+        <Heading
+          fontSize="24px"
+          mt={5}
+          mx={2}
+          fontFamily="Open sans, sans-serif"
+        >
           Project Management Tool
         </Heading>
       </Box>
+
       <Box display="flex" justifyContent="space-around" w="70%">
         {components.map((component) => {
           if (
@@ -41,7 +47,7 @@ const Header = ({ authenticated }: Props) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
                     color: isPending ? "pink" : "black",
-                    borderBottom: isActive ? "2px solid #0077B5" : "",
+                    borderBottom: isActive ? "2px solid #9147ff" : "",
                   };
                 }}
               >
@@ -49,7 +55,7 @@ const Header = ({ authenticated }: Props) => {
                   borderBottom="2px"
                   borderColor="transparent"
                   _hover={{
-                    borderColor: "#0077B5",
+                    borderColor: "#9147ff",
                     transition: "border-color 0.9s ease-in-out",
                   }}
                 >

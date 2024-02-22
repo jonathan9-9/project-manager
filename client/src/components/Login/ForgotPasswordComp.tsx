@@ -102,7 +102,7 @@ const ForgotPasswordComp = ({ isOpen, onClose }: Props) => {
             Cancel
           </Button>
           <Button
-            style={{ backgroundColor: "#1877f2", color: "#FFFFFF" }}
+            style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
             mr={3}
             onClick={onSubmitEmail}
           >

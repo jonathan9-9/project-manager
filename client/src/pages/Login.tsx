@@ -176,10 +176,10 @@ const Login = () => {
           <Box mt={4}>
             {/* #3498db */}
             <Button
-              style={{ backgroundColor: "#1877f2", color: "#FFFFFF" }}
+              style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
               size="md"
               height="42px"
-              width="125px"
+              width="100%"
               p={4}
               type="submit"
               onClick={handleLoginSubmit}
@@ -188,7 +188,7 @@ const Login = () => {
             </Button>
             <Box display="flex" mt={2}>
               <Text
-                textColor="#1877f2"
+                textColor="#000000"
                 _hover={{ textDecoration: "underline", cursor: "pointer" }}
                 onClick={onOpen}
               >

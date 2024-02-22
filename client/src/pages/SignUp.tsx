@@ -220,12 +220,22 @@ const SignUp = () => {
   return (
     <>
       <Center>
-        <Text as="b" fontSize="22px" mb="8" mt="2">
-          Create an Account
-        </Text>
+        <Box
+          mb={7}
+          mt={12}
+          justifyContent="center"
+          textAlign="center"
+          fontFamily="Open Sans, sans-serif"
+        >
+          <Text as="b" fontSize="22px" mb="4">
+            Create your account
+          </Text>
+          <Text>Create an account to view and manage your projects</Text>
+        </Box>
       </Center>
+
       <Center>
-        <Box w="40%" mb={12} p="8" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
+        <Box w="40%" mb={12} p="8" boxShadow="0 4px 8px rgba(0, 0, 0, 0.2)">
           <FormControl isInvalid={isErrorName} isRequired>
             <FormLabel>Name</FormLabel>
             <Input
@@ -318,17 +328,31 @@ const SignUp = () => {
                 : null}
             </FormErrorMessage>
           </FormControl>
-          <Button
-            style={{ backgroundColor: "#3BB143", color: "#FFFFFF" }}
-            size="md"
-            height="42px"
-            width="150px"
-            p={3}
-            type="submit"
-            onClick={handleSignUpSubmit}
-          >
-            Create account
-          </Button>
+          <Box>
+            <Button
+              style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
+              size="md"
+              height="42px"
+              width="100%"
+              mb={8}
+              p={2}
+              type="submit"
+              onClick={handleSignUpSubmit}
+            >
+              Create your account
+            </Button>
+            <hr />
+            <Box>
+              <Text mt={4} align="center">
+                By creating an account you agree to our{" "}
+                <span className="purple-text">
+                  Terms of <br />
+                  Service
+                </span>{" "}
+                and <span className="purple-text">Privacy Policy.</span>
+              </Text>
+            </Box>
+          </Box>
         </Box>
       </Center>
     </>
