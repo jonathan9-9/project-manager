@@ -61,36 +61,52 @@ const ResetPassword = () => {
   };
 
   return (
-    <Box w="40%" mb={12} p="8" boxShadow="0 4px 8px rgba(0, 0, 0, 0.2)">
-      <Text>Reset Your Password</Text>
-      <FormControl isInvalid={isErrorPassword} isRequired>
-        <FormLabel>Password</FormLabel>
-        <Input
-          id="password"
-          type="password"
-          value={password}
-          onChange={onChangePassword}
-        />
-        {!isErrorPassword ? null : (
-          <FormErrorMessage>Password is required.</FormErrorMessage>
-        )}
-      </FormControl>
-      <FormControl isInvalid={isErrorSecondPassword} isRequired>
-        <FormLabel>Re-enter password</FormLabel>
-        <Input
-          id="secondPassword"
-          type="password"
-          value={secondPassword}
-          onChange={onChangeSecondPassword}
-        />
-        {!isErrorSecondPassword ? null : (
-          <FormErrorMessage>Password must match</FormErrorMessage>
-        )}
-      </FormControl>
-      <Button width="100%" onClick={onSubmitPassword} type="button">
-        Submit
-      </Button>
-    </Box>
+    <>
+      <Box as="b" ml={8} mt={4}>
+        <Text>Reset Your Password</Text>
+      </Box>
+      <Box
+        w="45%"
+        p="7"
+        mt={10}
+        ml={5}
+        boxShadow="0 4px 8px rgba(0, 0, 0, 0.2)"
+      >
+        <FormControl isInvalid={isErrorPassword} isRequired>
+          <FormLabel>Password</FormLabel>
+          <Input
+            id="password"
+            type="password"
+            value={password}
+            onChange={onChangePassword}
+          />
+          {!isErrorPassword ? null : (
+            <FormErrorMessage>Password is required.</FormErrorMessage>
+          )}
+        </FormControl>
+        <FormControl isInvalid={isErrorSecondPassword} isRequired>
+          <FormLabel>Re-enter password</FormLabel>
+          <Input
+            id="secondPassword"
+            type="password"
+            value={secondPassword}
+            onChange={onChangeSecondPassword}
+          />
+          {!isErrorSecondPassword ? null : (
+            <FormErrorMessage>Password must match</FormErrorMessage>
+          )}
+        </FormControl>
+        <Button
+          style={{ backgroundColor: "#006D5B", color: "#FFFFFF" }}
+          mt={4}
+          width="100%"
+          onClick={onSubmitPassword}
+          type="button"
+        >
+          Reset Password
+        </Button>
+      </Box>
+    </>
   );
 };
 

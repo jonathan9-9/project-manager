@@ -29,7 +29,7 @@ const Header = ({ authenticated }: Props) => {
           mx={2}
           fontFamily="Open sans, sans-serif"
         >
-          Project Management Tool
+          Unifier
         </Heading>
       </Box>
 
