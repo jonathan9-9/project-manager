@@ -6,7 +6,6 @@ import { resetPasswordTemplate } from './email-pass-reset-template';
 @Injectable()
 export class MailService {
   async sendPasswordResetEmail(user: UserModel, token: string) {
-    console.log('TOKEN', token);
     sendEmail(
       {
         from: 'jonathan3060@gmail.com',

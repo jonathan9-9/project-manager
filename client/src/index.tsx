@@ -15,6 +15,7 @@ import Login from "./pages/Login";
 import AuthProvider from "./provider/AuthProvider";
 import Projects from "./pages/Projects";
 import Profile from "./pages/Profile";
+import ResetPassword from "./pages/ResetPassword";
 
 const { ToastContainer, toast } = createStandaloneToast();
 
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
             return redirect("/sign-up");
           }
         },
+      },
+      {
+        path: "/reset-password/:token/:id",
+        element: <ResetPassword />,
       },
     ],
   },
