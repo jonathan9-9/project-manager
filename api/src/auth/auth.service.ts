@@ -137,4 +137,8 @@ export class AuthService {
 
     return this.mailService.sendPasswordResetEmail(user, token);
   }
+
+  async saveNewPassword(newPassword: string) {
+    console.log('New Password', newPassword);
+  }
 }

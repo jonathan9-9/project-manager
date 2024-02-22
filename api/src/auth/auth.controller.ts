@@ -65,6 +65,12 @@ export class EmailDto {
   email: string;
 }
 
+export class NewPassDto {
+  @IsNotEmpty()
+  @Transform((params) => sanitizeHtml(params.value))
+  newPassword: string;
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -120,5 +126,12 @@ export class AuthController {
   resetPasswordByEmail(@Body() body: EmailDto) {
     console.log('email', body);
     return this.authService.resetPasswordByEmail(body.email);
+  }
+
+  @Public()
+  @Post('save-new-password')
+  saveNewPassword(@Body() body: NewPassDto) {
+    console.log('email', body.newPassword);
+    return this.authService.saveNewPassword(body.newPassword);
   }
 }
