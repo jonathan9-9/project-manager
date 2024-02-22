@@ -31,7 +31,7 @@ const ResetPassword = () => {
   };
   const onChangeSecondPassword = (e: any) => {
     setSubmitSecondPassword(true);
-    setSecondPassword(e.target.value);
+    setSecondPassword((e.target as HTMLInputElement).value);
   };
 
   const resetForm = () => {
@@ -44,7 +44,7 @@ const ResetPassword = () => {
     setFormSubmitted(false);
   };
 
-  const onSubmitPassword = (e: any) => {
+  const onSubmitPassword = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (password === "") {
