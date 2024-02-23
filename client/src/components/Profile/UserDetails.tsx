@@ -107,7 +107,7 @@ const UserDetails = ({ field, value, username, setData }: Props) => {
       if (valueState.trim() === "") {
         console.error("Input cannot be empty. Please enter a value.");
       } else {
-        if (editField) {
+        if (editField === true) {
           await handleCheckClick();
         }
         setEditField(false);
