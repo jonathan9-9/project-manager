@@ -148,7 +148,7 @@ const Profile = () => {
           </Box>
         </Box>
       </Box>
-
+      {/* modal: extra step to deleting account */}
       <Modal isOpen={isDeleteModalOpen} onClose={closeDeleteModal}>
         <ModalOverlay />
         <ModalContent>

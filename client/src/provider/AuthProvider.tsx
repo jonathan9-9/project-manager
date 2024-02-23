@@ -20,7 +20,6 @@ const AuthProvider = ({ children }: ReactProps) => {
     setToken: setToken,
   });
 
-  // console.log("CURRENT USER", currentUser);
   function verifyAndDecodeToken(token: string) {
     try {
       if (token) {
