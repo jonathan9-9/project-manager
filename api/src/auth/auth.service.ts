@@ -89,9 +89,9 @@ export class AuthService {
     return createdUser;
   }
 
-  async getProfileInfo(username: string): Promise<object> {
-    console.log('USERNAME', username);
-    const user = await this.usersService.findOne(username);
+  async getProfileInfo(id: number): Promise<object> {
+    console.log('id', id);
+    const user = await this.usersService.findUserById(id);
 
     return {
       name: user.name,

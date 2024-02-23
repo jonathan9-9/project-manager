@@ -119,7 +119,7 @@ export class AuthController {
   @Get('profile')
   getProfileInfo(@Request() req) {
     console.log('Request', req);
-    return this.authService.getProfileInfo(req.user.username);
+    return this.authService.getProfileInfo(req.user.sub);
   }
 
   @Post('edit-account-details')
@@ -148,5 +148,12 @@ export class AuthController {
   @Post('delete-user')
   deleteUser(@Request() req) {
     return this.authService.deleteUser(req.user.sub);
+  }
+
+  // get users' projects
+  @Get('user-projects')
+  getProjects(@Request() req) {
+    console.log('request', req.user);
+    return this.authService.getProfileInfo(req.user.sub);
   }
 }

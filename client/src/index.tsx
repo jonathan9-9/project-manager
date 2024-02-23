@@ -63,6 +63,57 @@ const router = createBrowserRouter([
       {
         path: "/projects",
         element: <Projects />,
+        loader: async () => {
+          const token = localStorage.getItem("token");
+
+          if (token) {
+            try {
+              const response = await fetch(
+                "http://localhost:3000/api/auth/user-projects",
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
+
+                  method: "GET",
+                }
+              );
+
+              if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+              }
+
+              const data = await response.json();
+
+              console.log("DATA FROM SERVER", data);
+
+              return data;
+            } catch (error) {
+              console.error("Error fetching data:", error);
+              toast({
+                title: "An error occurred",
+                description: "Failed to load projects.",
+                status: "error",
+                duration: 3000,
+                isClosable: true,
+                position: "top",
+              });
+              return redirect("/login");
+            }
+          } else {
+            console.log("NO TOKEN");
+            toast({
+              title: "Error",
+              description: "You must have an account to view this page",
+              status: "error",
+              duration: 3000,
+              isClosable: true,
+              position: "top",
+            });
+            return redirect("/sign-up");
+          }
+        },
       },
       {
         path: "/profile",
