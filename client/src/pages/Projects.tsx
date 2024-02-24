@@ -4,6 +4,7 @@ import { UserProfileData } from "./Profile";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import ProjectAccordion from "../components/Projects/ProjectAccordion";
 
 interface Project {
   name: string;
@@ -77,6 +78,7 @@ const Projects = () => {
             </Text>
           </Box>
         ))}
+        <ProjectAccordion />
       </Slider>
     </Box>
   );
