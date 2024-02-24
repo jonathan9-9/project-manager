@@ -72,14 +72,14 @@ const Projects = () => {
             border="1px solid black"
           >
             <Text mb={2}>{project.name}</Text>
-            <Text noOfLines={2}>{project.description}</Text>
+            <Text noOfLines={3}>{project.description}</Text>
             <Text mt={2} as="b">
               {project.status}
             </Text>
           </Box>
         ))}
       </Slider>
-      <Box mt={12}>
+      <Box mt={14}>
         <ProjectAccordion />
       </Box>
     </Box>
