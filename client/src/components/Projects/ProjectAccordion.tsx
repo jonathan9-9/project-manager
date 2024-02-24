@@ -40,24 +40,22 @@ const ProjectAccordion = ({ projects, setProjects }: Props) => {
   const onSubmitProjectCreation = () => {
     setSubmittedName(true);
 
-    setIsOpen(false);
+    if (name !== "") {
+      setProjects([
+        ...projects,
+        {
+          name,
+          description,
+          status: "Done",
+        },
+      ]);
 
-    setProjects([
-      ...projects,
-      {
-        name,
-        description,
-        status: "Done",
-      },
-    ]);
-
-    setName("");
-    setDescription("");
-
-    setSubmittedName(false);
-
-    console.log("NAME", name);
-    console.log("DESCRIPTION:", description);
+      setIsOpen(false);
+      setName("");
+      setDescription("");
+      // To prevent from isInvalid prop from erroring out set setSubmittedName to false;
+      setSubmittedName(false);
+    }
   };
 
   const isErrorName = name === "" && submittedName;
