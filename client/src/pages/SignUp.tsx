@@ -276,6 +276,7 @@ const SignUp = () => {
               <FormErrorMessage>Username is required.</FormErrorMessage>
             )}
           </FormControl>
+
           <FormControl isInvalid={isErrorPhoto} isRequired>
             <FormLabel>Profile Photo</FormLabel>
             <Input

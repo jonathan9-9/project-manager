@@ -68,7 +68,7 @@ const Projects = () => {
             alignContent="center"
             p={7}
             m={2}
-            bg="blue.200"
+            bg="gray.100"
             border="1px solid black"
           >
             <Text mb={2}>{project.name}</Text>
@@ -78,8 +78,10 @@ const Projects = () => {
             </Text>
           </Box>
         ))}
-        <ProjectAccordion />
       </Slider>
+      <Box mt={12}>
+        <ProjectAccordion />
+      </Box>
     </Box>
   );
 };

@@ -6,7 +6,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 
-import { AddIcon, MinusIcon } from "@chakra-ui/icons";
+import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 
 const ProjectAccordion = () => {
   return (
@@ -15,18 +15,18 @@ const ProjectAccordion = () => {
         {({ isExpanded }) => (
           <>
             <h2>
-              <AccordionButton>
-                <Box as="span" flex="1" textAlign="left">
-                  Add a project
-                </Box>
+              <AccordionButton border="1px solid black" ml={2} mt={2} p={3}>
                 {isExpanded ? (
-                  <MinusIcon fontSize="12px" />
+                  <CloseIcon fontSize="10px" />
                 ) : (
                   <AddIcon fontSize="12px" />
                 )}
+                <Box textAlign="left" ml={2}>
+                  Add a project
+                </Box>
               </AccordionButton>
             </h2>
-            <AccordionPanel pb={4}>
+            <AccordionPanel pb={2} flex="1" border="1px solid black" ml={2}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
               enim ad minim veniam, quis nostrud exercitation ullamco laboris
