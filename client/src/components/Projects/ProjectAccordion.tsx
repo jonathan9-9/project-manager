@@ -61,7 +61,8 @@ const ProjectAccordion = ({ projects, setProjects }: Props) => {
       );
 
       if (response.ok) {
-        console.log("RES", response);
+        const responseData = await response.json();
+        setProjects(responseData);
 
         setIsOpen(false);
         setName("");
