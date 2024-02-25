@@ -7,6 +7,7 @@ import { jwtConstants } from './constants';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth.guard';
 import { MailModule } from 'src/mail/mail.module';
+import { ProjectsModule } from 'src/projects/projects.module';
 
 @Module({
   controllers: [AuthController],
@@ -20,6 +21,7 @@ import { MailModule } from 'src/mail/mail.module';
   exports: [AuthService],
   imports: [
     UsersModule,
+    ProjectsModule,
     MailModule,
     JwtModule.register({
       global: true,

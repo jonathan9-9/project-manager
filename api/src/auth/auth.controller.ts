@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { User as UserModel } from '@prisma/client';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import * as bcrypt from 'bcrypt';
 import { Public } from './decorators/public.decorator';
 import { Transform } from 'class-transformer';
@@ -75,6 +75,16 @@ export class NewPassDto {
 
   @IsNotEmpty()
   token: string;
+}
+
+export class ProjectDto {
+  @IsNotEmpty()
+  @Transform((params) => sanitizeHtml(params.value))
+  name: string;
+
+  @IsOptional()
+  @Transform((params) => sanitizeHtml(params.value))
+  description: string;
 }
 
 @Controller('auth')
@@ -155,5 +165,10 @@ export class AuthController {
   getProjects(@Request() req) {
     console.log('request', req.user);
     return this.authService.getProfileInfo(req.user.sub);
+  }
+
+  @Post('create-project')
+  createProject(@Body() projectDto: ProjectDto) {
+    console.log('projectDto', projectDto);
   }
 }

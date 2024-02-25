@@ -12,6 +12,7 @@ import * as bcrypt from 'bcrypt';
 import { jwtConstants } from './constants';
 import { AccountDetailsDto } from './auth.controller';
 import { MailService } from 'src/mail/mail.service';
+import { ProjectsService } from 'src/projects/projects.service';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +20,7 @@ export class AuthService {
     private usersService: UsersService,
     private jwtService: JwtService,
     private mailService: MailService,
+    private projectsService: ProjectsService,
   ) {}
 
   async hashPassword(password: string) {
