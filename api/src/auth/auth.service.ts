@@ -169,6 +169,15 @@ export class AuthService {
     return await this.usersService.remove(id);
   }
 
+  async getUserProjects(userId: number) {
+    const user = await this.getProfileInfo(userId);
+    const projects = await this.projectsService.getUserProjects(userId);
+    return {
+      user,
+      projects,
+    };
+  }
+
   async createProject(name: string, description: string, userId: number) {
     return await this.projectsService.createProject(name, description, userId);
   }

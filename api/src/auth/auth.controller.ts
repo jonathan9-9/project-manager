@@ -163,8 +163,7 @@ export class AuthController {
   // get users' projects
   @Get('user-projects')
   getProjects(@Request() req) {
-    console.log('request', req.user);
-    return this.authService.getProfileInfo(req.user.sub);
+    return this.authService.getUserProjects(req.user.sub);
   }
 
   @Post('create-project')

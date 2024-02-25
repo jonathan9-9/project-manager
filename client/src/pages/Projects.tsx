@@ -13,43 +13,18 @@ export interface Project {
   status: string;
 }
 
-const mock_projects_data: Project[] = [
-  {
-    name: "Project A",
-    description:
-      "This is project A. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    status: "To Do",
-  },
-  {
-    name: "Project B",
-    description:
-      "This is project B. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    status: "In Progress",
-  },
-  {
-    name: "Project C",
-    description:
-      "This is project C. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    status: "In Progress",
-  },
-  {
-    name: "Project D",
-    description:
-      "This is project C. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    status: "Testing",
-  },
-  {
-    name: "Project E",
-    description:
-      "This is project C. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-    status: "Done",
-  },
-];
+interface LoaderDataType {
+  user: UserProfileData;
+  projects: Project[];
+}
 
 const Projects = () => {
-  const data = useLoaderData() as UserProfileData;
-  const [projects, setProjects] = useState(mock_projects_data);
-  console.log("data", data);
+  const data = useLoaderData() as LoaderDataType;
+
+  const user = data.user as UserProfileData;
+  console.log("Loader Data", data);
+
+  const [projects, setProjects] = useState(data.projects);
 
   const sliderSettings = {
     dots: true,
@@ -63,7 +38,7 @@ const Projects = () => {
   return (
     <Box>
       <Text mt={2} align="center">
-        {data.name}'s Projects
+        {user.name}'s Projects
       </Text>
       <Slider {...sliderSettings}>
         {projects.map((project, index) => (
