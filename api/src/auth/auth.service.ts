@@ -168,4 +168,8 @@ export class AuthService {
   async deleteUser(id: number) {
     return await this.usersService.remove(id);
   }
+
+  async createProject(name: string, description: string, userId: number) {
+    return await this.projectsService.createProject(name, description, userId);
+  }
 }

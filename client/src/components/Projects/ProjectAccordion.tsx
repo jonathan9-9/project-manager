@@ -37,10 +37,32 @@ const ProjectAccordion = ({ projects, setProjects }: Props) => {
     setDescription((e.target as HTMLInputElement).value);
   };
 
-  const onSubmitProjectCreation = () => {
+  const onSubmitProjectCreation = async () => {
     setSubmittedName(true);
 
     if (name !== "") {
+      const data = {
+        name: name,
+        description: description,
+      };
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "http://localhost:3000/api/auth/create-project",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+
+          method: "POST",
+          body: JSON.stringify(data),
+        }
+      );
+
+      if (response.ok) {
+        console.log("RES", response);
+      }
       setProjects([
         ...projects,
         {

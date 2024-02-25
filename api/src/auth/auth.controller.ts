@@ -168,7 +168,11 @@ export class AuthController {
   }
 
   @Post('create-project')
-  createProject(@Body() projectDto: ProjectDto) {
-    console.log('projectDto', projectDto);
+  createProject(@Body() projectDto: ProjectDto, @Request() req) {
+    return this.authService.createProject(
+      projectDto.name,
+      projectDto.description,
+      req.user.sub,
+    );
   }
 }
