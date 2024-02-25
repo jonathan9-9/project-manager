@@ -62,21 +62,13 @@ const ProjectAccordion = ({ projects, setProjects }: Props) => {
 
       if (response.ok) {
         console.log("RES", response);
-      }
-      setProjects([
-        ...projects,
-        {
-          name,
-          description,
-          status: "Done",
-        },
-      ]);
 
-      setIsOpen(false);
-      setName("");
-      setDescription("");
-      // To prevent from isInvalid prop from erroring out set setSubmittedName to false;
-      setSubmittedName(false);
+        setIsOpen(false);
+        setName("");
+        setDescription("");
+        // To prevent from isInvalid prop from erroring out set setSubmittedName to false;
+        setSubmittedName(false);
+      }
     }
   };
 
