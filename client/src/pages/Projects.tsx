@@ -28,7 +28,7 @@ const Projects = () => {
     <Box>
       <div className="flex items-center justify-center">
         <div className="flex items-center space-x-8">
-          <div className="text-2xl ml-4 text-white">All projects</div>
+          <div className="text-2xl ml-4 text-white mb-3">All projects</div>
 
           <CreateProjectModal projects={projects} setProjects={setProjects} />
         </div>
@@ -37,36 +37,40 @@ const Projects = () => {
         </div>
       </div>
 
-      {projects.map((project, index) => (
-        <Box key={index} alignContent="center" m={2}>
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-200">
-            <img
-              className="w-full"
-              src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/rainforest.webp?alt=media&token=83cdb9b2-984c-46d7-98f2-d8cecd7fade2"
-              alt="Sunset in the mountains"
-            />
-            <div className="px-6 py-4">
-              <div className="font-bold text-xl mb-2">{project.name}</div>
-              <p className="text-gray-700 text-base">{project.description}</p>
+      <div className="grid md:grid-cols-4 gap-4">
+        {projects.map((project, index) => (
+          <Box key={index} alignContent="center" m={2}>
+            <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-200">
+              <img
+                className="w-full"
+                src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/rainforest.webp?alt=media&token=83cdb9b2-984c-46d7-98f2-d8cecd7fade2"
+                alt="Sunset in the mountains"
+              />
+              <div className="px-6 py-4">
+                <div className="font-bold text-xl mb-2">{project.name}</div>
+                <p className="text-gray-700 text-base line-clamp-1">
+                  {project.description}
+                </p>
+              </div>
+              <div className="px-6 pt-4 pb-2">
+                <span className="inline-block bg-gray-200 rounded-full px-3 py-2 text-md font-semibold text-gray-700 mr-2 mb-2">
+                  <div>
+                    {project.status === "In Progress" ? (
+                      <Text color="orange">#{project.status}</Text>
+                    ) : project.status === "Done" ? (
+                      <Text color="green">#{project.status}</Text>
+                    ) : project.status === "Testing" ? (
+                      <Text color="purple">#{project.status}</Text>
+                    ) : project.status === "To Do" ? (
+                      <Text color="red">#{project.status}</Text>
+                    ) : null}
+                  </div>
+                </span>
+              </div>
             </div>
-            <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-2 text-md font-semibold text-gray-700 mr-2 mb-2">
-                <div>
-                  {project.status === "In Progress" ? (
-                    <Text color="orange">#{project.status}</Text>
-                  ) : project.status === "Done" ? (
-                    <Text color="green">#{project.status}</Text>
-                  ) : project.status === "Testing" ? (
-                    <Text color="purple">#{project.status}</Text>
-                  ) : project.status === "To Do" ? (
-                    <Text color="red">#{project.status}</Text>
-                  ) : null}
-                </div>
-              </span>
-            </div>
-          </div>
-        </Box>
-      ))}
+          </Box>
+        ))}
+      </div>
     </Box>
   );
 };
