@@ -36,7 +36,7 @@ function App() {
     <>
       <Box display="flex" flexDirection="column" minHeight="100vh">
         <Header authenticated={authenticated} />
-        <hr />
+
         <Outlet context={context} />
         <Footer />
       </Box>

@@ -30,16 +30,25 @@ const Projects = () => {
     dots: true,
     infinite: true,
     speed: 700,
-    slidesToShow: 2,
+    slidesToShow: 1,
     slidesToScroll: 1,
     arrows: true,
   };
 
   return (
     <Box>
-      <Text mt={2} align="center">
-        {user.name}'s Projects
-      </Text>
+      <div className="flex items-center">
+        <div className="flex items-center space-x-8">
+          <div className="text-2xl ml-4">All projects</div>
+          <button className="p-2 bg-purple-400 text-white rounded-lg">
+            + New Project
+          </button>
+        </div>
+        <div className="text-center flex-grow">
+          <p className="text-pink-400">{user.name}'s Projects</p>
+        </div>
+      </div>
+
       <Slider {...sliderSettings}>
         {projects.map((project, index) => (
           <Box

@@ -9,6 +9,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  Text,
   Textarea,
 } from "@chakra-ui/react";
 
@@ -75,55 +76,59 @@ const ProjectAccordion = ({ projects, setProjects }: Props) => {
 
   const isErrorName = name === "" && submittedName;
   return (
-    <Accordion allowToggle index={isOpen ? 0 : 1}>
-      <AccordionItem>
-        {({ isExpanded }) => (
-          <>
-            <h2>
-              <AccordionButton
-                border="1px solid black"
-                ml={2}
-                mt={2}
-                p={3}
-                onClick={() => setIsOpen(!!!isOpen)}
-              >
-                {isExpanded ? (
-                  <CloseIcon fontSize="10px" />
-                ) : (
-                  <AddIcon fontSize="12px" />
-                )}
-                <Box textAlign="left" ml={2}>
-                  Add a project
-                </Box>
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={2} flex="1" border="1px solid black" ml={2}>
-              <FormControl isInvalid={isErrorName} mb={4} isRequired>
-                <FormLabel>Project Name:</FormLabel>
-                <Input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={onChangeName}
-                />
-                {!isErrorName ? null : (
-                  <FormErrorMessage>Project name is required.</FormErrorMessage>
-                )}
-              </FormControl>
-
-              <FormControl>
-                <FormLabel>Description: </FormLabel>
-                <Textarea value={description} onChange={onChangeDescription} />
-              </FormControl>
-              <Button mt={4} w="100%" onClick={onSubmitProjectCreation}>
-                Create
-              </Button>
-            </AccordionPanel>
-          </>
-        )}
-      </AccordionItem>
-    </Accordion>
+    <button
+      className="text-white bg-sky-400 p-2 rounded-lg ml-3"
+      style={{ width: "80px" }}
+    >
+      Hello
+    </button>
   );
 };
 
 export default ProjectAccordion;
+
+// <Accordion allowToggle index={isOpen ? 0 : 1}>
+//   <AccordionItem>
+//     {({ isExpanded }) => (
+//       <>
+//         <h2>
+//           <AccordionButton
+//             border="1px solid black"
+//             ml={2}
+//             mt={2}
+//             p={3}
+//             onClick={() => setIsOpen(!!!isOpen)}
+//           >
+//             {isExpanded ? (
+//               <CloseIcon fontSize="10px" />
+//             ) : (
+//               <AddIcon fontSize="12px" />
+//             )}
+//             <Box textAlign="left" ml={2}>
+//               <Text className="text-blue-500">New Project</Text>
+//             </Box>
+//           </AccordionButton>
+//         </h2>
+//         <AccordionPanel pb={2} flex="1" border="1px solid black" ml={2}>
+//           <FormControl isInvalid={isErrorName} mb={4} isRequired>
+//             <FormLabel>Project Name:</FormLabel>
+//             <Input
+//               id="name"
+//               type="text"
+//               value={name}
+//               onChange={onChangeName}
+//             />
+//             {!isErrorName ? null : (
+//               <FormErrorMessage>Project name is required.</FormErrorMessage>
+//             )}
+//           </FormControl>
+
+//           <FormControl>
+//             <FormLabel>Description: </FormLabel>
+//             <Textarea value={description} onChange={onChangeDescription} />
+//           </FormControl>
+//         </AccordionPanel>
+//       </>
+//     )}
+//   </AccordionItem>
+// </Accordion>
