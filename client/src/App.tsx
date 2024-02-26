@@ -34,7 +34,12 @@ function App() {
 
   return (
     <>
-      <Box display="flex" flexDirection="column" minHeight="100vh">
+      <Box
+        display="flex"
+        flexDirection="column"
+        minHeight="100vh"
+        className="bg-black"
+      >
         <Header authenticated={authenticated} />
 
         <Outlet context={context} />

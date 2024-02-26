@@ -117,11 +117,12 @@ const UserDetails = ({ field, value, username, setData }: Props) => {
 
   return (
     <Flex>
-      <Text lineHeight="32px" flex={1}>
+      <Text lineHeight="32px" flex={1} className="text-gray-200">
         {field}
       </Text>
       {editField ? (
         <Input
+          className="text-gray-200"
           value={valueState}
           onChange={handleValueChange}
           onKeyDown={(e) => onPressEnter(e)}
@@ -130,11 +131,11 @@ const UserDetails = ({ field, value, username, setData }: Props) => {
           type={field === "Password" ? "password" : "text"}
         />
       ) : (
-        <Text lineHeight="32px" flex={1}>
+        <Text lineHeight="32px" flex={1} className="text-gray-200">
           {field === "Password" ? "***********" : valueState}
         </Text>
       )}
-      <Box ml={8}>
+      <Box ml={8} className="text-gray-200">
         {editField ? (
           <GiCheckMark cursor="pointer" onClick={handleCheckClick} />
         ) : (

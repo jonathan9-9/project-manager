@@ -46,7 +46,8 @@ const Header = ({ authenticated }: Props) => {
                 style={({ isActive, isPending }) => {
                   return {
                     fontWeight: isActive ? "bold" : "",
-                    color: isPending ? "pink" : "black",
+                    color: isPending ? "red" : "white",
+
                     borderBottom: isActive ? "2px solid #9147ff" : "",
                   };
                 }}

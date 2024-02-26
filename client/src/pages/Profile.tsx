@@ -96,10 +96,10 @@ const Profile = () => {
 
   return (
     <Box>
-      <Text textAlign="center" mb={4} fontSize={20}>
+      <Text textAlign="center" mb={4} fontSize={20} className="text-gray-200">
         Account Details
       </Text>
-      <Text textAlign="center" mb={8}>
+      <Text textAlign="center" mb={8} className="text-gray-200">
         Welcome, {name}! You can manage your account details here.
       </Text>
 

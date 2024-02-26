@@ -142,14 +142,19 @@ const Login = () => {
   return (
     <>
       <Center>
-        <Text as="b" fontSize="22px" mb="4" mt="2">
+        <Text as="b" fontSize="22px" mb="4" mt="2" className="text-gray-200">
           Sign in
         </Text>
       </Center>
       <Center>
-        <Box w="40%" p="8" boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)">
+        <Box
+          w="40%"
+          p="8"
+          className="bg-[#7285A5]"
+          boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"
+        >
           <FormControl isInvalid={isErrorUsername} isRequired>
-            <FormLabel>Username</FormLabel>
+            <FormLabel className="text-gray-200">Username</FormLabel>
             <Input
               id="name"
               type="text"
@@ -161,7 +166,7 @@ const Login = () => {
             )}
           </FormControl>
           <FormControl isInvalid={isErrorPassword} isRequired>
-            <FormLabel>Password</FormLabel>
+            <FormLabel className="text-gray-200">Password</FormLabel>
             <Input
               id="password"
               type="password"
@@ -188,9 +193,9 @@ const Login = () => {
             </Button>
             <Box display="flex" mt={2}>
               <Text
-                textColor="#000000"
                 _hover={{ textDecoration: "underline", cursor: "pointer" }}
                 onClick={onOpen}
+                className="text-gray-200"
               >
                 Forgot account?
               </Text>
