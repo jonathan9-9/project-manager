@@ -17,11 +17,11 @@ const Header = ({ authenticated }: Props) => {
     <Box display="flex" p={4} alignItems="center">
       <Box p={1} display="flex" alignItems="center">
         <Image
-          src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/vecteezy_watercolor-paintings-of-a-black-crow-bird-ai-generated_33053087.png?alt=media&token=a5b0f204-b95b-44e3-8db5-fbfef6a4719c"
+          src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/vecteezy_ribbon-banner-icon-png-ribbon-transparent_21665063.png?alt=media&token=565ab3f3-8337-4380-b7f7-f4f9e8338667"
           fallbackSrc="https://via.placeholder.com/150"
           alt="black crow"
-          borderRadius="50%"
-          boxSize="60px"
+          borderRadius="70%"
+          boxSize="75px"
         />
         <Heading
           fontSize="24px"
