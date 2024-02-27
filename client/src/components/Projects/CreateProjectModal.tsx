@@ -1,18 +1,3 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-  Button,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Input,
-  Text,
-  Textarea,
-} from "@chakra-ui/react";
-
 import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 // import { UserProfileData } from "../../pages/Profile";

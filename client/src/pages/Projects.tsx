@@ -43,7 +43,7 @@ const Projects = () => {
             <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-200">
               <img
                 className="w-full"
-                src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/rainforest.webp?alt=media&token=83cdb9b2-984c-46d7-98f2-d8cecd7fade2"
+                src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/car-night.jpeg?alt=media&token=67c24fed-cbf1-4eaf-9eb1-69448fed9b09"
                 alt="Sunset in the mountains"
               />
               <div className="px-6 py-4">

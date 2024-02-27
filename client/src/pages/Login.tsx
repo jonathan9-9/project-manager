@@ -150,7 +150,7 @@ const Login = () => {
         <Box
           w="40%"
           p="8"
-          className="bg-[#7285A5]"
+          className="bg-[#193073]"
           boxShadow="0 4px 8px rgba(0, 0, 0, 0.1)"
         >
           <FormControl isInvalid={isErrorUsername} isRequired>
