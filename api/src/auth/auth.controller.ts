@@ -8,6 +8,7 @@ import {
   HttpStatus,
   Get,
   Request,
+  Param,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { User as UserModel } from '@prisma/client';
@@ -164,6 +165,12 @@ export class AuthController {
   @Get('user-projects')
   getProjects(@Request() req) {
     return this.authService.getUserProjects(req.user.sub);
+  }
+
+  //get single project
+  @Get('project/:id')
+  getProject(@Param('id') id: number) {
+    console.log('params', id);
   }
 
   @Post('create-project')

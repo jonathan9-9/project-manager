@@ -17,7 +17,7 @@ const Header = ({ authenticated }: Props) => {
     <Box display="flex" p={4} alignItems="center">
       <Box p={1} display="flex" alignItems="center">
         <Image
-          src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/vecteezy_ribbon-banner-icon-png-ribbon-transparent_21665063.png?alt=media&token=565ab3f3-8337-4380-b7f7-f4f9e8338667"
+          src=""
           fallbackSrc="https://via.placeholder.com/150"
           alt="black crow"
           borderRadius="70%"

@@ -152,6 +152,7 @@ const router = createBrowserRouter([
                 isClosable: true,
                 position: "top",
               });
+
               return redirect("/login");
             }
           } else {
@@ -185,7 +186,6 @@ const router = createBrowserRouter([
                 {
                   headers: {
                     Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json",
                   },
 
                   method: "GET",
@@ -196,11 +196,8 @@ const router = createBrowserRouter([
                 throw new Error(`HTTP error! Status: ${response.status}`);
               }
 
-              const data = await response.json();
-
-              console.log("DATA FROM SERVER", data);
-
-              return data;
+              console.log("DATA FROM SERVER", response);
+              return response;
             } catch (error) {
               console.error("Error fetching data:", error);
               toast({
