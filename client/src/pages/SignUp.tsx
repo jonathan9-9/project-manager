@@ -229,18 +229,27 @@ const SignUp = () => {
           textAlign="center"
           fontFamily="Open Sans, sans-serif"
         >
-          <Text as="b" fontSize="22px" mb="4">
+          <Text as="b" fontSize="22px" mb="4" className="text-gray-200">
             Create your account
           </Text>
-          <Text>Create an account to view and manage your projects</Text>
+          <Text className="text-gray-200">
+            Create an account to view and manage your projects
+          </Text>
         </Box>
       </Center>
 
       <Center>
-        <Box w="40%" mb={12} p="8" boxShadow="0 4px 8px rgba(0, 0, 0, 0.2)">
+        <Box
+          w="40%"
+          mb={12}
+          p="8"
+          className="bg-[#333]"
+          boxShadow="0 4px 8px rgba(0, 0, 0, 0.3)"
+        >
           <FormControl isInvalid={isErrorName} isRequired>
-            <FormLabel>Name</FormLabel>
+            <FormLabel className="text-gray-200">Name</FormLabel>
             <Input
+              className="text-gray-200"
               id="name"
               type="text"
               value={nameInput}
@@ -251,54 +260,64 @@ const SignUp = () => {
             )}
           </FormControl>
           <FormControl isInvalid={isErrorEmail} isRequired>
-            <FormLabel>Email</FormLabel>
+            <FormLabel mt={2} className="text-gray-200">
+              Email
+            </FormLabel>
             <Input
+              className="text-gray-200"
               type="email"
               value={emailInput}
               onChange={handleEmailInputChange}
             />
-            {!isErrorEmail ? (
-              <FormHelperText>Enter email</FormHelperText>
-            ) : (
-              <FormErrorMessage>Must enter a valid email</FormErrorMessage>
+            {!isErrorEmail ? null : (
+              <FormErrorMessage className="text-white">
+                Must enter a valid email
+              </FormErrorMessage>
             )}
           </FormControl>
           <FormControl isInvalid={isErrorUsername} isRequired>
-            <FormLabel>Username</FormLabel>
+            <FormLabel mt={3} className="text-gray-200">
+              Username
+            </FormLabel>
             <Input
+              className="text-gray-200"
               type="text"
               value={usernameInput}
               onChange={handleUsernameInputChange}
             />
-            {!isErrorUsername ? (
-              <FormHelperText>Enter username.</FormHelperText>
-            ) : (
+            {!isErrorUsername ? null : (
               <FormErrorMessage>Username is required.</FormErrorMessage>
             )}
           </FormControl>
 
           <FormControl isInvalid={isErrorPhoto} isRequired>
-            <FormLabel>Profile Photo</FormLabel>
+            <FormLabel mt={3} className="text-gray-200">
+              Profile Photo
+            </FormLabel>
             <Input
+              className="text-gray-200"
               type="text"
               value={photoInput}
               onChange={handlePhotoInputChange}
             />
             {!isErrorPhoto ? (
-              <FormHelperText>Add your profile photo.</FormHelperText>
+              <FormHelperText color="#87CEEB">
+                Add your profile photo.
+              </FormHelperText>
             ) : (
               <FormErrorMessage>Profile photo is required.</FormErrorMessage>
             )}
           </FormControl>
           <FormControl isInvalid={isErrorPassword} isRequired mb={7}>
-            <FormLabel>Password</FormLabel>
+            <FormLabel className="text-gray-200">Password</FormLabel>
             <Input
+              className="text-gray-200"
               type="password"
               value={passwordInput}
               onChange={handlePasswordInputChange}
             />
             {!isErrorPassword ? (
-              <FormHelperText>
+              <FormHelperText color="#87CEEB">
                 Password must be within 7 and 18 characters long.
               </FormHelperText>
             ) : (
@@ -312,14 +331,15 @@ const SignUp = () => {
           </FormControl>
           {/* second password entry  below*/}
           <FormControl isInvalid={isErrorSecondPassword} isRequired mb={7}>
-            <FormLabel>Re-enter password</FormLabel>
+            <FormLabel className="text-gray-200">Re-enter password</FormLabel>
             <Input
+              className="text-gray-200"
               type="password"
               value={secondPasswordInput}
               onChange={handleSecondPasswordInputChange}
             />
             {!isErrorSecondPassword ? (
-              <FormHelperText>
+              <FormHelperText color="#87CEEB">
                 Password must be within 7 and 18 characters long.
               </FormHelperText>
             ) : (
@@ -347,12 +367,16 @@ const SignUp = () => {
             <hr />
             <Box>
               <Text mt={4} align="center">
-                By creating an account you agree to our{" "}
+                <span className="text-gray-200">
+                  {" "}
+                  By creating an account you agree to our{" "}
+                </span>{" "}
                 <span className="purple-text">
                   Terms of <br />
                   Service
                 </span>{" "}
-                and <span className="purple-text">Privacy Policy.</span>
+                <span className="text-gray-200"> and </span>{" "}
+                <span className="purple-text">Privacy Policy.</span>
               </Text>
             </Box>
           </Box>

@@ -38,7 +38,7 @@ function App() {
         display="flex"
         flexDirection="column"
         minHeight="100vh"
-        className="bg-[#1B1C1E]"
+        className="bg-[#333]"
       >
         <Header authenticated={authenticated} />
 
