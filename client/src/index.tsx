@@ -184,6 +184,7 @@ const router = createBrowserRouter([
               const response = await fetch(
                 `http://localhost:3000/api/auth/project/${params.id}`,
                 {
+                  // no json Content Type
                   headers: {
                     Authorization: `Bearer ${token}`,
                   },
