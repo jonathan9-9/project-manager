@@ -1,18 +1,18 @@
-import { AddIcon, CloseIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 // import { UserProfileData } from "../../pages/Profile";
 import { Project } from "../../pages/Projects";
+import { useToast } from "@chakra-ui/react";
 
 interface Props {
-  projects: Project[];
   setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
 }
 
-const CreateProjectModal = ({ projects, setProjects }: Props) => {
+const CreateProjectModal = ({ setProjects }: Props) => {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [submittedName, setSubmittedName] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const toast = useToast();
 
   const openModal = () => {
     setIsOpen(true);
@@ -44,23 +44,45 @@ const CreateProjectModal = ({ projects, setProjects }: Props) => {
       };
       const token = localStorage.getItem("token");
 
-      const response = await fetch(
-        "http://localhost:3000/api/auth/create-project",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-          method: "POST",
-          body: JSON.stringify(data),
+      try {
+        const response = await fetch(
+          "http://localhost:3000/api/auth/create-project",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (response.ok) {
+          const responseData = await response.json();
+          setProjects(responseData);
+
+          toast({
+            title: "Success",
+            description: "Your project has been created!",
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top-right",
+          });
+          closeModal();
+        } else {
+          console.error(`Error: ${response.status} - ${response.statusText}`);
         }
-      );
-
-      if (response.ok) {
-        const responseData = await response.json();
-        setProjects(responseData);
-
-        closeModal();
+      } catch (error) {
+        console.error("Error: ", error);
+        toast({
+          title: "Error",
+          description: "Unable to create new project. Try again.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
       }
     }
   };
@@ -140,46 +162,3 @@ const CreateProjectModal = ({ projects, setProjects }: Props) => {
 };
 
 export default CreateProjectModal;
-
-{
-  /* <Accordion allowToggle index={isOpen ? 0 : 1}>
-  <AccordionItem>
-    {({ isExpanded }) => (
-      <>
-        <h2>
-          <AccordionButton
-            border="1px solid black"
-            ml={2}
-            mt={2}
-            p={3}
-            onClick={() => setIsOpen(!!!isOpen)}
-          >
-            {isExpanded ? (
-              <CloseIcon fontSize="10px" />
-            ) : (
-              <AddIcon fontSize="12px" />
-            )}
-            <Box textAlign="left" ml={2}>
-              <Text className="text-blue-500">New Project</Text>
-            </Box>
-          </AccordionButton>
-        </h2>
-        <AccordionPanel pb={2} flex="1" border="1px solid black" ml={2}>
-          <FormControl isInvalid={isErrorName} mb={4} isRequired>
-            <FormLabel>Project Name:</FormLabel>
-            <Input id="name" type="text" value={name} onChange={onChangeName} />
-            {!isErrorName ? null : (
-              <FormErrorMessage>Project name is required.</FormErrorMessage>
-            )}
-          </FormControl>
-
-          <FormControl>
-            <FormLabel>Description: </FormLabel>
-            <Textarea value={description} onChange={onChangeDescription} />
-          </FormControl>
-        </AccordionPanel>
-      </>
-    )}
-  </AccordionItem>
-</Accordion>; */
-}

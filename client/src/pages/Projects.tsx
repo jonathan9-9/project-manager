@@ -30,7 +30,7 @@ const Projects = () => {
         <div className="flex items-center space-x-8">
           <div className="text-2xl ml-4 text-white mb-3">All projects</div>
 
-          <CreateProjectModal projects={projects} setProjects={setProjects} />
+          <CreateProjectModal setProjects={setProjects} />
         </div>
         <div className="text-center flex-grow mr-48">
           <p className="text-white">{user.name}'s Projects</p>
@@ -43,7 +43,7 @@ const Projects = () => {
             <div className="max-w-sm rounded overflow-hidden shadow-lg bg-gray-200">
               <img
                 className="w-full"
-                src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/car-night.jpeg?alt=media&token=67c24fed-cbf1-4eaf-9eb1-69448fed9b09"
+                src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/humming-bird.jpeg?alt=media&token=c272f3f3-50d9-4dea-be8d-63387145858a"
                 alt="Sunset in the mountains"
               />
               <div className="px-6 py-4">

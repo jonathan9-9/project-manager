@@ -23,7 +23,7 @@ const Header = ({ authenticated }: Props) => {
           borderRadius="70%"
           boxSize="75px"
         />
-        <Heading fontSize="25px" mt={5} mx={2} className="text-white">
+        <Heading fontSize="25px" mt={2} mx={2} className="text-white">
           Unifier
         </Heading>
       </Box>
