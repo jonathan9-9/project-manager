@@ -49,22 +49,26 @@ const Projects = () => {
             key={index}
             alignContent="center"
             m={2}
+            cursor="pointer"
+            className="hover:bg-red-800 hover:shadow-sm transition duration-300 ease-in-out"
             onClick={() => navigateToProject(project.id)}
           >
-            <div className="max-w-xs rounded overflow-hidden shadow-lg bg-gray-200">
+            <div className="max-w-xs rounded overflow-hidden shadow-lg bg-[#333]">
               <img
                 className="w-full"
                 src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/humming-bird.jpeg?alt=media&token=c272f3f3-50d9-4dea-be8d-63387145858a"
                 alt="Sunset in the mountains"
               />
               <div className="px-6 py-2">
-                <div className="font-bold text-xl mb-2">{project.name}</div>
-                <p className="text-gray-700 text-base line-clamp-1">
+                <div className="font-bold text-xl mb-2 text-gray-300">
+                  {project.name}
+                </div>
+                <p className="text-gray-200 text-base line-clamp-1">
                   {project.description}
                 </p>
               </div>
               <div className="px-6 pt-2 pb-2">
-                <span className="inline-block bg-gray-200 rounded-full px-1  text-md font-semibold text-gray-700 mr-2 mb-2">
+                <span className="inline-block bg-gray-700 rounded-full px-1  text-md font-semibold text-gray-700 mr-2 mb-2">
                   <div>
                     {project.status === "In Progress" ? (
                       <Text color="orange">#{project.status}</Text>
