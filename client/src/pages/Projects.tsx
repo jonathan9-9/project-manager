@@ -50,7 +50,7 @@ const Projects = () => {
             alignContent="center"
             m={2}
             cursor="pointer"
-            className="hover:bg-red-800 hover:shadow-sm transition duration-300 ease-in-out"
+            className="transition-transform hover:scale-105 hover:bg-[#2B2525] hover:shadow-md duration-300 ease-in-out p-1"
             onClick={() => navigateToProject(project.id)}
           >
             <div className="max-w-xs rounded overflow-hidden shadow-lg bg-[#333]">
