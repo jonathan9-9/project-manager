@@ -5,7 +5,7 @@ import { UserProfileData } from "./Profile";
 import { useState } from "react";
 import CreateProjectModal from "../components/Projects/CreateProjectModal";
 
-export interface Project {
+export interface ProjectProps {
   id: number;
   name: string;
   description: string;
@@ -14,7 +14,7 @@ export interface Project {
 
 interface LoaderDataType {
   user: UserProfileData;
-  projects: Project[];
+  projects: ProjectProps[];
 }
 
 const Projects = () => {
@@ -50,7 +50,7 @@ const Projects = () => {
             alignContent="center"
             m={2}
             cursor="pointer"
-            className="transition-transform hover:scale-105 hover:bg-[#2B2525] hover:shadow-md duration-300 ease-in-out p-1"
+            className="transition-transform hover:scale-105 shadow-lg duration-300 ease-in-out "
             onClick={() => navigateToProject(project.id)}
           >
             <div className="max-w-xs rounded overflow-hidden shadow-lg bg-[#333]">

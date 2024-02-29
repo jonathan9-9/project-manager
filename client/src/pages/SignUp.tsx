@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Center,
   FormControl,
   FormErrorMessage,
@@ -352,18 +351,13 @@ const SignUp = () => {
             </FormErrorMessage>
           </FormControl>
           <Box>
-            <Button
-              style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
-              size="md"
-              height="42px"
-              width="100%"
-              mb={8}
-              p={2}
+            <button
+              className="bg-indigo-500 text-white p-2 shadow-indigo-500/50 shadow-xl rounded-xl w-full mb-4"
               type="submit"
               onClick={handleSignUpSubmit}
             >
               Create your account
-            </Button>
+            </button>
             <hr />
             <Box>
               <Text mt={4} align="center">

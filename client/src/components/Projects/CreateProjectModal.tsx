@@ -1,10 +1,10 @@
 import { useState } from "react";
 // import { UserProfileData } from "../../pages/Profile";
-import { Project } from "../../pages/Projects";
+import { ProjectProps } from "../../pages/Projects";
 import { useToast } from "@chakra-ui/react";
 
 interface Props {
-  setProjects: React.Dispatch<React.SetStateAction<Project[]>>;
+  setProjects: React.Dispatch<React.SetStateAction<ProjectProps[]>>;
 }
 
 const CreateProjectModal = ({ setProjects }: Props) => {
@@ -93,7 +93,7 @@ const CreateProjectModal = ({ setProjects }: Props) => {
     <div className="relative flex items-center space-x-8">
       <button
         onClick={openModal}
-        className="p-2 bg-[#8c27ed] ml-2 text-white rounded-lg mb-3"
+        className="p-2 bg-indigo-500 shadow-lg shadow-indigo-500/50 ml-2 text-white rounded-lg mb-3"
       >
         + New Project
       </button>

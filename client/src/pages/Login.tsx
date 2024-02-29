@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useAuth } from "../provider/AuthProvider";
 import {
   Box,
-  Button,
   Center,
   FormControl,
   FormErrorMessage,
@@ -182,17 +181,19 @@ const Login = () => {
 
           <Box mt={4}>
             {/* #3498db */}
-            <Button
-              style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
-              size="md"
-              height="42px"
-              width="100%"
-              p={4}
+            <button
+              // style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
+              className="bg-indigo-500 text-white p-2 shadow-indigo-500/50 shadow-xl rounded-xl w-full"
+              // size="md"
+              // height="42px"
+              // width="100%"
+              // p={4}
+
               type="submit"
               onClick={handleLoginSubmit}
             >
               Login
-            </Button>
+            </button>
             <Box display="flex" mt={2}>
               <Text
                 _hover={{ textDecoration: "underline", cursor: "pointer" }}
