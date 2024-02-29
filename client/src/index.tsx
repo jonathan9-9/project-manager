@@ -197,8 +197,21 @@ const router = createBrowserRouter([
                 throw new Error(`HTTP error! Status: ${response.status}`);
               }
 
-              console.log("DATA FROM SERVER", response);
-              return response;
+              const data = await response.json();
+
+              if (!data.length) {
+                toast({
+                  title: "Error",
+                  description: "Project does not exist",
+                  status: "error",
+                  duration: 3000,
+                  isClosable: true,
+                  position: "top-right",
+                });
+                return redirect("/projects");
+              }
+              console.log("response of single project data", data);
+              return data;
             } catch (error) {
               console.error("Error fetching data:", error);
               toast({

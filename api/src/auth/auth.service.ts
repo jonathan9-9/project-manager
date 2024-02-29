@@ -178,6 +178,11 @@ export class AuthService {
     };
   }
 
+  async getProject(id: number, userId: number) {
+    const projects = await this.projectsService.getUserProjects(userId);
+    return projects.filter((project) => project.id === id);
+  }
+
   async createProject(name: string, description: string, userId: number) {
     return await this.projectsService.createProject(name, description, userId);
   }

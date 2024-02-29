@@ -169,8 +169,9 @@ export class AuthController {
 
   //get single project
   @Get('project/:id')
-  getProject(@Param('id') id: number) {
+  getProject(@Param('id') id: number, @Request() req) {
     console.log('params', id);
+    return this.authService.getProject(id, req.user.sub);
   }
 
   @Post('create-project')

@@ -1,11 +1,12 @@
 import { Box, Text } from "@chakra-ui/react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import { UserProfileData } from "./Profile";
 
 import { useState } from "react";
 import CreateProjectModal from "../components/Projects/CreateProjectModal";
 
 export interface Project {
+  id: number;
   name: string;
   description: string;
   status: string;
@@ -22,7 +23,12 @@ const Projects = () => {
   const user = data.user as UserProfileData;
   console.log("Loader Data", data);
 
+  const navigate = useNavigate();
   const [projects, setProjects] = useState(data.projects);
+
+  const navigateToProject = (id: number) => {
+    navigate(`/project/${id}`);
+  };
 
   return (
     <Box>
@@ -39,7 +45,12 @@ const Projects = () => {
 
       <div className="grid md:grid-cols-4 gap-4">
         {projects.map((project, index) => (
-          <Box key={index} alignContent="center" m={2}>
+          <Box
+            key={index}
+            alignContent="center"
+            m={2}
+            onClick={() => navigateToProject(project.id)}
+          >
             <div className="max-w-xs rounded overflow-hidden shadow-lg bg-gray-200">
               <img
                 className="w-full"
