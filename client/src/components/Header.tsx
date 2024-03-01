@@ -43,7 +43,7 @@ const Header = ({ authenticated }: Props) => {
                     fontWeight: isActive ? "bold" : "",
                     color: isPending ? "red" : "white",
 
-                    borderBottom: isActive ? "2px solid #9147ff" : "",
+                    borderBottom: isActive ? "2px solid #FFA500" : "",
                   };
                 }}
               >
@@ -51,7 +51,7 @@ const Header = ({ authenticated }: Props) => {
                   borderBottom="2px"
                   borderColor="transparent"
                   _hover={{
-                    borderColor: "#9147ff",
+                    borderColor: "#FFA500",
                     transition: "border-color 0.9s ease-in-out",
                   }}
                 >
