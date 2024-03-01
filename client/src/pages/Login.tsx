@@ -183,7 +183,7 @@ const Login = () => {
             {/* #3498db */}
             <button
               // style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
-              className="text-white p-2 bg-orange-400 shadow-lg shadow-orange-400/55  rounded-xl w-full"
+              className="text-black p-2 bg-[#CCCCFF] rounded-xl w-full"
               // size="md"
               // height="42px"
               // width="100%"

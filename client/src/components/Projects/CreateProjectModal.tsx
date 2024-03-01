@@ -93,7 +93,7 @@ const CreateProjectModal = ({ setProjects }: Props) => {
     <div className="relative flex items-center space-x-8">
       <button
         onClick={openModal}
-        className="p-2 bg-orange-400 shadow-lg shadow-orange-400/60 ml-2 text-white rounded-lg mb-3"
+        className="p-2 bg-[#CCCCFF] text-black rounded-lg mb-3 ring ring-[#CCCCFF] ring-opacity-60 hover:ring-opacity-75"
       >
         + New Project
       </button>
