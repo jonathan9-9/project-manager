@@ -2,6 +2,7 @@ import { useState } from "react";
 // import { UserProfileData } from "../../pages/Profile";
 import { ProjectProps } from "../../pages/Projects";
 import { useToast } from "@chakra-ui/react";
+import { GoPlus } from "react-icons/go";
 
 interface Props {
   setProjects: React.Dispatch<React.SetStateAction<ProjectProps[]>>;
@@ -93,9 +94,9 @@ const CreateProjectModal = ({ setProjects }: Props) => {
     <div className="relative flex items-center space-x-8">
       <button
         onClick={openModal}
-        className="p-2 bg-[#CCCCFF] text-black rounded-lg mb-3 ring ring-[#CCCCFF] ring-opacity-60 hover:ring-opacity-75"
+        className="p-2 bg-[#CCCCFF] text-black rounded-lg mb-2  hover:ring-opacity-75 flex flex-row"
       >
-        + New Project
+        <GoPlus className="mt-1" /> New Project
       </button>
 
       {isOpen && (

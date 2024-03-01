@@ -76,19 +76,24 @@ const Project = () => {
     e.preventDefault();
 
     if (featureName !== "") {
+      const token = localStorage.getItem("token");
       try {
         console.log("Feature name", featureName);
         console.log("Feature description", featureDescription);
-        const response = await fetch("your-api-endpoint", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: featureName,
-            description: featureDescription,
-          }),
-        });
+        const response = await fetch(
+          "http://localhost:3000/api/auth/create-feature",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: featureName,
+              description: featureDescription,
+            }),
+          }
+        );
 
         const responseData = await response.json();
         console.log(responseData);
@@ -126,7 +131,7 @@ const Project = () => {
           return (
             <div
               key={index}
-              className="bg-white shadow-lg rounded-md p-4 w-72 mb-4 "
+              className="bg-[#CCCCFF] shadow-lg rounded-md p-4 w-72 mb-4 "
             >
               <div className="text-center text-gray-800 font-bold text-lg mb-2">
                 {column.name}
@@ -174,14 +179,14 @@ const Project = () => {
                   <div className="flex justify-end">
                     <button
                       type="submit"
-                      className="p-2 bg-green-500 text-white rounded-md mr-2"
+                      className="p-2 bg-white text-black rounded-md mr-2"
                     >
                       Add Card
                     </button>
                     <button
                       type="button"
                       onClick={handleCancelClick}
-                      className="p-2 bg-red-500 text-white rounded-md"
+                      className="p-2 bg-red-400 text-black rounded-md"
                     >
                       Cancel
                     </button>
