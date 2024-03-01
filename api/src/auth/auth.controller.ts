@@ -87,6 +87,15 @@ export class ProjectDto {
   @Transform((params) => sanitizeHtml(params.value))
   description: string;
 }
+export class FeatureDto {
+  @IsNotEmpty()
+  @Transform((params) => sanitizeHtml(params.value))
+  name: string;
+
+  @IsOptional()
+  @Transform((params) => sanitizeHtml(params.value))
+  description: string;
+}
 
 @Controller('auth')
 export class AuthController {
@@ -99,7 +108,8 @@ export class AuthController {
   signIn(@Body() signInDto: SignInDto) {
     return this.authService.signIn(signInDto.username, signInDto.password);
   }
-  //inside auth controller public decorator enables user creation
+  //inside auth controller public decorator enables accessibility since all
+  // endpoints are protected by default from APP GUARD and Auth Guard in auth.module.ts
 
   @Public()
   @Post('signup')
@@ -179,6 +189,14 @@ export class AuthController {
     return this.authService.createProject(
       projectDto.name,
       projectDto.description,
+      req.user.sub,
+    );
+  }
+  @Post('create-feature')
+  createFeature(@Body() featureDto: FeatureDto, @Request() req) {
+    return this.authService.createFeature(
+      featureDto.name,
+      featureDto.description,
       req.user.sub,
     );
   }

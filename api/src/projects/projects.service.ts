@@ -12,7 +12,7 @@ export class ProjectsService {
       const projects = await this.prisma.project.findMany({
         where: { userId: id },
       });
-      console.log('single user project', projects);
+
       return projects;
     } catch (error) {
       throw new Error(`Error fetching user projects: ${error.message}`);

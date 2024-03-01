@@ -67,9 +67,14 @@ const Project = () => {
     setSelectedCardIndex(index);
   };
 
-  const handleCancelClick = () => {
-    setSelectedCardIndex(null);
+  const resetForm = () => {
+    setFeatureName("");
+    setFeatureDescription("");
+  };
+
+  const handleCancellation = () => {
     resetForm();
+    setSelectedCardIndex(null);
   };
 
   const handleFormSubmit = async (e: any) => {
@@ -95,19 +100,21 @@ const Project = () => {
           }
         );
 
-        const responseData = await response.json();
-        console.log(responseData);
+        if (!response.ok) {
+          // Handle the error here, e.g., show a message to the user
+          console.error("Error:", response.statusText);
+          return;
+        }
 
-        handleCancelClick();
+        console.log("response", response);
+
+        resetForm();
+        setSelectedCardIndex(null);
+        return await response.json();
       } catch (error) {
         console.error("Error:", error);
       }
     }
-  };
-
-  const resetForm = () => {
-    setFeatureName("");
-    setFeatureDescription("");
   };
 
   console.log("id", id);
@@ -153,10 +160,10 @@ const Project = () => {
                 onClick={() => handleAddCardClick(index)}
                 className="mt-4 text-gray-600 text-sm cursor-pointer"
               >
-                Add a card...
+                Add a feature...
               </div>
               {selectedCardIndex === index && (
-                <form onSubmit={handleFormSubmit} className="mt-4">
+                <form className="mt-4">
                   <div className="mb-2">
                     <input
                       type="text"
@@ -179,14 +186,15 @@ const Project = () => {
                   <div className="flex justify-end">
                     <button
                       type="submit"
+                      onClick={handleFormSubmit}
                       className="p-2 bg-white text-black rounded-md mr-2"
                     >
                       Add Card
                     </button>
                     <button
                       type="button"
-                      onClick={handleCancelClick}
-                      className="p-2 bg-red-400 text-black rounded-md"
+                      onClick={handleCancellation}
+                      className="p-2 bg-red-400 text-white rounded-md"
                     >
                       Cancel
                     </button>
