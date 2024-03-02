@@ -94,7 +94,7 @@ const CreateProjectModal = ({ setProjects }: Props) => {
     <div className="relative flex items-center space-x-8">
       <button
         onClick={openModal}
-        className="p-2 bg-[#CCCCFF] text-black rounded-lg mb-2  hover:ring-opacity-75 flex flex-row"
+        className="p-2 bg-[#ff014f] text-white rounded-lg mb-2  hover:ring-opacity-75 flex flex-row"
       >
         <GoPlus className="mt-1" /> New Project
       </button>

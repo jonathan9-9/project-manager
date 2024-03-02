@@ -139,12 +139,18 @@ const Profile = () => {
           />
 
           <Box display="flex" gap={4} justifyContent="center">
-            <Button color="gray.800" onClick={() => logOut()}>
+            <button
+              className="bg-gray-200 rounded-lg p-2"
+              onClick={() => logOut()}
+            >
               Log out
-            </Button>
-            <Button colorScheme="red" onClick={openDeleteModal}>
+            </button>
+            <button
+              className="bg-[#ff014f] rounded-lg p-2"
+              onClick={openDeleteModal}
+            >
               Delete Account
-            </Button>
+            </button>
           </Box>
         </Box>
       </Box>

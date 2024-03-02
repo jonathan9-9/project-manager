@@ -24,7 +24,7 @@ const Header = ({ authenticated }: Props) => {
           boxSize="75px"
         />
         <Heading fontSize="25px" mt={2} mx={2} className="text-white">
-          Unifier
+          UnitedOne
         </Heading>
       </Box>
 
@@ -43,7 +43,7 @@ const Header = ({ authenticated }: Props) => {
                     fontWeight: isActive ? "bold" : "",
                     color: isPending ? "red" : "white",
 
-                    borderBottom: isActive ? "2px solid #CCCCFF" : "",
+                    borderBottom: isActive ? "2px solid #ff014f" : "",
                   };
                 }}
               >
@@ -51,7 +51,7 @@ const Header = ({ authenticated }: Props) => {
                   borderBottom="2px"
                   borderColor="transparent"
                   _hover={{
-                    borderColor: "#CCCCFF",
+                    borderColor: "#ff014f",
                     transition: "border-color 0.9s ease-in-out",
                   }}
                 >

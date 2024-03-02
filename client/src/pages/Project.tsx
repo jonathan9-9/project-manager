@@ -129,7 +129,7 @@ const Project = () => {
 
   return (
     <Box className="text-white">
-      <div className="text-[#CCCCFF]">
+      <div className="text-[#c4cfde]">
         <Text textAlign="center" mb={4} fontSize="20">
           {project.name}
         </Text>
@@ -146,9 +146,9 @@ const Project = () => {
           return (
             <div
               key={index}
-              className="bg-[#CCCCFF] shadow-lg rounded-md p-4 w-72 mb-4 "
+              className="bg-[#23272b] shadow-lg rounded-md p-4 w-72 mb-4 "
             >
-              <div className="text-center text-gray-800 font-bold text-lg mb-2">
+              <div className="text-center text-gray-200 font-bold text-lg mb-2">
                 {column.name}
               </div>
               <Box className="flex flex-col gap-4">
@@ -166,19 +166,19 @@ const Project = () => {
               </Box>
               <div
                 onClick={() => handleAddCardClick(index)}
-                className="mt-4 text-gray-600 text-sm cursor-pointer"
+                className="mt-4 text-gray-200 text-sm cursor-pointer"
               >
                 Add a feature...
               </div>
               {selectedCardIndex === index && (
-                <form className="mt-4">
-                  <div className="mb-2">
+                <form className="mt-4 ">
+                  <div className="mb-2 text-black">
                     <input
                       type="text"
                       placeholder="Feature Name"
                       value={featureName}
                       onChange={(e) => setFeatureName(e.target.value)}
-                      className="p-2 w-full border rounded-md text-black"
+                      className="p-2 w-full border rounded-lg text-white bg-[#1e2024]"
                       required
                     />
                   </div>
@@ -187,7 +187,7 @@ const Project = () => {
                       placeholder="Feature Description"
                       value={featureDescription}
                       onChange={(e) => setFeatureDescription(e.target.value)}
-                      className="p-2 w-full border rounded-md text-black"
+                      className="p-2 w-full border rounded-md text-white bg-[#1e2024]"
                       required
                     />
                   </div>
@@ -202,7 +202,7 @@ const Project = () => {
                     <button
                       type="button"
                       onClick={handleCancellation}
-                      className="p-2 bg-red-400 text-white rounded-md"
+                      className="p-2 bg-[#ff014f] text-white rounded-md"
                     >
                       Cancel
                     </button>

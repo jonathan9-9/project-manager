@@ -242,7 +242,7 @@ const SignUp = () => {
           w="40%"
           mb={12}
           p="8"
-          className="bg-[#333]"
+          className="#212428"
           boxShadow="0 4px 8px rgba(0, 0, 0, 0.3)"
         >
           <FormControl isInvalid={isErrorName} isRequired>
@@ -299,8 +299,9 @@ const SignUp = () => {
               value={photoInput}
               onChange={handlePhotoInputChange}
             />
+            {/* #87CEEB */}
             {!isErrorPhoto ? (
-              <FormHelperText color="#87CEEB">
+              <FormHelperText color="#c4cfde">
                 Add your profile photo.
               </FormHelperText>
             ) : (
@@ -316,7 +317,7 @@ const SignUp = () => {
               onChange={handlePasswordInputChange}
             />
             {!isErrorPassword ? (
-              <FormHelperText color="#87CEEB">
+              <FormHelperText color="#c4cfde">
                 Password must be within 7 and 18 characters long.
               </FormHelperText>
             ) : (
@@ -338,7 +339,7 @@ const SignUp = () => {
               onChange={handleSecondPasswordInputChange}
             />
             {!isErrorSecondPassword ? (
-              <FormHelperText color="#87CEEB">
+              <FormHelperText color="#c4cfde">
                 Password must be within 7 and 18 characters long.
               </FormHelperText>
             ) : (
@@ -352,7 +353,7 @@ const SignUp = () => {
           </FormControl>
           <Box>
             <button
-              className="bg-indigo-500 text-white p-2 shadow-indigo-500/50 shadow-xl rounded-xl w-full mb-4"
+              className="text-white bg-[#ff014f] p-2  shadow-xl rounded-xl w-full mb-4"
               type="submit"
               onClick={handleSignUpSubmit}
             >

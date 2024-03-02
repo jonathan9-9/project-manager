@@ -149,7 +149,7 @@ const Login = () => {
         <Box
           w="40%"
           p="8"
-          className="bg-[#333]"
+          className="bg-[#212428]"
           boxShadow="0 4px 8px rgba(0, 0, 0, 0.3)"
         >
           <FormControl isInvalid={isErrorUsername} isRequired>
@@ -183,7 +183,7 @@ const Login = () => {
             {/* #3498db */}
             <button
               // style={{ backgroundColor: "#9147ff", color: "#FFFFFF" }}
-              className="text-black p-2 bg-[#CCCCFF] rounded-xl w-full"
+              className="text-white p-2 bg-[#ff014f] rounded-xl w-full"
               // size="md"
               // height="42px"
               // width="100%"
