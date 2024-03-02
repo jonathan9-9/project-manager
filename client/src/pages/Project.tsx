@@ -3,7 +3,7 @@ import { useLoaderData, useParams } from "react-router";
 import { ProjectProps } from "./Projects";
 import { Box, Text } from "@chakra-ui/react";
 
-interface Feature {
+export interface Feature {
   name: string;
   status: "To Do" | "In Progress" | "Done";
   userStoryCount: number;
@@ -22,48 +22,52 @@ const columns = [
   },
 ];
 
-const sampleFeatures: Feature[] = [
-  {
-    name: "Feature C",
-    status: "In Progress",
-    userStoryCount: 10,
-    completedUserStories: 3,
-  },
-  {
-    name: "Feature H",
-    status: "Done",
-    userStoryCount: 10,
-    completedUserStories: 10,
-  },
-  {
-    name: "Feature G",
-    status: "Done",
-    userStoryCount: 7,
-    completedUserStories: 7,
-  },
-  {
-    name: "Feature K",
-    status: "To Do",
-    userStoryCount: 5,
-    completedUserStories: 0,
-  },
-  {
-    name: "Feature P",
-    status: "In Progress",
-    userStoryCount: 10,
-    completedUserStories: 4,
-  },
-];
+// const sampleFeatures: Feature[] = [
+//   {
+//     name: "Feature C",
+//     status: "In Progress",
+//     userStoryCount: 10,
+//     completedUserStories: 3,
+//   },
+//   {
+//     name: "Feature H",
+//     status: "Done",
+//     userStoryCount: 10,
+//     completedUserStories: 10,
+//   },
+//   {
+//     name: "Feature G",
+//     status: "Done",
+//     userStoryCount: 7,
+//     completedUserStories: 7,
+//   },
+//   {
+//     name: "Feature K",
+//     status: "To Do",
+//     userStoryCount: 5,
+//     completedUserStories: 0,
+//   },
+//   {
+//     name: "Feature P",
+//     status: "In Progress",
+//     userStoryCount: 10,
+//     completedUserStories: 4,
+//   },
+// ];
 
 const Project = () => {
   const { id } = useParams();
   const data = useLoaderData() as ProjectProps[];
 
+  const project = data[0];
+
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const [featureName, setFeatureName] = useState("");
   const [featureDescription, setFeatureDescription] = useState("");
 
-  const [features, setFeatures] = useState(sampleFeatures);
+  const [features, setFeatures] = useState(project.features);
+
+  console.log("FEATURES", features);
 
   const handleAddCardClick = (index: any) => {
     setSelectedCardIndex(index);
@@ -82,7 +86,7 @@ const Project = () => {
   const handleFormSubmit = async (e: any) => {
     e.preventDefault();
 
-    console.log("PROJECT ID", data[0].id);
+    console.log("PROJECT ID", project.id);
 
     if (featureName !== "") {
       const token = localStorage.getItem("token");
@@ -100,7 +104,7 @@ const Project = () => {
             body: JSON.stringify({
               name: featureName,
               description: featureDescription,
-              projectId: data[0].id,
+              projectId: project.id,
             }),
           }
         );
@@ -108,13 +112,13 @@ const Project = () => {
         if (!response.ok) {
           console.error("Error:", response.statusText);
           return;
+        } else {
+          const newFeature = await response.json();
+          setFeatures(newFeature);
+          resetForm();
+          setSelectedCardIndex(null);
+          return newFeature;
         }
-
-        console.log("response", response);
-
-        resetForm();
-        setSelectedCardIndex(null);
-        return await response.json();
       } catch (error) {
         console.error("Error:", error);
       }
@@ -127,10 +131,10 @@ const Project = () => {
     <Box className="text-white">
       <div className="text-[#CCCCFF]">
         <Text textAlign="center" mb={4} fontSize="20">
-          {data[0].name}
+          {project.name}
         </Text>
         <Text textAlign="center" mb={4} fontSize="14">
-          {data[0].description || "There is no project description"}
+          {project.description || "There is no project description"}
         </Text>
       </div>
       <Box className="flex flex-row justify-around flex-wrap gap-4 p-4">

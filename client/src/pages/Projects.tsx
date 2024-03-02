@@ -4,12 +4,14 @@ import { UserProfileData } from "./Profile";
 
 import { useState } from "react";
 import CreateProjectModal from "../components/Projects/CreateProjectModal";
+import { Feature } from "./Project";
 
 export interface ProjectProps {
   id: number;
   name: string;
   description: string;
   status: string;
+  features: Feature[];
 }
 
 interface LoaderDataType {
