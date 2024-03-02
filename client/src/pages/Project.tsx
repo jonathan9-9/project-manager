@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import { ProjectProps } from "./Projects";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Text, useDisclosure } from "@chakra-ui/react";
+import FeatureModal from "../components/Features/FeatureModal";
 
 export interface Feature {
   name: string;
@@ -60,6 +61,8 @@ const Project = () => {
   const data = useLoaderData() as ProjectProps[];
 
   const project = data[0];
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const [featureName, setFeatureName] = useState("");
@@ -155,7 +158,8 @@ const Project = () => {
                 {filteredFeatures.map((feature, featureIndex) => (
                   <div
                     key={featureIndex}
-                    className="bg-gray-100 p-4 rounded-md flex flex-row justify-between items-center"
+                    onClick={onOpen}
+                    className="bg-gray-400 cursor-pointer p-4 rounded-md flex flex-row justify-between items-center"
                   >
                     <div className="text-gray-800">{feature.name}</div>
                     <div className="text-gray-500">
@@ -213,6 +217,7 @@ const Project = () => {
           );
         })}
       </Box>
+      <FeatureModal isOpen={isOpen} onClose={onClose} />
     </Box>
   );
 };

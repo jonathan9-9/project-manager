@@ -144,7 +144,7 @@ const CreateProjectModal = ({ setProjects }: Props) => {
             <div className="flex justify-end space-x-6">
               <button
                 onClick={onSubmitProjectCreation}
-                className="bg-purple-400 text-white px-4 py-2  rounded-md hover:bg-purple-600 focus:outline-none focus:ring focus:border-purple-300"
+                className="bg-[#ff014f] text-white px-4 py-2  rounded-md hover:bg-red-700 focus:outline-none focus:ring focus:border-purple-300"
               >
                 Create
               </button>
