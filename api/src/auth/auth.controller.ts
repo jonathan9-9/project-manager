@@ -200,8 +200,8 @@ export class AuthController {
     return this.authService.createFeature(
       featureDto.name,
       featureDto.description,
-      featureDto.projectId,
       req.user.sub,
+      featureDto.projectId,
     );
   }
 }

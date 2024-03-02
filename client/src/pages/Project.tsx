@@ -22,7 +22,7 @@ const columns = [
   },
 ];
 
-const features: Feature[] = [
+const sampleFeatures: Feature[] = [
   {
     name: "Feature C",
     status: "In Progress",
@@ -63,6 +63,8 @@ const Project = () => {
   const [featureName, setFeatureName] = useState("");
   const [featureDescription, setFeatureDescription] = useState("");
 
+  const [features, setFeatures] = useState(sampleFeatures);
+
   const handleAddCardClick = (index: any) => {
     setSelectedCardIndex(index);
   };
@@ -79,6 +81,8 @@ const Project = () => {
 
   const handleFormSubmit = async (e: any) => {
     e.preventDefault();
+
+    console.log("PROJECT ID", data[0].id);
 
     if (featureName !== "") {
       const token = localStorage.getItem("token");
@@ -102,7 +106,6 @@ const Project = () => {
         );
 
         if (!response.ok) {
-          // Handle the error here, e.g., show a message to the user
           console.error("Error:", response.statusText);
           return;
         }

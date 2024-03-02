@@ -11,6 +11,10 @@ export class ProjectsService {
       // note to self: userId in the where clause is a foreign key (Fk) defined in the prisma schema
       const projects = await this.prisma.project.findMany({
         where: { userId: id },
+        // get relations: retrieve a record and include related records
+        include: {
+          features: true,
+        },
       });
 
       return projects;
