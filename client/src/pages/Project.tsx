@@ -9,6 +9,7 @@ export interface Feature {
   status: "To Do" | "In Progress" | "Done";
   userStoryCount: number;
   completedUserStories: number;
+  description?: string;
 }
 
 const columns = [
@@ -36,6 +37,7 @@ const Project = () => {
   const [featureDescription, setFeatureDescription] = useState("");
 
   const [features, setFeatures] = useState(project.features);
+  const [selectedFeature, setSelectedFeature] = useState(features[0]);
 
   console.log("FEATURES", features);
 
@@ -126,7 +128,7 @@ const Project = () => {
                   <div
                     key={featureIndex}
                     onClick={onOpen}
-                    className="bg-gray-400 cursor-pointer p-4 rounded-md flex flex-row justify-between items-center"
+                    className="bg-[#ff014f] cursor-pointer p-4 rounded-md flex flex-row justify-between items-center"
                   >
                     <div className="text-gray-800">{feature.name}</div>
                     <div className="text-gray-500">
@@ -184,7 +186,14 @@ const Project = () => {
           );
         })}
       </Box>
-      <FeatureModal isOpen={isOpen} onClose={onClose} />
+      <FeatureModal
+        isOpen={isOpen}
+        onClose={onClose}
+        featureName={selectedFeature.name}
+        featureDescription={
+          selectedFeature.description || "There is no feature description"
+        }
+      />
     </Box>
   );
 };

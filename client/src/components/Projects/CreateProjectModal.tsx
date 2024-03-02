@@ -150,7 +150,7 @@ const CreateProjectModal = ({ setProjects }: Props) => {
               </button>
               <button
                 onClick={closeModal}
-                className=" text-gray-400 hover:text-gray-100 focus:outline-none px-3  ring-2 ring-offset-white"
+                className=" text-gray-400 hover:text-gray-100 px-3 ring-2 ring-offset-white"
               >
                 Cancel
               </button>
