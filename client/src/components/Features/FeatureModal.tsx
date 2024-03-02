@@ -1,13 +1,34 @@
 import {
-  Button,
+  Box,
+  Text,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
-  ModalFooter,
-  ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
+
+const sampleUserStories = [
+  {
+    name: "User story",
+    status: "2/10",
+  },
+  {
+    name: "User story",
+    status: "3/7",
+  },
+  {
+    name: "User story",
+    status: "5/9",
+  },
+  {
+    name: "User story",
+    status: "1/5",
+  },
+  {
+    name: "User story",
+    status: "4/8",
+  },
+];
 
 type ModalProps = {
   isOpen: boolean;
@@ -22,13 +43,35 @@ const FeatureModal = ({ isOpen, onClose }: ModalProps) => {
           bg="blackAlpha.300"
           backdropFilter="blur(10px) hue-rotate(90deg)"
         />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>This is the body of the modal</ModalBody>
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
+        <ModalContent
+          minW="fit-content"
+          style={{ backgroundColor: "#23272b" }}
+          className=" shadow-lg rounded-md p-4"
+        >
+          <Box m={10}>
+            <Box mb={20}>
+              <Text mb={4} fontSize={20} className="text-gray-300">
+                Feature Name
+              </Text>
+              <Text className="text-gray-300">
+                This is a description of the feature...
+              </Text>
+            </Box>
+            <ModalCloseButton style={{ backgroundColor: "#ff014f" }} />
+            <div className="flex flex-col gap-4 ">
+              {sampleUserStories.map((story, storyIdx) => {
+                return (
+                  <div
+                    key={storyIdx}
+                    className="bg-gray-300 cursor-pointer p-4 rounded-md flex flex-row justify-between items-center"
+                  >
+                    <Text>{story.name}</Text>
+                    <Text>{story.status}</Text>
+                  </div>
+                );
+              })}
+            </div>
+          </Box>
         </ModalContent>
       </Modal>
     </>
@@ -36,3 +79,17 @@ const FeatureModal = ({ isOpen, onClose }: ModalProps) => {
 };
 
 export default FeatureModal;
+
+// <Box
+// key={storyIdx}
+// border="1px"
+// p={4}
+// mt={4}
+// display="flex"
+// justifyContent="space-between"
+// _hover={{ cursor: "pointer" }}
+// w="100%"
+// >
+// <Text>{story.name}</Text>
+// <Text>{story.status}</Text>
+// </Box>

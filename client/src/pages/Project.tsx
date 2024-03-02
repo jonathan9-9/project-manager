@@ -23,39 +23,6 @@ const columns = [
   },
 ];
 
-// const sampleFeatures: Feature[] = [
-//   {
-//     name: "Feature C",
-//     status: "In Progress",
-//     userStoryCount: 10,
-//     completedUserStories: 3,
-//   },
-//   {
-//     name: "Feature H",
-//     status: "Done",
-//     userStoryCount: 10,
-//     completedUserStories: 10,
-//   },
-//   {
-//     name: "Feature G",
-//     status: "Done",
-//     userStoryCount: 7,
-//     completedUserStories: 7,
-//   },
-//   {
-//     name: "Feature K",
-//     status: "To Do",
-//     userStoryCount: 5,
-//     completedUserStories: 0,
-//   },
-//   {
-//     name: "Feature P",
-//     status: "In Progress",
-//     userStoryCount: 10,
-//     completedUserStories: 4,
-//   },
-// ];
-
 const Project = () => {
   const { id } = useParams();
   const data = useLoaderData() as ProjectProps[];
