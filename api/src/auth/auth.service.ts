@@ -13,6 +13,7 @@ import { jwtConstants } from './constants';
 import { AccountDetailsDto } from './auth.controller';
 import { MailService } from 'src/mail/mail.service';
 import { ProjectsService } from 'src/projects/projects.service';
+import { FeaturesService } from 'src/features/features.service';
 
 @Injectable()
 export class AuthService {
@@ -21,6 +22,7 @@ export class AuthService {
     private jwtService: JwtService,
     private mailService: MailService,
     private projectsService: ProjectsService,
+    private featuresService: FeaturesService,
   ) {}
 
   async hashPassword(password: string) {
@@ -187,9 +189,24 @@ export class AuthService {
     return await this.projectsService.createProject(name, description, userId);
   }
 
-  async createFeature(name: string, description: string, userId: number) {
-    console.log('name', name);
-    console.log('description', description);
-    console.log('user id', userId);
+  async createFeature(
+    name: string,
+    description: string,
+    userId: number,
+    projectId: number,
+  ) {
+    const projects = await this.projectsService.getUserProjects(userId);
+
+    const project = projects.find((project) => project.id === projectId);
+
+    if (project.id) {
+      return await this.featuresService.createFeature(
+        name,
+        description,
+        projectId,
+      );
+    } else {
+      throw new UnauthorizedException('Project not found');
+    }
   }
 }

@@ -95,6 +95,9 @@ export class FeatureDto {
   @IsOptional()
   @Transform((params) => sanitizeHtml(params.value))
   description: string;
+
+  @IsNotEmpty()
+  projectId: number;
 }
 
 @Controller('auth')
@@ -197,6 +200,7 @@ export class AuthController {
     return this.authService.createFeature(
       featureDto.name,
       featureDto.description,
+      featureDto.projectId,
       req.user.sub,
     );
   }

@@ -96,6 +96,7 @@ const Project = () => {
             body: JSON.stringify({
               name: featureName,
               description: featureDescription,
+              projectId: data[0].id,
             }),
           }
         );
