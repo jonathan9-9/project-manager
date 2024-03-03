@@ -195,9 +195,10 @@ const Project = () => {
       <FeatureModal
         isOpen={isOpen}
         onClose={onClose}
-        featureName={selectedFeature.name}
+        featureName={selectedFeature ? selectedFeature.name : ""}
         featureDescription={
-          selectedFeature.description || "There is no feature description"
+          (selectedFeature && selectedFeature.description) ||
+          "There is no feature description"
         }
       />
     </Box>
