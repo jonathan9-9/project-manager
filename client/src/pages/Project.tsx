@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import { ProjectProps } from "./Projects";
 import { Box, Text, useDisclosure } from "@chakra-ui/react";

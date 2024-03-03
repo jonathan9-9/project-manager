@@ -6,6 +6,7 @@ import {
   ModalContent,
   ModalOverlay,
 } from "@chakra-ui/react";
+import UserStoryAccordion from "../UserStories/UserStoryAccordion";
 // import { Feature } from "../../pages/Project";
 
 const sampleUserStories = [
@@ -69,21 +70,17 @@ const FeatureModal = ({
               </Text>
               <Text className="text-gray-300">{featureDescription}</Text>
             </Box>
-            <ModalCloseButton style={{ backgroundColor: "#9CA3AF" }} />
-            <div className="flex flex-col gap-4">
-              {sampleUserStories.map((story, storyIdx) => {
-                return (
-                  <div
-                    key={storyIdx}
-                    className="bg-[#ff014f] cursor-pointer p-4 rounded-md flex flex-row justify-between"
-                  >
-                    <Text>
-                      {story.name} {storyIdx + 1}
-                    </Text>
-                    <Text>{story.status}</Text>
-                  </div>
-                );
-              })}
+            <ModalCloseButton style={{ backgroundColor: "#ff014f" }} />
+            <div className="flex flex-col gap-4 bg-[#1e2024] rounded-lg p-6">
+              {sampleUserStories.map((story, storyIdx) => (
+                // <div key={storyIdx} className="mb-4">
+                <UserStoryAccordion
+                  name={`${story.name} ${storyIdx + 1}`}
+                  status={story.status}
+                  description={story.description}
+                />
+                // </div>
+              ))}
             </div>
           </Box>
         </ModalContent>
