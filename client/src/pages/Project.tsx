@@ -86,6 +86,7 @@ const Project = () => {
           return;
         } else {
           const newFeature = await response.json();
+          // setSelectedFeature(newFeature);
           setFeatures(newFeature);
           resetForm();
           setSelectedCardIndex(null);
@@ -127,7 +128,10 @@ const Project = () => {
                 {filteredFeatures.map((feature, featureIndex) => (
                   <div
                     key={featureIndex}
-                    onClick={onOpen}
+                    onClick={() => {
+                      onOpen();
+                      setSelectedFeature(feature);
+                    }}
                     className="bg-[#ff014f] cursor-pointer p-4 rounded-md flex flex-row justify-between items-center"
                   >
                     <div className="text-gray-800">{feature.name}</div>
@@ -197,5 +201,4 @@ const Project = () => {
     </Box>
   );
 };
-
 export default Project;

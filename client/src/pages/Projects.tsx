@@ -53,7 +53,9 @@ const Projects = () => {
             m={2}
             cursor="pointer"
             className="transition-transform hover:scale-105 shadow-lg duration-300 ease-in-out "
-            onClick={() => navigateToProject(project.id)}
+            onClick={() => {
+              navigateToProject(project.id);
+            }}
           >
             <div className="max-w-xs rounded overflow-hidden bg-[#212428] shadow-[10px 10px 19px #1c1e22, -10px -10px 19px #262a2e] bg-gradient-to-r from-[#212428] to-[#202327] group hover:bg-gradient-to-b hover:from-black hover:to-[#1e2024] transition-colors duration-100 group ">
               <img
