@@ -41,6 +41,8 @@ const Project = () => {
 
   console.log("FEATURES", features);
 
+  console.log("selected feature", selectedFeature);
+
   const handleAddCardClick = (index: any) => {
     setSelectedCardIndex(index);
   };
@@ -86,7 +88,7 @@ const Project = () => {
           return;
         } else {
           const newFeature = await response.json();
-          // setSelectedFeature(newFeature);
+
           setFeatures(newFeature);
           resetForm();
           setSelectedCardIndex(null);
