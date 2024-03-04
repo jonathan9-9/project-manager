@@ -136,7 +136,7 @@ const Project = () => {
                     }}
                     className="bg-[#ff014f] cursor-pointer p-4 rounded-md flex flex-row justify-between items-center"
                   >
-                    <div className="text-gray-800">{feature.name}</div>
+                    <div className="text-gray-100">{feature.name}</div>
                     <div className="text-gray-500">
                       {feature.completedUserStories}/{feature.userStoryCount}
                     </div>
