@@ -2,9 +2,7 @@ import {
   Accordion,
   AccordionItem,
   AccordionButton,
-  AccordionIcon,
   AccordionPanel,
-  Text,
   FormControl,
   FormLabel,
   Input,
@@ -20,6 +18,9 @@ import { useState } from "react";
 
 const MakeUserStoryAccordion = () => {
   const toast = useToast();
+
+  // REMOVE comment
+  console.log("example toast", toast);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -44,6 +45,9 @@ const MakeUserStoryAccordion = () => {
       setIsOpen(false);
 
       const token = localStorage.getItem("token");
+
+      // REMOVE
+      console.log("token", token);
     }
   };
   return (
