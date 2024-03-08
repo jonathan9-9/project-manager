@@ -33,9 +33,19 @@ model Project {
 
 model Feature {
   id Int @id @default(autoincrement())
+  userStories UserStory[]
   name String
   description String?
   status String @default("To Do")
   project Project @relation(fields: [projectId], references: [id])
   projectId Int
+}
+
+model UserStory {
+  id Int @id @default(autoincrement())
+  name String
+  description String?
+  status String @default("To Do")
+  feature Feature @relation(fields: [featureId], references: [id])
+  featureId Int
 }

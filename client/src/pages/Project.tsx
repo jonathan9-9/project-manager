@@ -202,6 +202,7 @@ const Project = () => {
           "There is no feature description"
         }
         featureId={selectedFeature.id}
+        projectId={project.id}
       />
     </Box>
   );

@@ -99,6 +99,21 @@ export class FeatureDto {
   @IsNotEmpty()
   projectId: number;
 }
+export class UserStoryDto {
+  @IsNotEmpty()
+  @Transform((params) => sanitizeHtml(params.value))
+  name: string;
+
+  @IsOptional()
+  @Transform((params) => sanitizeHtml(params.value))
+  description: string;
+
+  @IsNotEmpty()
+  featureId: number;
+
+  @IsNotEmpty()
+  projectId: number;
+}
 
 @Controller('auth')
 export class AuthController {
@@ -202,6 +217,16 @@ export class AuthController {
       featureDto.description,
       req.user.sub,
       featureDto.projectId,
+    );
+  }
+  @Post('create-user-story')
+  createUserStory(@Body() userStoryDto: UserStoryDto, @Request() req) {
+    return this.authService.createUserStory(
+      userStoryDto.name,
+      userStoryDto.description,
+      userStoryDto.projectId,
+      userStoryDto.featureId,
+      req.user.sub,
     );
   }
 }

@@ -9,6 +9,7 @@ import { AuthGuard } from './auth.guard';
 import { MailModule } from 'src/mail/mail.module';
 import { ProjectsModule } from 'src/projects/projects.module';
 import { FeaturesModule } from 'src/features/features.module';
+import { UserStoriesModule } from 'src/userStories/userStories.module';
 
 @Module({
   controllers: [AuthController],
@@ -24,6 +25,7 @@ import { FeaturesModule } from 'src/features/features.module';
     UsersModule,
     ProjectsModule,
     FeaturesModule,
+    UserStoriesModule,
     MailModule,
     JwtModule.register({
       global: true,

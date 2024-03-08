@@ -44,6 +44,7 @@ interface ModalProps {
   featureName: string;
   featureDescription: string;
   featureId: number;
+  projectId: number;
   // setSelectedFeature: React.Dispatch<React.SetStateAction<Feature>>;
 }
 
@@ -59,6 +60,7 @@ const FeatureModal = ({
   featureName,
   featureDescription,
   featureId,
+  projectId,
 }: ModalProps) => {
   const [userStories, setUserStories] = useState(sampleUserStories);
   return (
@@ -95,6 +97,7 @@ const FeatureModal = ({
                 userStories={userStories}
                 setUserStories={setUserStories}
                 featureId={featureId}
+                projectId={projectId}
               />
             </div>
           </Box>

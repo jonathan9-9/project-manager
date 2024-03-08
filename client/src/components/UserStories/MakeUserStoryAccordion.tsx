@@ -22,12 +22,14 @@ interface UserStoryProps {
   userStories: UserStory[];
   setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
   featureId: number;
+  projectId: number;
 }
 
 const MakeUserStoryAccordion = ({
   userStories,
   setUserStories,
   featureId,
+  projectId,
 }: UserStoryProps) => {
   const toast = useToast();
   const [name, setName] = useState("");
@@ -50,6 +52,13 @@ const MakeUserStoryAccordion = ({
     e.preventDefault();
     setSubmittedName(true);
 
+    const data = {
+      name: name,
+      description: description,
+      featureId: featureId,
+      projectId: projectId,
+    };
+
     try {
       if (name !== "") {
         setIsOpen(false);
@@ -58,12 +67,6 @@ const MakeUserStoryAccordion = ({
 
         console.log("name", name);
         console.log("description", description);
-
-        const data = {
-          name: name,
-          description: description,
-          featureId: featureId,
-        };
 
         const url = "http://localhost:3000/api/auth/create-user-story";
         const fetchConfig = {
@@ -89,7 +92,7 @@ const MakeUserStoryAccordion = ({
         } else {
           toast({
             title: "Error",
-            description: "Unable to create user story",
+            description: "Session expired. Please log in again.",
             status: "error",
             duration: 3000,
             isClosable: true,
@@ -113,7 +116,7 @@ const MakeUserStoryAccordion = ({
                 ) : (
                   <AddIcon fontSize="12px" />
                 )}
-                <Box className="text-white flex flex-initial justify-start items-start border-s-2">
+                <Box className="text-white flex flex-initial items-start border-s-2">
                   <GoPlus className="mt-1 ml-1" />
                   Add a user story
                 </Box>
