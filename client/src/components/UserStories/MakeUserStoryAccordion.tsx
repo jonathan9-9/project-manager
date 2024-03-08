@@ -15,12 +15,20 @@ import {
 
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+import { UserStory } from "../Features/FeatureModal";
 
-const MakeUserStoryAccordion = () => {
+interface UserStoryProps {
+  userStories: UserStory[];
+  setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
+  featureId: number;
+}
+
+const MakeUserStoryAccordion = ({
+  userStories,
+  setUserStories,
+  featureId,
+}: UserStoryProps) => {
   const toast = useToast();
-
-  // REMOVE comment
-  console.log("example toast", toast);
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -38,16 +46,56 @@ const MakeUserStoryAccordion = () => {
     setDescription((e.target as HTMLInputElement).value);
   };
 
-  const onSubmitUserStory = () => {
+  const onSubmitUserStory = async (e: any) => {
+    e.preventDefault();
     setSubmittedName(true);
 
-    if (name !== "") {
-      setIsOpen(false);
+    try {
+      if (name !== "") {
+        setIsOpen(false);
 
-      const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");
 
-      // REMOVE
-      console.log("token", token);
+        const data = {
+          name: name,
+          description: description,
+          featureId: featureId,
+        };
+
+        const url = "http://localhost:3000/api/auth/create-user-story";
+        const fetchConfig = {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+
+        const res = await fetch(url, fetchConfig);
+
+        if (res.ok) {
+          setName("");
+          setDescription("");
+          setSubmittedName(false);
+
+          const newUserStory = await res.json();
+          setUserStories(newUserStory);
+
+          return newUserStory;
+        } else {
+          toast({
+            title: "Error",
+            description: "Unable to create user story",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
+        }
+      }
+    } catch (e) {
+      console.error(e);
     }
   };
   return (

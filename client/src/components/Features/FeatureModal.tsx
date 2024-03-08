@@ -37,13 +37,19 @@ const sampleUserStories = [
   },
 ];
 
-type ModalProps = {
+interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   featureName: string;
   featureDescription: string;
   // setSelectedFeature: React.Dispatch<React.SetStateAction<Feature>>;
-};
+}
+
+export interface UserStory {
+  name: string;
+  description: string;
+  status: string;
+}
 
 const FeatureModal = ({
   isOpen,
