@@ -9,7 +9,6 @@ import {
 import UserStoryAccordion from "../UserStories/UserStoryAccordion";
 import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
 import { useState } from "react";
-// import { Feature } from "../../pages/Project";
 
 const sampleUserStories = [
   {
@@ -72,7 +71,7 @@ const FeatureModal = ({
         <ModalContent
           minW="70%"
           style={{ backgroundColor: "#23272b" }}
-          className=" shadow-lg rounded-md p-4"
+          className="shadow-lg rounded-md p-4"
         >
           <Box m={10}>
             <Box mb={20}>
@@ -84,21 +83,21 @@ const FeatureModal = ({
             <ModalCloseButton style={{ backgroundColor: "#ff014f" }} />
             <div className="flex flex-col gap-4 bg-[#1e2024] rounded-lg p-6">
               {sampleUserStories.map((story, storyIdx) => (
-                // <div key={storyIdx} className="mb-4">
-                <UserStoryAccordion
-                  name={`${story.name} ${storyIdx + 1}`}
-                  status={story.status}
-                  description={story.description}
-                />
-                // </div>
+                <div key={storyIdx} className="mb-2">
+                  <UserStoryAccordion
+                    name={`${story.name} ${storyIdx + 1}`}
+                    status={story.status}
+                    description={story.description}
+                  />
+                </div>
               ))}
+              <MakeUserStoryAccordion
+                userStories={userStories}
+                setUserStories={setUserStories}
+                featureId={featureId}
+              />
             </div>
           </Box>
-          <MakeUserStoryAccordion
-            userStories={userStories}
-            setUserStories={setUserStories}
-            featureId={featureId}
-          />
         </ModalContent>
       </Modal>
     </>

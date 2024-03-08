@@ -13,6 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
+import { GoPlus } from "react-icons/go";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { UserStory } from "../Features/FeatureModal";
@@ -109,8 +110,8 @@ const MakeUserStoryAccordion = ({
                 ) : (
                   <AddIcon fontSize="12px" />
                 )}
-                <Box as="span" flex="1" textAlign="left" ml={3}>
-                  Add a user story
+                <Box className="text-white flex flex-row text-left">
+                  <GoPlus className="mt-1" /> Add a user story
                 </Box>
               </AccordionButton>
             </h2>
