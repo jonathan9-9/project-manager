@@ -29,7 +29,6 @@ const MakeUserStoryAccordion = ({
   featureId,
 }: UserStoryProps) => {
   const toast = useToast();
-
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [submittedName, setSubmittedName] = useState(false);

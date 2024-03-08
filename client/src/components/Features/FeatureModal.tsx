@@ -7,6 +7,8 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import UserStoryAccordion from "../UserStories/UserStoryAccordion";
+import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
+import { useState } from "react";
 // import { Feature } from "../../pages/Project";
 
 const sampleUserStories = [
@@ -42,6 +44,7 @@ interface ModalProps {
   onClose: () => void;
   featureName: string;
   featureDescription: string;
+  featureId: number;
   // setSelectedFeature: React.Dispatch<React.SetStateAction<Feature>>;
 }
 
@@ -56,7 +59,9 @@ const FeatureModal = ({
   onClose,
   featureName,
   featureDescription,
+  featureId,
 }: ModalProps) => {
+  const [userStories, setUserStories] = useState(sampleUserStories);
   return (
     <>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
@@ -89,6 +94,11 @@ const FeatureModal = ({
               ))}
             </div>
           </Box>
+          <MakeUserStoryAccordion
+            userStories={userStories}
+            setUserStories={setUserStories}
+            featureId={featureId}
+          />
         </ModalContent>
       </Modal>
     </>

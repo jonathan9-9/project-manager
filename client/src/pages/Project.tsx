@@ -10,6 +10,7 @@ export interface Feature {
   userStoryCount: number;
   completedUserStories: number;
   description?: string;
+  id: number;
 }
 
 const columns = [
@@ -200,6 +201,7 @@ const Project = () => {
           (selectedFeature && selectedFeature.description) ||
           "There is no feature description"
         }
+        featureId={selectedFeature.id}
       />
     </Box>
   );
