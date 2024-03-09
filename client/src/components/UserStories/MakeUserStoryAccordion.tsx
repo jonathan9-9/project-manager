@@ -48,25 +48,29 @@ const MakeUserStoryAccordion = ({
     setDescription((e.target as HTMLInputElement).value);
   };
 
+  const resetForm = () => {
+    setName("");
+    setDescription("");
+  };
+
   const onSubmitUserStory = async (e: any) => {
     e.preventDefault();
     setSubmittedName(true);
 
-    const data = {
-      name: name,
-      description: description,
-      projectId: projectId,
-      featureId: featureId,
-    };
-
-    try {
-      if (name !== "") {
+    if (name !== "") {
+      const token = localStorage.getItem("token");
+      try {
         setIsOpen(false);
-
-        const token = localStorage.getItem("token");
 
         console.log("name", name);
         console.log("description", description);
+
+        const data = {
+          name: name,
+          description: description,
+          projectId: projectId,
+          featureId: featureId,
+        };
 
         const url = "http://localhost:3000/api/auth/create-user-story";
         const fetchConfig = {
@@ -80,16 +84,7 @@ const MakeUserStoryAccordion = ({
 
         const res = await fetch(url, fetchConfig);
 
-        if (res.ok) {
-          setName("");
-          setDescription("");
-          setSubmittedName(false);
-
-          const newUserStory = await res.json();
-          setUserStories(newUserStory);
-
-          return newUserStory;
-        } else {
+        if (!res.ok) {
           toast({
             title: "Error",
             description: "Unable to create user story",
@@ -98,10 +93,23 @@ const MakeUserStoryAccordion = ({
             isClosable: true,
             position: "top",
           });
+
+          console.log("Error", res.statusText);
+
+          return;
+        } else {
+          setSubmittedName(false);
+          resetForm();
+
+          const newUserStory = await res.json();
+
+          setUserStories(newUserStory);
+
+          return newUserStory;
         }
+      } catch (e) {
+        console.error(e);
       }
-    } catch (e) {
-      console.error(e);
     }
   };
   return (

@@ -109,10 +109,10 @@ export class UserStoryDto {
   description: string;
 
   @IsNotEmpty()
-  featureId: number;
+  projectId: number;
 
   @IsNotEmpty()
-  projectId: number;
+  featureId: number;
 }
 
 @Controller('auth')

@@ -84,10 +84,10 @@ const FeatureModal = ({
             </Box>
             <ModalCloseButton style={{ backgroundColor: "#ff014f" }} />
             <div className="flex flex-col gap-4 bg-[#1e2024] rounded-lg p-6">
-              {sampleUserStories.map((story, storyIdx) => (
+              {userStories.map((story, storyIdx) => (
                 <div key={storyIdx} className="mb-2">
                   <UserStoryAccordion
-                    name={`${story.name} ${storyIdx + 1}`}
+                    name={story.name}
                     status={story.status}
                     description={story.description}
                   />
