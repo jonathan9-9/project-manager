@@ -17,7 +17,11 @@ export class FeaturesService {
     }
   }
 
-  async createFeature(name: string, description: string, projectId: number) {
+  async createFeature(
+    name: string,
+    description: string,
+    projectId: number,
+  ): Promise<Feature[]> {
     try {
       await this.prisma.feature.create({
         data: {

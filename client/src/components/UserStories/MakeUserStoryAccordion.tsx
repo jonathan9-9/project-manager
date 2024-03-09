@@ -58,10 +58,10 @@ const MakeUserStoryAccordion = ({
     setSubmittedName(true);
 
     if (name !== "") {
-      const token = localStorage.getItem("token");
       try {
         setIsOpen(false);
 
+        const token = localStorage.getItem("token");
         console.log("name", name);
         console.log("description", description);
 
@@ -77,8 +77,8 @@ const MakeUserStoryAccordion = ({
           method: "POST",
           body: JSON.stringify(data),
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
         };
 

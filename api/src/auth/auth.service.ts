@@ -7,7 +7,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { User as UserModel } from '@prisma/client';
+import { Project, User as UserModel } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { jwtConstants } from './constants';
 import { AccountDetailsDto } from './auth.controller';
@@ -220,22 +220,22 @@ export class AuthService {
   ) {
     const projects = await this.projectsService.getUserProjects(userId);
 
-    const project = projects.find((project) => project.id === projectId);
-
-    console.log('DEBUG project:', project);
-
-    // const features = project.features
-
-    // const feature = features.find((feature) => feature.id === featureId);
-
-    // if (feature.id) {
-    //   return await this.userStoriesService.createUserStory(
-    //     name,
-    //     description,
-    //     featureId,
+    //   const project: Project = projects.find(
+    //     (project) => project.id === projectId,
     //   );
-    // } else {
-    //   throw new UnauthorizedException('Feature not found');
-    // }
+
+    //   const features = project?.features;
+
+    //   const feature = features.find((feature) => feature.id === featureId);
+
+    //   if (feature.id) {
+    //     return await this.userStoriesService.createUserStory(
+    //       name,
+    //       description,
+    //       featureId,
+    //     );
+    //   } else {
+    //     throw new UnauthorizedException('Feature not found');
+    //   }
   }
 }

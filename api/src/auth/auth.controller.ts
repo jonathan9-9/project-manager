@@ -225,8 +225,8 @@ export class AuthController {
       userStoryDto.name,
       userStoryDto.description,
       req.user.sub,
-      userStoryDto.featureId,
       userStoryDto.projectId,
+      userStoryDto.featureId,
     );
   }
 }
