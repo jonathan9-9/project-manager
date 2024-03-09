@@ -201,7 +201,7 @@ const Project = () => {
           (selectedFeature && selectedFeature.description) ||
           "There is no feature description"
         }
-        featureId={selectedFeature.id}
+        featureId={selectedFeature ? selectedFeature.id : null}
         projectId={project.id}
       />
     </Box>

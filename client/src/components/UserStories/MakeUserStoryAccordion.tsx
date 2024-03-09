@@ -21,8 +21,8 @@ import { UserStory } from "../Features/FeatureModal";
 interface UserStoryProps {
   userStories: UserStory[];
   setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
-  featureId: number;
   projectId: number;
+  featureId: number | null;
 }
 
 const MakeUserStoryAccordion = ({
@@ -55,8 +55,8 @@ const MakeUserStoryAccordion = ({
     const data = {
       name: name,
       description: description,
-      featureId: featureId,
       projectId: projectId,
+      featureId: featureId,
     };
 
     try {
@@ -92,7 +92,7 @@ const MakeUserStoryAccordion = ({
         } else {
           toast({
             title: "Error",
-            description: "Session expired. Please log in again.",
+            description: "Unable to create user story",
             status: "error",
             duration: 3000,
             isClosable: true,

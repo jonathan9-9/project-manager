@@ -23,21 +23,6 @@ export class ProjectsService {
     }
   }
 
-  // async getProject(id: number, userId: number): Promise<Project> {
-  //   try {
-  //     const project = await this.prisma.project.findFirst({
-  //       where: {
-  //         userId: userId,
-  //         id: id,
-  //       },
-  //     });
-  //     console.log('Specific user project', project);
-  //     return project;
-  //   } catch (error) {
-  //     throw new Error(`Error fetching user's single project: ${error.message}`);
-  //   }
-  // }
-
   async createProject(
     name: string,
     description: string,

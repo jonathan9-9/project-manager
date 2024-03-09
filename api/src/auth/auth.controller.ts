@@ -224,9 +224,9 @@ export class AuthController {
     return this.authService.createUserStory(
       userStoryDto.name,
       userStoryDto.description,
-      userStoryDto.projectId,
-      userStoryDto.featureId,
       req.user.sub,
+      userStoryDto.featureId,
+      userStoryDto.projectId,
     );
   }
 }

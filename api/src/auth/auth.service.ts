@@ -222,18 +222,20 @@ export class AuthService {
 
     const project = projects.find((project) => project.id === projectId);
 
-    const features = project[0].features;
+    console.log('DEBUG project:', project);
 
-    const feature = features.find((feature) => feature.id === featureId);
+    // const features = project.features
 
-    if (feature.id) {
-      return await this.userStoriesService.createUserStory(
-        name,
-        description,
-        featureId,
-      );
-    } else {
-      throw new UnauthorizedException('Feature not found');
-    }
+    // const feature = features.find((feature) => feature.id === featureId);
+
+    // if (feature.id) {
+    //   return await this.userStoriesService.createUserStory(
+    //     name,
+    //     description,
+    //     featureId,
+    //   );
+    // } else {
+    //   throw new UnauthorizedException('Feature not found');
+    // }
   }
 }

@@ -43,7 +43,7 @@ interface ModalProps {
   onClose: () => void;
   featureName: string;
   featureDescription: string;
-  featureId: number;
+  featureId: number | null;
   projectId: number;
   // setSelectedFeature: React.Dispatch<React.SetStateAction<Feature>>;
 }
