@@ -124,9 +124,8 @@ const MakeUserStoryAccordion = ({
                 ) : (
                   <AddIcon fontSize="12px" />
                 )}
-                <Box className="text-white flex flex-initial items-start border-s-2">
-                  <GoPlus className="mt-1 ml-1" />
-                  Add a user story
+                <Box className="text-white flex flex-initial border-s-2">
+                  <div className="ml-2">Add a user story</div>
                 </Box>
               </AccordionButton>
             </h2>

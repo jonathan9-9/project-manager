@@ -9,7 +9,7 @@ export class ProjectsService {
   async getUserProjects(id: number): Promise<Project[]> {
     try {
       // note to self: userId in the where clause is a foreign key (Fk) defined in the prisma schema
-      const projects = await this.prisma.project.findMany({
+      const projects: Project[] = await this.prisma.project.findMany({
         where: { userId: id },
         // get relations: retrieve a record and include related records
         include: {

@@ -3,6 +3,7 @@ import {
   HttpException,
   Injectable,
   InternalServerErrorException,
+  NotFoundException,
   UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
@@ -218,24 +219,32 @@ export class AuthService {
     projectId: number,
     featureId: number,
   ) {
-    const projects = await this.projectsService.getUserProjects(userId);
+    try {
+      const projects = await this.projectsService.getUserProjects(userId);
 
-    //   const project: Project = projects.find(
-    //     (project) => project.id === projectId,
-    //   );
+      const project: Project = projects.find(
+        (project) => project.id === projectId,
+      );
 
-    //   const features = project?.features;
+      if (!project) {
+        throw new NotFoundException('Project not found');
+      }
 
-    //   const feature = features.find((feature) => feature.id === featureId);
+      const features = await this.featuresService.getProjectFeatures(projectId);
 
-    //   if (feature.id) {
-    //     return await this.userStoriesService.createUserStory(
-    //       name,
-    //       description,
-    //       featureId,
-    //     );
-    //   } else {
-    //     throw new UnauthorizedException('Feature not found');
-    //   }
+      const feature = features.find((feature) => feature.id === featureId);
+
+      if (feature.id) {
+        return await this.userStoriesService.createUserStory(
+          name,
+          description,
+          featureId,
+        );
+      } else {
+        throw new NotFoundException('Feature not found');
+      }
+    } catch (e) {
+      throw new Error(`Failed to create user story: ${e.message}`);
+    }
   }
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLoaderData, useParams } from "react-router";
+import { useLoaderData } from "react-router";
 import { ProjectProps } from "./Projects";
 import { Box, Text, useDisclosure } from "@chakra-ui/react";
 import FeatureModal from "../components/Features/FeatureModal";
@@ -26,7 +26,7 @@ const columns = [
 ];
 
 const Project = () => {
-  const { id } = useParams();
+  // const { id } = useParams();
   const data = useLoaderData() as ProjectProps[];
 
   const project = data[0];
@@ -100,8 +100,6 @@ const Project = () => {
       }
     }
   };
-
-  console.log("id", id);
 
   return (
     <Box className="text-white">
