@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useLoaderData } from "react-router";
 import { ProjectProps } from "./Projects";
 import { Box, Text, useDisclosure } from "@chakra-ui/react";
-import FeatureModal from "../components/Features/FeatureModal";
+import FeatureModal, { UserStory } from "../components/Features/FeatureModal";
 
 export interface Feature {
   name: string;
@@ -11,6 +11,7 @@ export interface Feature {
   completedUserStories: number;
   description?: string;
   id: number;
+  userStories: UserStory[];
 }
 
 const columns = [
@@ -36,9 +37,9 @@ const Project = () => {
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const [featureName, setFeatureName] = useState("");
   const [featureDescription, setFeatureDescription] = useState("");
-
   const [features, setFeatures] = useState(project.features);
   const [selectedFeature, setSelectedFeature] = useState(features[0]);
+  // const [userStories, setUserStories] = useState(selectedFeature.userStories);
 
   console.log("FEATURES", features);
 
@@ -201,6 +202,7 @@ const Project = () => {
         }
         featureId={selectedFeature ? selectedFeature.id : null}
         projectId={project.id}
+        stories={selectedFeature.userStories}
       />
     </Box>
   );

@@ -10,33 +10,33 @@ import UserStoryAccordion from "../UserStories/UserStoryAccordion";
 import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
 import { useState } from "react";
 
-const sampleUserStories = [
-  {
-    name: "User Story",
-    status: "2/10",
-    description: "This is the user story description",
-  },
-  {
-    name: "User Story",
-    status: "3/7",
-    description: "This is the user story description",
-  },
-  {
-    name: "User Story",
-    status: "5/9",
-    description: "This is the user story description",
-  },
-  {
-    name: "User Story",
-    status: "1/5",
-    description: "This is the user story description",
-  },
-  {
-    name: "User Story",
-    status: "4/8",
-    description: "This is the user story description",
-  },
-];
+// const sampleUserStories = [
+//   {
+//     name: "User Story",
+//     status: "2/10",
+//     description: "This is the user story description",
+//   },
+//   {
+//     name: "User Story",
+//     status: "3/7",
+//     description: "This is the user story description",
+//   },
+//   {
+//     name: "User Story",
+//     status: "5/9",
+//     description: "This is the user story description",
+//   },
+//   {
+//     name: "User Story",
+//     status: "1/5",
+//     description: "This is the user story description",
+//   },
+//   {
+//     name: "User Story",
+//     status: "4/8",
+//     description: "This is the user story description",
+//   },
+// ];
 
 interface ModalProps {
   isOpen: boolean;
@@ -45,7 +45,8 @@ interface ModalProps {
   featureDescription: string;
   featureId: number | null;
   projectId: number;
-  // setSelectedFeature: React.Dispatch<React.SetStateAction<Feature>>;
+  stories: UserStory[];
+  // setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
 }
 
 export interface UserStory {
@@ -61,8 +62,10 @@ const FeatureModal = ({
   featureDescription,
   featureId,
   projectId,
+  stories,
 }: ModalProps) => {
-  const [userStories, setUserStories] = useState(sampleUserStories);
+  const [userStories, setUserStories] = useState(stories);
+
   return (
     <>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
