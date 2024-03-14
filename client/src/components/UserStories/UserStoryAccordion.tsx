@@ -41,7 +41,7 @@ const UserStoryAccordion = ({ name, status, description }: Props) => {
         <h2>
           <AccordionButton display="flex" justifyContent="space-between" p={4}>
             <Text flex={1} textAlign="left" textColor="white">
-              {name}
+              <div className="text-[#ff014f]">{name}</div>
             </Text>
 
             <Text className="text-white">{status}</Text>
@@ -49,8 +49,8 @@ const UserStoryAccordion = ({ name, status, description }: Props) => {
             <AccordionIcon color="white" />
           </AccordionButton>
         </h2>
-        <AccordionPanel textColor="white">
-          <Box>{description}</Box>
+        <AccordionPanel textColor="white" borderTop="1px" p={0}>
+          <Box p={4}>{description}</Box>
           {sampleDevTasks.map((task, idx) => {
             return (
               <Box
@@ -59,6 +59,8 @@ const UserStoryAccordion = ({ name, status, description }: Props) => {
                 border="1px"
                 alignItems="center"
                 key={idx}
+                px={4}
+                py={2}
               >
                 <Text>{task.name}</Text>
                 <Button>{task.status}</Button>
