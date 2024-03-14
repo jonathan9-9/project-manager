@@ -5,6 +5,8 @@ import {
   AccordionIcon,
   AccordionPanel,
   Text,
+  Box,
+  Button,
 } from "@chakra-ui/react";
 
 type Props = {
@@ -12,6 +14,25 @@ type Props = {
   status: string;
   description: string;
 };
+
+const sampleDevTasks = [
+  {
+    name: "Developer Tasks 1",
+    status: "To Do",
+  },
+  {
+    name: "Developer Tasks 2",
+    status: "To Do",
+  },
+  {
+    name: "Developer Tasks 3",
+    status: "To Do",
+  },
+  {
+    name: "Developer Tasks 4",
+    status: "To Do",
+  },
+];
 
 const UserStoryAccordion = ({ name, status, description }: Props) => {
   return (
@@ -28,7 +49,23 @@ const UserStoryAccordion = ({ name, status, description }: Props) => {
             <AccordionIcon color="white" />
           </AccordionButton>
         </h2>
-        <AccordionPanel textColor="white">{description}</AccordionPanel>
+        <AccordionPanel textColor="white">
+          <Box>{description}</Box>
+          {sampleDevTasks.map((task, idx) => {
+            return (
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                border="1px"
+                alignItems="center"
+                key={idx}
+              >
+                <Text>{task.name}</Text>
+                <Button>{task.status}</Button>
+              </Box>
+            );
+          })}
+        </AccordionPanel>
       </AccordionItem>
     </Accordion>
   );
