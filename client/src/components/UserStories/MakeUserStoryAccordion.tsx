@@ -13,7 +13,6 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import { GoPlus } from "react-icons/go";
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { UserStory } from "../Features/FeatureModal";

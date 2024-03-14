@@ -3,25 +3,16 @@ import {
   Accordion,
   AccordionItem,
   AccordionButton,
-  AccordionIcon,
   AccordionPanel,
-  Text,
   Box,
   Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Input,
-  Textarea,
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-
-type Props = {
-  name: string;
-  status: string;
-  description: string;
-};
 
 const sampleDevTasks = [
   {
@@ -42,12 +33,13 @@ const sampleDevTasks = [
   },
 ];
 
-const CreateTaskAccordion = ({
-  userStories,
-  setUserStories,
-  featureId,
-  projectId,
-}: Props) => {
+interface Props {
+  projectId: number;
+  featureId: number | null;
+  userStoryId: number;
+}
+
+const CreateTaskAccordion = ({ featureId, projectId, userStoryId }: Props) => {
   const toast = useToast();
   const [name, setName] = useState("");
 
@@ -80,6 +72,7 @@ const CreateTaskAccordion = ({
           name: name,
           projectId: projectId,
           featureId: featureId,
+          userStoryId: userStoryId,
         };
 
         const url = "http://localhost:3000/api/auth/create-task";
@@ -97,7 +90,7 @@ const CreateTaskAccordion = ({
         if (!res.ok) {
           toast({
             title: "Error",
-            description: "Unable to create user story",
+            description: "Unable to create task",
             status: "error",
             duration: 3000,
             isClosable: true,
@@ -121,8 +114,6 @@ const CreateTaskAccordion = ({
 
           const newUserStory = await res.json();
 
-          setUserStories(newUserStory);
-
           return newUserStory;
         }
       } catch (e) {
@@ -142,26 +133,21 @@ const CreateTaskAccordion = ({
                 ) : (
                   <AddIcon fontSize="12px" />
                 )}
-                <Box className="text-white flex flex-initial border-s-2">
-                  <div className="ml-2">Add a user story</div>
+                <Box className="text-white flex flex-initial">
+                  <div className="ml-2">Add a task</div>
                 </Box>
               </AccordionButton>
             </h2>
 
             <AccordionPanel textColor="white" border="1px solid" pb={4}>
               <FormControl isInvalid={isErrorName} isRequired mb={4}>
-                <FormLabel>User Story Name:</FormLabel>
+                <FormLabel>Task Name:</FormLabel>
                 <Input type="text" value={name} onChange={onChangeName} />
                 {!isErrorName ? null : (
-                  <FormErrorMessage>
-                    User story name is required.
-                  </FormErrorMessage>
+                  <FormErrorMessage>Task name is required.</FormErrorMessage>
                 )}
               </FormControl>
-              <FormControl mb={4}>
-                <FormLabel>User Story Description:</FormLabel>
-                <Textarea value={description} onChange={onChangeDescription} />
-              </FormControl>
+
               <Button w="100%" onClick={onSubmitUserStory}>
                 Create Task
               </Button>

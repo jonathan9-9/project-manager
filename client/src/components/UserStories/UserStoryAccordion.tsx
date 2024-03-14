@@ -8,6 +8,7 @@ import {
   Box,
   Button,
 } from "@chakra-ui/react";
+import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
 
 type Props = {
   name: string;
@@ -41,7 +42,7 @@ const UserStoryAccordion = ({ name, status, description }: Props) => {
         <h2>
           <AccordionButton display="flex" justifyContent="space-between" p={4}>
             <Text flex={1} textAlign="left" textColor="white">
-              <div className="text-[#ff014f]">{name}</div>
+              <div className="text-[#D8D8D8]">{name}</div>
             </Text>
 
             <Text className="text-white">{status}</Text>
@@ -67,6 +68,7 @@ const UserStoryAccordion = ({ name, status, description }: Props) => {
               </Box>
             );
           })}
+          <CreateTaskAccordion projectId={0} featureId={0} userStoryId={0} />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
