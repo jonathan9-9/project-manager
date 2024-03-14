@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import UserStoryAccordion from "../UserStories/UserStoryAccordion";
 import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 // const sampleUserStories = [
 //   {
@@ -65,6 +65,10 @@ const FeatureModal = ({
   stories,
 }: ModalProps) => {
   const [userStories, setUserStories] = useState(stories);
+
+  useEffect(() => {
+    setUserStories(stories);
+  }, [stories]);
 
   return (
     <>
