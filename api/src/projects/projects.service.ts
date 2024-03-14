@@ -13,7 +13,11 @@ export class ProjectsService {
         where: { userId: id },
         // get relations: retrieve a record and include related records
         include: {
-          features: true,
+          features: {
+            include: {
+              userStories: true,
+            },
+          },
         },
       });
 
