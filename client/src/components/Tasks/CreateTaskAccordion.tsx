@@ -112,9 +112,9 @@ const CreateTaskAccordion = ({ featureId, projectId, userStoryId }: Props) => {
           setSubmittedName(false);
           resetForm();
 
-          const newUserStory = await res.json();
+          const newTask = await res.json();
 
-          return newUserStory;
+          return newTask;
         }
       } catch (e) {
         console.error(e);

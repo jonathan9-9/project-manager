@@ -60,7 +60,7 @@ const Projects = () => {
             <div className="max-w-xs rounded overflow-hidden bg-[#212428] shadow-[10px 10px 19px #1c1e22, -10px -10px 19px #262a2e] bg-gradient-to-r from-[#212428] to-[#202327] group hover:bg-gradient-to-b hover:from-black hover:to-[#1e2024] transition-colors duration-100 group ">
               <img
                 className="w-full"
-                src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/humming-bird.jpeg?alt=media&token=c272f3f3-50d9-4dea-be8d-63387145858a"
+                src="https://firebasestorage.googleapis.com/v0/b/my-first-project-portfol-6847b.appspot.com/o/HD-wallpaper-dandelions-plants-trees-sunset-nature.jpg?alt=media&token=32ceb08c-73ff-40a4-9314-c6680bff3866"
                 alt="Sunset in the mountains"
               />
               <div className="px-6 py-2">
