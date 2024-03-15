@@ -46,6 +46,7 @@ interface ModalProps {
   featureId: number | null;
   projectId: number;
   stories: UserStory[];
+
   // setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
 }
 
@@ -53,6 +54,7 @@ export interface UserStory {
   name: string;
   description: string;
   status: string;
+  id: number;
 }
 
 const FeatureModal = ({
@@ -97,6 +99,9 @@ const FeatureModal = ({
                     name={story.name}
                     status={story.status}
                     description={story.description}
+                    featureId={featureId}
+                    projectId={projectId}
+                    userStoryId={story.id}
                   />
                 </div>
               ))}

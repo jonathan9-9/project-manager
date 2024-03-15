@@ -14,6 +14,9 @@ type Props = {
   name: string;
   status: string;
   description: string;
+  projectId: number;
+  featureId: number | null;
+  userStoryId: number;
 };
 
 const sampleDevTasks = [
@@ -35,7 +38,14 @@ const sampleDevTasks = [
   },
 ];
 
-const UserStoryAccordion = ({ name, status, description }: Props) => {
+const UserStoryAccordion = ({
+  name,
+  status,
+  description,
+  projectId,
+  featureId,
+  userStoryId,
+}: Props) => {
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
@@ -68,7 +78,11 @@ const UserStoryAccordion = ({ name, status, description }: Props) => {
               </Box>
             );
           })}
-          <CreateTaskAccordion projectId={0} featureId={0} userStoryId={0} />
+          <CreateTaskAccordion
+            featureId={featureId}
+            projectId={projectId}
+            userStoryId={userStoryId}
+          />
         </AccordionPanel>
       </AccordionItem>
     </Accordion>
