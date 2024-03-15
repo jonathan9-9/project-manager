@@ -115,6 +115,21 @@ export class UserStoryDto {
   featureId: number;
 }
 
+export class TaskDto {
+  @IsNotEmpty()
+  @Transform((params) => sanitizeHtml(params.value))
+  name: string;
+
+  @IsNotEmpty()
+  projectId: number;
+
+  @IsNotEmpty()
+  featureId: number;
+
+  @IsNotEmpty()
+  userStoryId: number;
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
@@ -228,5 +243,9 @@ export class AuthController {
       userStoryDto.projectId,
       userStoryDto.featureId,
     );
+  }
+  @Post('create-task')
+  createTask(@Body() taskDto: TaskDto, @Request() req) {
+    console.log('taskDto', taskDto, 'req', req.user.sub);
   }
 }
