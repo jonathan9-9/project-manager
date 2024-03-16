@@ -247,5 +247,12 @@ export class AuthController {
   @Post('create-task')
   createTask(@Body() taskDto: TaskDto, @Request() req) {
     console.log('taskDto', taskDto, 'req', req.user.sub);
+    return this.authService.createTask(
+      taskDto.name,
+      taskDto.projectId,
+      taskDto.featureId,
+      taskDto.userStoryId,
+      req.user.sub,
+    );
   }
 }

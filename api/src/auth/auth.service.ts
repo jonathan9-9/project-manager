@@ -16,6 +16,7 @@ import { MailService } from 'src/mail/mail.service';
 import { ProjectsService } from 'src/projects/projects.service';
 import { FeaturesService } from 'src/features/features.service';
 import { UserStoriesService } from 'src/userStories/userStories.service';
+import { TasksService } from 'src/tasks/tasks.service';
 
 @Injectable()
 export class AuthService {
@@ -26,6 +27,7 @@ export class AuthService {
     private projectsService: ProjectsService,
     private featuresService: FeaturesService,
     private userStoriesService: UserStoriesService,
+    private tasksService: TasksService,
   ) {}
 
   async hashPassword(password: string) {
