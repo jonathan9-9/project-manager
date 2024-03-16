@@ -249,10 +249,10 @@ export class AuthController {
     console.log('taskDto', taskDto, 'req', req.user.sub);
     return this.authService.createTask(
       taskDto.name,
+      req.user.sub,
       taskDto.projectId,
       taskDto.featureId,
       taskDto.userStoryId,
-      req.user.sub,
     );
   }
 }

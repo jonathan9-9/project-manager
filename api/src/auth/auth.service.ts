@@ -249,4 +249,32 @@ export class AuthService {
       throw new Error(`Failed to create user story: ${e.message}`);
     }
   }
+  async createTask(
+    name: string,
+    userId: number,
+    projectId: number,
+    featureId: number,
+    userStoryId: number,
+  ) {
+    try {
+      const projects = await this.projectsService.getUserProjects(userId);
+      const project = projects.find((project) => project.id === projectId);
+
+      if (!project) {
+        throw new NotFoundException('Project not found');
+      }
+      const userStories =
+        await this.userStoriesService.getFeatureUserStories(featureId);
+
+      const userStory = userStories.find(
+        (userStory) => userStory.id === userStoryId,
+      );
+
+      if (userStory.id) {
+        return await this.tasksService.createTask(name, userStoryId);
+      }
+    } catch (e) {
+      throw new Error(`Failed to create to user task ${e.message}`);
+    }
+  }
 }
