@@ -15,7 +15,11 @@ export class ProjectsService {
         include: {
           features: {
             include: {
-              userStories: true,
+              userStories: {
+                include: {
+                  tasks: true,
+                },
+              },
             },
           },
         },

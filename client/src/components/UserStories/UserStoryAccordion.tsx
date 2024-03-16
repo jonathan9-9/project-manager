@@ -9,6 +9,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
+import { useState } from "react";
 
 type Props = {
   name: string;
@@ -46,6 +47,7 @@ const UserStoryAccordion = ({
   featureId,
   userStoryId,
 }: Props) => {
+  const [tasks, setTasks] = useState(sampleDevTasks);
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
@@ -62,7 +64,7 @@ const UserStoryAccordion = ({
         </h2>
         <AccordionPanel textColor="white" borderTop="1px" p={0}>
           <Box p={4}>{description}</Box>
-          {sampleDevTasks.map((task, idx) => {
+          {tasks.map((task, idx) => {
             return (
               <Box
                 display="flex"
