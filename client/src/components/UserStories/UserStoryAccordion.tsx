@@ -48,6 +48,7 @@ const UserStoryAccordion = ({
   userStoryId,
 }: Props) => {
   const [tasks, setTasks] = useState(sampleDevTasks);
+  console.log("set tasks", setTasks);
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
