@@ -13,6 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { Task } from "../UserStories/UserStoryAccordion";
 
 const sampleDevTasks = [
   {
@@ -37,9 +38,15 @@ interface Props {
   projectId: number;
   featureId: number | null;
   userStoryId: number;
+  setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 }
 
-const CreateTaskAccordion = ({ featureId, projectId, userStoryId }: Props) => {
+const CreateTaskAccordion = ({
+  featureId,
+  projectId,
+  userStoryId,
+  setTasks,
+}: Props) => {
   const toast = useToast();
   const [name, setName] = useState("");
 
@@ -113,7 +120,7 @@ const CreateTaskAccordion = ({ featureId, projectId, userStoryId }: Props) => {
           resetForm();
 
           const newTask = await res.json();
-
+          setTasks(newTask);
           return newTask;
         }
       } catch (e) {

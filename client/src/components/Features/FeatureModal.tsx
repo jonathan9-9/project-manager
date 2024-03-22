@@ -6,7 +6,7 @@ import {
   ModalContent,
   ModalOverlay,
 } from "@chakra-ui/react";
-import UserStoryAccordion from "../UserStories/UserStoryAccordion";
+import UserStoryAccordion, { Task } from "../UserStories/UserStoryAccordion";
 import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
 import { useEffect, useState } from "react";
 
@@ -55,6 +55,7 @@ export interface UserStory {
   description: string;
   status: string;
   id: number;
+  tasks: Task[];
 }
 
 const FeatureModal = ({
@@ -102,6 +103,7 @@ const FeatureModal = ({
                     featureId={featureId}
                     projectId={projectId}
                     userStoryId={story.id}
+                    tasks={story.tasks}
                   />
                 </div>
               ))}

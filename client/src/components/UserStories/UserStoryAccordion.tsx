@@ -18,6 +18,12 @@ type Props = {
   projectId: number;
   featureId: number | null;
   userStoryId: number;
+  tasks: Task[];
+};
+
+export type Task = {
+  name: string;
+  status: string;
 };
 
 const sampleDevTasks = [
@@ -46,8 +52,9 @@ const UserStoryAccordion = ({
   projectId,
   featureId,
   userStoryId,
+  tasks,
 }: Props) => {
-  const [tasks, setTasks] = useState(sampleDevTasks);
+  const [devTasks, setDevTasks] = useState(tasks);
 
   return (
     <Accordion allowToggle>
@@ -65,7 +72,7 @@ const UserStoryAccordion = ({
         </h2>
         <AccordionPanel textColor="white" borderTop="1px" p={0}>
           <Box p={4}>{description}</Box>
-          {tasks.map((task, idx) => {
+          {devTasks.map((task, idx) => {
             return (
               <Box
                 display="flex"
@@ -85,6 +92,7 @@ const UserStoryAccordion = ({
             featureId={featureId}
             projectId={projectId}
             userStoryId={userStoryId}
+            setTasks={setDevTasks}
           />
         </AccordionPanel>
       </AccordionItem>
