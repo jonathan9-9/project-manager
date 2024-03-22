@@ -114,10 +114,12 @@ const Project = () => {
       </div>
       <Box className="flex flex-row justify-around flex-wrap gap-4 p-4">
         {columns.map((column, index) => {
-          const filteredFeatures = features.filter(
-            (feature) => feature.status === column.name
-          );
-
+          const filteredFeatures = features
+            .map((feature, idx) => ({
+              ...feature,
+              status: feature.status || "To Do",
+            }))
+            .filter((feature) => feature.status === column.name);
           return (
             <div
               key={index}
