@@ -46,9 +46,9 @@ const Projects = () => {
       </div>
 
       <div className="grid md:grid-cols-4 gap-4">
-        {projects.map((project, index) => (
+        {projects.map((project, idx) => (
           <Box
-            key={index}
+            key={idx}
             alignContent="center"
             m={2}
             cursor="pointer"

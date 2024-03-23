@@ -10,33 +10,7 @@ import UserStoryAccordion, { Task } from "../UserStories/UserStoryAccordion";
 import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
 import { useEffect, useState } from "react";
 
-// const sampleUserStories = [
-//   {
-//     name: "User Story",
-//     status: "2/10",
-//     description: "This is the user story description",
-//   },
-//   {
-//     name: "User Story",
-//     status: "3/7",
-//     description: "This is the user story description",
-//   },
-//   {
-//     name: "User Story",
-//     status: "5/9",
-//     description: "This is the user story description",
-//   },
-//   {
-//     name: "User Story",
-//     status: "1/5",
-//     description: "This is the user story description",
-//   },
-//   {
-//     name: "User Story",
-//     status: "4/8",
-//     description: "This is the user story description",
-//   },
-// ];
+// sample user stories; an array of objects
 
 interface ModalProps {
   isOpen: boolean;

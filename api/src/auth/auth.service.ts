@@ -185,9 +185,11 @@ export class AuthService {
     };
   }
 
+  // filter to find method changes the structure of the returned data. filter returns an array of objects
+  // while find returns an object for a specific project in this case. This allows us to refactor our code on the FE
   async getProject(id: number, userId: number) {
     const projects = await this.projectsService.getUserProjects(userId);
-    return projects.filter((project) => project.id === id);
+    return projects.find((project) => project.id === id);
   }
 
   async createProject(name: string, description: string, userId: number) {
