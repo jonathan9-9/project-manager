@@ -9,6 +9,7 @@ import {
 import UserStoryAccordion, { Task } from "../UserStories/UserStoryAccordion";
 import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
 import { useEffect, useState } from "react";
+import { ProjectProps } from "../../pages/Projects";
 
 // sample user stories; an array of objects
 
@@ -20,6 +21,7 @@ interface ModalProps {
   featureId: number | null;
   projectId: number;
   stories: UserStory[];
+  setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
 
   // setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
 }
@@ -40,6 +42,7 @@ const FeatureModal = ({
   featureId,
   projectId,
   stories,
+  setProject,
 }: ModalProps) => {
   const [userStories, setUserStories] = useState(stories);
 
