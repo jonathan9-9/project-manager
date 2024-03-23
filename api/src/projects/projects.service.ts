@@ -31,6 +31,23 @@ export class ProjectsService {
     }
   }
 
+  async getProjectById(id: number): Promise<Project> {
+    return await this.prisma.project.findUnique({
+      where: { id },
+      include: {
+        features: {
+          include: {
+            userStories: {
+              include: {
+                tasks: true,
+              },
+            },
+          },
+        },
+      },
+    });
+  }
+
   async createProject(
     name: string,
     description: string,

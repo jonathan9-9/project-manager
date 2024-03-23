@@ -28,22 +28,18 @@ const columns = [
 
 const Project = () => {
   // const { id } = useParams();
-  const data = useLoaderData() as ProjectProps[];
+  const loaderData = useLoaderData() as ProjectProps;
 
-  const project = data[0];
+  const [project, setProject] = useState(loaderData);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const [featureName, setFeatureName] = useState("");
   const [featureDescription, setFeatureDescription] = useState("");
-  const [features, setFeatures] = useState(project.features);
-  const [selectedFeature, setSelectedFeature] = useState(features[0]);
+  // const [features, setFeatures] = useState(project.features);
+  const [selectedFeature, setSelectedFeature] = useState(project.features[0]);
   // const [userStories, setUserStories] = useState(selectedFeature.userStories);
-
-  console.log("FEATURES", features);
-
-  console.log("selected feature", selectedFeature);
 
   const handleAddCardClick = (index: any) => {
     setSelectedCardIndex(index);
@@ -91,7 +87,7 @@ const Project = () => {
         } else {
           const newFeature = await response.json();
 
-          setFeatures(newFeature);
+          setProject(newFeature);
           resetForm();
           setSelectedCardIndex(null);
           return newFeature;
@@ -114,7 +110,7 @@ const Project = () => {
       </div>
       <Box className="flex flex-row justify-around flex-wrap gap-4 p-4">
         {columns.map((column, index) => {
-          const filteredFeatures = features
+          const filteredFeatures = project.features
             .map((feature, idx) => ({
               ...feature,
               status: feature.status || "To Do",
@@ -178,7 +174,7 @@ const Project = () => {
                       onClick={handleFormSubmit}
                       className="p-2 bg-white text-black rounded-md mr-2"
                     >
-                      Add Card
+                      Add Feature
                     </button>
                     <button
                       type="button"

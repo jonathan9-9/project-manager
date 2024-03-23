@@ -207,11 +207,8 @@ export class AuthService {
     const project = projects.find((project) => project.id === projectId);
 
     if (project.id) {
-      return await this.featuresService.createFeature(
-        name,
-        description,
-        projectId,
-      );
+      await this.featuresService.createFeature(name, description, projectId);
+      return await this.projectsService.getProjectById(projectId);
     } else {
       throw new UnauthorizedException('Project not found');
     }
