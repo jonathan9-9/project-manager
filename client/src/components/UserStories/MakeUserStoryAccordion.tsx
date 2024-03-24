@@ -15,20 +15,22 @@ import {
 
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-import { UserStory } from "../Features/FeatureModal";
+import { ProjectProps } from "../../pages/Projects";
 
 interface UserStoryProps {
-  userStories: UserStory[];
-  setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
+  // userStories: UserStory[];
+  // setUserStories: React.Dispatch<React.SetStateAction<UserStory[]>>;
   projectId: number;
   featureId: number | null;
+  setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
 }
 
 const MakeUserStoryAccordion = ({
-  userStories,
-  setUserStories,
+  // userStories,
+  // setUserStories,
   featureId,
   projectId,
+  setProject,
 }: UserStoryProps) => {
   const toast = useToast();
   const [name, setName] = useState("");
@@ -102,7 +104,7 @@ const MakeUserStoryAccordion = ({
 
           const newUserStory = await res.json();
 
-          setUserStories(newUserStory);
+          setProject(newUserStory);
 
           return newUserStory;
         }

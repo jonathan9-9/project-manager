@@ -201,6 +201,7 @@ const Project = () => {
         featureId={selectedFeature ? selectedFeature.id : null}
         projectId={project.id}
         stories={selectedFeature.userStories}
+        setProject={setProject}
       />
     </Box>
   );

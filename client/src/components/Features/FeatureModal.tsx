@@ -11,8 +11,6 @@ import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
 import { useEffect, useState } from "react";
 import { ProjectProps } from "../../pages/Projects";
 
-// sample user stories; an array of objects
-
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -44,11 +42,11 @@ const FeatureModal = ({
   stories,
   setProject,
 }: ModalProps) => {
-  const [userStories, setUserStories] = useState(stories);
+  // const [userStories, setUserStories] = useState(stories);
 
-  useEffect(() => {
-    setUserStories(stories);
-  }, [stories]);
+  // useEffect(() => {
+  //   setUserStories(stories);
+  // }, [stories]);
 
   return (
     <>
@@ -71,7 +69,7 @@ const FeatureModal = ({
             </Box>
             <ModalCloseButton style={{ backgroundColor: "#ff014f" }} />
             <div className="flex flex-col gap-4 bg-[#1e2024] rounded-lg p-6">
-              {userStories.map((story, storyIdx) => (
+              {stories.map((story, storyIdx) => (
                 <div key={storyIdx} className="mb-2">
                   <UserStoryAccordion
                     name={story.name}
@@ -85,10 +83,11 @@ const FeatureModal = ({
                 </div>
               ))}
               <MakeUserStoryAccordion
-                userStories={userStories}
-                setUserStories={setUserStories}
+                // userStories={userStories}
+                // setUserStories={setUserStories}
                 featureId={featureId}
                 projectId={projectId}
+                setProject={setProject}
               />
             </div>
           </Box>
