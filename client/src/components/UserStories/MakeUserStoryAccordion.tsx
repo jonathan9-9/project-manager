@@ -25,6 +25,7 @@ interface UserStoryProps {
   setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
 }
 
+// set project prop passed down to child components
 const MakeUserStoryAccordion = ({
   // userStories,
   // setUserStories,
