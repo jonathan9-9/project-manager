@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useLoaderData } from "react-router";
 import { ProjectProps } from "./Projects";
-import { Box, Text, useDisclosure } from "@chakra-ui/react";
-import FeatureModal, { UserStory } from "../components/Features/FeatureModal";
+import { Box, Text } from "@chakra-ui/react";
+import { UserStory } from "../components/Features/FeatureModal";
+import FeatureSection from "../components/Features/FeatureSection";
 
 export interface Feature {
   name: string;
@@ -32,13 +33,11 @@ const Project = () => {
 
   const [project, setProject] = useState(loaderData);
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
   const [selectedCardIndex, setSelectedCardIndex] = useState(null);
   const [featureName, setFeatureName] = useState("");
   const [featureDescription, setFeatureDescription] = useState("");
   // const [features, setFeatures] = useState(project.features);
-  const [selectedFeature, setSelectedFeature] = useState(project.features[0]);
+  // const [selectedFeature, setSelectedFeature] = useState(project.features[0]);
   // const [userStories, setUserStories] = useState(selectedFeature.userStories);
 
   const handleAddCardClick = (index: any) => {
@@ -110,12 +109,6 @@ const Project = () => {
       </div>
       <Box className="flex flex-row justify-around flex-wrap gap-4 p-4">
         {columns.map((column, index) => {
-          const filteredFeatures = project.features
-            .map((feature, idx) => ({
-              ...feature,
-              status: feature.status || "To Do",
-            }))
-            .filter((feature) => feature.status === column.name);
           return (
             <div
               key={index}
@@ -124,23 +117,22 @@ const Project = () => {
               <div className="text-center text-gray-200 font-bold text-lg mb-2">
                 {column.name}
               </div>
-              <Box className="flex flex-col gap-4">
-                {filteredFeatures.map((feature, featureIndex) => (
-                  <div
-                    key={featureIndex}
-                    onClick={() => {
-                      onOpen();
-                      setSelectedFeature(feature);
-                    }}
-                    className="bg-[#ff014f] cursor-pointer p-4 rounded-md flex flex-row justify-between items-center"
-                  >
-                    <div className="text-gray-100">{feature.name}</div>
-                    <div className="text-gray-500">
-                      {feature.completedUserStories}/{feature.userStoryCount}
-                    </div>
-                  </div>
-                ))}
-              </Box>
+              {project.features.map((feature, featureIdx) => {
+                feature.status = "To Do";
+                if (column.name === feature.status) {
+                  return (
+                    <FeatureSection
+                      key={featureIdx}
+                      feature={feature}
+                      projectId={project.id}
+                      setProject={setProject}
+                    />
+                  );
+                } else {
+                  return null;
+                }
+              })}
+
               <div
                 onClick={() => handleAddCardClick(index)}
                 className="mt-4 text-gray-200 text-sm cursor-pointer"
@@ -190,19 +182,6 @@ const Project = () => {
           );
         })}
       </Box>
-      <FeatureModal
-        isOpen={isOpen}
-        onClose={onClose}
-        featureName={selectedFeature ? selectedFeature.name : ""}
-        featureDescription={
-          (selectedFeature && selectedFeature.description) ||
-          "There is no feature description"
-        }
-        featureId={selectedFeature ? selectedFeature.id : null}
-        projectId={project.id}
-        stories={selectedFeature.userStories}
-        setProject={setProject}
-      />
     </Box>
   );
 };

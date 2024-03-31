@@ -189,6 +189,7 @@ export class AuthService {
   // while find returns an object for a specific project in this case. This allows us to refactor our code on the FE
   async getProject(id: number, userId: number) {
     const projects = await this.projectsService.getUserProjects(userId);
+
     return projects.find((project) => project.id === id);
   }
 
@@ -236,11 +237,12 @@ export class AuthService {
       const feature = features.find((feature) => feature.id === featureId);
 
       if (feature.id) {
-        return await this.userStoriesService.createUserStory(
+        await this.userStoriesService.createUserStory(
           name,
           description,
           featureId,
         );
+        return await this.projectsService.getProjectById(projectId);
       } else {
         throw new NotFoundException('Feature not found');
       }

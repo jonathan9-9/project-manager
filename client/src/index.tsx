@@ -199,7 +199,9 @@ const router = createBrowserRouter([
 
               const data = await response.json();
 
-              if (!data.length) {
+              console.log("response of single project data", data);
+
+              if (data && Object.keys(data).length === 0) {
                 toast({
                   title: "Error",
                   description: "Project does not exist",
@@ -210,7 +212,7 @@ const router = createBrowserRouter([
                 });
                 return redirect("/projects");
               }
-              console.log("response of single project data", data);
+
               return data;
             } catch (error) {
               console.error("Error fetching data:", error);

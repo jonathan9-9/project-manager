@@ -8,7 +8,6 @@ import {
 } from "@chakra-ui/react";
 import UserStoryAccordion, { Task } from "../UserStories/UserStoryAccordion";
 import MakeUserStoryAccordion from "../UserStories/MakeUserStoryAccordion";
-import { useEffect, useState } from "react";
 import { ProjectProps } from "../../pages/Projects";
 
 interface ModalProps {
@@ -42,12 +41,6 @@ const FeatureModal = ({
   stories,
   setProject,
 }: ModalProps) => {
-  // const [userStories, setUserStories] = useState(stories);
-
-  // useEffect(() => {
-  //   setUserStories(stories);
-  // }, [stories]);
-
   return (
     <>
       <Modal onClose={onClose} isOpen={isOpen} isCentered>
