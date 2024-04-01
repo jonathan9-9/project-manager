@@ -11,6 +11,8 @@ interface Props {
 
 const FeatureSection = ({ feature, projectId, setProject }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  console.log("FEATURE", feature);
   return (
     <>
       <Box className="flex flex-col gap-4">
