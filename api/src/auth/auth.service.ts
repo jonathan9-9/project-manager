@@ -272,7 +272,9 @@ export class AuthService {
       );
 
       if (userStory.id) {
-        return await this.tasksService.createTask(name, userStoryId);
+        await this.tasksService.createTask(name, userStoryId);
+        // refactored code into this line below
+        return await this.projectsService.getProjectById(projectId);
       }
     } catch (e) {
       throw new Error(`Failed to create to user task ${e.message}`);

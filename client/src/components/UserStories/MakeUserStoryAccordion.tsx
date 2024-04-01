@@ -64,8 +64,6 @@ const MakeUserStoryAccordion = ({
         setIsOpen(false);
 
         const token = localStorage.getItem("token");
-        console.log("name", name);
-        console.log("description", description);
 
         const data = {
           name: name,

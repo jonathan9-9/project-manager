@@ -13,27 +13,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { Task } from "../UserStories/UserStoryAccordion";
 import { ProjectProps } from "../../pages/Projects";
-
-const sampleDevTasks = [
-  {
-    name: "Developer Tasks 1",
-    status: "To Do",
-  },
-  {
-    name: "Developer Tasks 2",
-    status: "To Do",
-  },
-  {
-    name: "Developer Tasks 3",
-    status: "To Do",
-  },
-  {
-    name: "Developer Tasks 4",
-    status: "To Do",
-  },
-];
 
 interface Props {
   projectId: number;
@@ -121,6 +101,7 @@ const CreateTaskAccordion = ({
           resetForm();
 
           const newTask = await res.json();
+          console.log("New task", newTask);
           setProject(newTask);
           return newTask;
         }
