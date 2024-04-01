@@ -23,6 +23,7 @@ export class ProjectsService {
             },
           },
         },
+        orderBy: { id: 'desc' },
       });
 
       return projects;
