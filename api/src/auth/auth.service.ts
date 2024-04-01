@@ -211,7 +211,7 @@ export class AuthService {
       await this.featuresService.createFeature(name, description, projectId);
       return await this.projectsService.getProjectById(projectId);
     } else {
-      throw new UnauthorizedException('Project not found');
+      throw new UnauthorizedException('Unauthorized');
     }
   }
   async createUserStory(
@@ -232,19 +232,24 @@ export class AuthService {
         throw new NotFoundException('Project not found');
       }
 
-      const features = await this.featuresService.getProjectFeatures(projectId);
+      if (project) {
+        const features =
+          await this.featuresService.getProjectFeatures(projectId);
 
-      const feature = features.find((feature) => feature.id === featureId);
+        const feature = features.find((feature) => feature.id === featureId);
 
-      if (feature.id) {
-        await this.userStoriesService.createUserStory(
-          name,
-          description,
-          featureId,
-        );
-        return await this.projectsService.getProjectById(projectId);
+        if (feature) {
+          await this.userStoriesService.createUserStory(
+            name,
+            description,
+            featureId,
+          );
+          return await this.projectsService.getProjectById(projectId);
+        } else {
+          throw new UnauthorizedException('Unauthorized');
+        }
       } else {
-        throw new NotFoundException('Feature not found');
+        throw new UnauthorizedException('Unauthorized');
       }
     } catch (e) {
       throw new Error(`Failed to create user story: ${e.message}`);
@@ -264,17 +269,34 @@ export class AuthService {
       if (!project) {
         throw new NotFoundException('Project not found');
       }
-      const userStories =
-        await this.userStoriesService.getFeatureUserStories(featureId);
 
-      const userStory = userStories.find(
-        (userStory) => userStory.id === userStoryId,
-      );
+      if (project) {
+        // feature variable used simply to check if feature exists before checking
+        // for user story to create a task and return the projectById method
+        const features =
+          await this.featuresService.getProjectFeatures(projectId);
+        const feature = features.find((feature) => feature.id === featureId);
 
-      if (userStory.id) {
-        await this.tasksService.createTask(name, userStoryId);
-        // refactored code into this line below
-        return await this.projectsService.getProjectById(projectId);
+        if (feature) {
+          const userStories =
+            await this.userStoriesService.getFeatureUserStories(featureId);
+
+          const userStory = userStories.find(
+            (userStory) => userStory.id === userStoryId,
+          );
+
+          if (userStory) {
+            await this.tasksService.createTask(name, userStoryId);
+            // refactored code into this line below
+            return await this.projectsService.getProjectById(projectId);
+          } else {
+            throw new UnauthorizedException('Unauthorized');
+          }
+        } else {
+          throw new UnauthorizedException('Unauthorized');
+        }
+      } else {
+        throw new UnauthorizedException('Unauthorized');
       }
     } catch (e) {
       throw new Error(`Failed to create to user task ${e.message}`);
