@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
 import { useState } from "react";
+import { ProjectProps } from "../../pages/Projects";
 
 type Props = {
   name: string;
@@ -19,31 +20,13 @@ type Props = {
   featureId: number | null;
   userStoryId: number;
   tasks: Task[];
+  setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
 };
 
 export type Task = {
   name: string;
   status: string;
 };
-
-const sampleDevTasks = [
-  {
-    name: "Developer Tasks 1",
-    status: "To Do",
-  },
-  {
-    name: "Developer Tasks 2",
-    status: "To Do",
-  },
-  {
-    name: "Developer Tasks 3",
-    status: "To Do",
-  },
-  {
-    name: "Developer Tasks 4",
-    status: "To Do",
-  },
-];
 
 const UserStoryAccordion = ({
   name,
@@ -53,9 +36,8 @@ const UserStoryAccordion = ({
   featureId,
   userStoryId,
   tasks,
+  setProject,
 }: Props) => {
-  const [devTasks, setDevTasks] = useState(tasks);
-
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
@@ -72,7 +54,7 @@ const UserStoryAccordion = ({
         </h2>
         <AccordionPanel textColor="white" borderTop="1px" p={0}>
           <Box p={4}>{description}</Box>
-          {devTasks.map((task, idx) => {
+          {tasks.map((task, idx) => {
             return (
               <Box
                 display="flex"
@@ -92,7 +74,7 @@ const UserStoryAccordion = ({
             featureId={featureId}
             projectId={projectId}
             userStoryId={userStoryId}
-            setTasks={setDevTasks}
+            setProject={setProject}
           />
         </AccordionPanel>
       </AccordionItem>

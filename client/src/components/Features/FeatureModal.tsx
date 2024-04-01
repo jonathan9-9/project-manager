@@ -72,6 +72,7 @@ const FeatureModal = ({
                     projectId={projectId}
                     userStoryId={story.id}
                     tasks={story.tasks}
+                    setProject={setProject}
                   />
                 </div>
               ))}
