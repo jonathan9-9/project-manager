@@ -107,7 +107,7 @@ const Project = () => {
           {project.description || "There is no project description"}
         </Text>
       </div>
-      <Box className="flex flex-row justify-around flex-wrap gap-4 p-4">
+      <Box className="flex flex-row justify-around flex-nowrap gap-4 p-4">
         {columns.map((column, index) => {
           return (
             <div
