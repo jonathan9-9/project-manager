@@ -26,9 +26,10 @@ interface ModalProps {
 export interface UserStory {
   name: string;
   description: string;
-  status: string;
   id: number;
   tasks: Task[];
+  completedTasks: number;
+  taskCount: number;
 }
 
 const FeatureModal = ({
@@ -66,7 +67,7 @@ const FeatureModal = ({
                 <div key={storyIdx} className="mb-2">
                   <UserStoryAccordion
                     name={story.name}
-                    status={story.status}
+                    status={`${story.completedTasks} / ${story.taskCount}`}
                     description={story.description}
                     featureId={featureId}
                     projectId={projectId}
