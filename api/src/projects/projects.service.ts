@@ -2,11 +2,56 @@ import { Injectable } from '@nestjs/common';
 import { Project } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
+// project.interface.ts
+export interface ProjectProps {
+  id: number;
+  name: string;
+  description: string;
+  userId: number;
+  features: Feature[];
+}
+
+export interface Feature {
+  // Define properties for feature here
+  // For example:
+  id: number;
+  name: string;
+  userStories: UserStory[];
+}
+
+export interface UserStory {
+  // Define properties for user story here
+  // For example:
+  id: number;
+  tasks: Task[];
+}
+
+export interface Task {
+  // Define properties for task here
+  // For example:
+  id: number;
+  status: string; // Assuming status can be 'Done' or other values
+}
+
 @Injectable()
 export class ProjectsService {
   constructor(private readonly prisma: DatabaseService) {}
 
-  addStatusToProject(project: Project) {
+  addStatusToProject(project: ProjectProps) {
+    project.features.forEach((feature) => {
+      feature['userStoryCount'] = feature.userStories.length;
+      feature['completedUserStories'] = 0;
+      feature['started'] = false;
+
+      const userStories = feature.userStories;
+
+      userStories.forEach((story) => {
+        story['taskCount'] = story.tasks.length;
+        story['completedTasks'] = story.tasks.filter(
+          (task) => task.status === 'Done',
+        ).length;
+      });
+    });
     return project;
   }
 
@@ -30,7 +75,7 @@ export class ProjectsService {
         orderBy: { id: 'desc' },
       });
 
-      return projects.map((project) => {
+      return projects.map((project: ProjectProps) => {
         return this.addStatusToProject(project);
       });
     } catch (error) {
