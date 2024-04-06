@@ -6,6 +6,10 @@ import { DatabaseService } from 'src/database/database.service';
 export class ProjectsService {
   constructor(private readonly prisma: DatabaseService) {}
 
+  addStatusToProject(project: Project) {
+    return project;
+  }
+
   async getUserProjects(id: number): Promise<Project[]> {
     try {
       // note to self: userId in the where clause is a foreign key (Fk) defined in the prisma schema
@@ -26,14 +30,16 @@ export class ProjectsService {
         orderBy: { id: 'desc' },
       });
 
-      return projects;
+      return projects.map((project) => {
+        return this.addStatusToProject(project);
+      });
     } catch (error) {
       throw new Error(`Error fetching user projects: ${error.message}`);
     }
   }
 
   async getProjectById(id: number): Promise<Project> {
-    return await this.prisma.project.findUnique({
+    const project = await this.prisma.project.findUnique({
       where: { id },
       include: {
         features: {
@@ -47,6 +53,7 @@ export class ProjectsService {
         },
       },
     });
+    return this.addStatusToProject(project);
   }
 
   async createProject(
