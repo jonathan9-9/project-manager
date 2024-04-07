@@ -23,7 +23,7 @@ const FeatureSection = ({ feature, projectId, setProject }: Props) => {
           className="bg-[#ff014f] cursor-pointer p-4 my-3 rounded-md flex flex-row justify-between items-center"
         >
           <div className="text-gray-100">{feature.name}</div>
-          <div className="text-fuchsia-200">
+          <div className="text-zinc-100">
             {feature.completedUserStories}/{feature.userStoryCount}
           </div>
         </div>

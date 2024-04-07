@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Project } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
-// project.interface.ts
+// specify props
 export interface ProjectProps {
   id: number;
   name: string;
@@ -12,25 +12,19 @@ export interface ProjectProps {
 }
 
 export interface Feature {
-  // Define properties for feature here
-  // For example:
   id: number;
   name: string;
   userStories: UserStory[];
 }
 
 export interface UserStory {
-  // Define properties for user story here
-  // For example:
   id: number;
   tasks: Task[];
 }
 
 export interface Task {
-  // Define properties for task here
-  // For example:
   id: number;
-  status: string; // Assuming status can be 'Done' or other values
+  status: string;
 }
 
 @Injectable()
@@ -47,9 +41,14 @@ export class ProjectsService {
 
       userStories.forEach((story) => {
         story['taskCount'] = story.tasks.length;
-        story['completedTasks'] = story.tasks.filter(
+        const completedTasks = story.tasks.filter(
           (task) => task.status === 'Done',
         ).length;
+        story['completedTasks'] = completedTasks;
+
+        if (completedTasks > 0) {
+          feature['started'] = true;
+        }
       });
     });
     return project;
