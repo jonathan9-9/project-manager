@@ -139,6 +139,7 @@ const Project = () => {
               >
                 Add a feature...
               </div>
+
               {selectedCardIndex === index && (
                 <form className="mt-4 ">
                   <div className="mb-2 text-black">

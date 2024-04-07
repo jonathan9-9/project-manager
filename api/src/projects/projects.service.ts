@@ -35,7 +35,7 @@ export class ProjectsService {
     project.features.forEach((feature) => {
       feature['userStoryCount'] = feature.userStories.length;
       feature['completedUserStories'] = 0;
-      feature['started'] = false;
+      let featureStarted = false;
 
       const userStories = feature.userStories;
 
@@ -47,10 +47,14 @@ export class ProjectsService {
         story['completedTasks'] = completedTasks;
 
         if (completedTasks > 0) {
-          feature['started'] = true;
+          featureStarted = true;
+        }
+
+        if ((story['taskCount'] = completedTasks)) {
+          feature['completedUserStories']++;
         }
       });
-      if (!feature['started']) {
+      if (!featureStarted) {
         feature['status'] === 'To Do';
       } else if (
         feature['userStoryCount'] === feature['completedUserStories']
