@@ -50,6 +50,15 @@ export class ProjectsService {
           feature['started'] = true;
         }
       });
+      if (!feature['started']) {
+        feature['status'] === 'To Do';
+      } else if (
+        feature['userStoryCount'] === feature['completedUserStories']
+      ) {
+        feature['status'] = 'Done';
+      } else {
+        feature['status'] = 'In Progress';
+      }
     });
     return project;
   }
