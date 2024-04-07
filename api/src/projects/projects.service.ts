@@ -32,6 +32,11 @@ export class ProjectsService {
   constructor(private readonly prisma: DatabaseService) {}
 
   addStatusToProject(project: ProjectProps) {
+    // featureCount: total number of features to be completed
+    const featureCount = project.features.length;
+    let completedFeatures = 0;
+    let projectStarted = false;
+
     project.features.forEach((feature) => {
       feature['userStoryCount'] = feature.userStories.length;
       feature['completedUserStories'] = 0;
@@ -41,13 +46,18 @@ export class ProjectsService {
 
       userStories.forEach((story) => {
         story['taskCount'] = story.tasks.length;
+
+        const inProgressTasks = story.tasks.filter(
+          (task) => task.status === 'In Progress',
+        ).length;
         const completedTasks = story.tasks.filter(
           (task) => task.status === 'Done',
         ).length;
         story['completedTasks'] = completedTasks;
 
-        if (completedTasks > 0) {
+        if (completedTasks > 0 || inProgressTasks > 0) {
           featureStarted = true;
+          projectStarted = true;
         }
 
         if ((story['taskCount'] = completedTasks)) {
@@ -60,10 +70,20 @@ export class ProjectsService {
         feature['userStoryCount'] === feature['completedUserStories']
       ) {
         feature['status'] = 'Done';
+        completedFeatures++;
       } else {
         feature['status'] = 'In Progress';
       }
     });
+
+    if (!projectStarted) {
+      project['status'] === 'To Do';
+    } else if (featureCount === completedFeatures) {
+      project['status'] = 'Done';
+    } else {
+      project['status'] = 'In Progress';
+    }
+
     return project;
   }
 
