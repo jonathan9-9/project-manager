@@ -1,6 +1,8 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Text, VStack } from "@chakra-ui/react";
 import { Task } from "../UserStories/UserStoryAccordion";
 import { useState } from "react";
+import { useToast } from "@chakra-ui/react";
+import { useNavigate } from "react-router";
 
 interface Props {
   task: Task;
@@ -10,8 +12,65 @@ interface Props {
 const TaskSection = ({ task, idx }: Props) => {
   const [taskStatus, setTaskStatus] = useState(task.status);
 
+  const toast = useToast();
+  const navigate = useNavigate();
+
   const updateTask = (field: "status" | "name", value: string) => {
-    return;
+    const onSubmitUpdateTaskStatus = async (e: any) => {
+      e.preventDefault();
+
+      try {
+        const token = localStorage.getItem("token");
+
+        const data = {
+          field: field,
+          value: value,
+        };
+
+        const url = "http://localhost:3000/api/auth/update-task";
+        const fetchConfig = {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        };
+
+        const res = await fetch(url, fetchConfig);
+
+        if (!res.ok) {
+          toast({
+            title: "Error",
+            description: "Unable to update task. Please try again.",
+            status: "error",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
+
+          console.log("Error", res.statusText);
+
+          return;
+        } else {
+          toast({
+            title: "Success",
+            description: `Your task ${field} has been updated!`,
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top-right",
+          });
+
+          const newTask = await res.json();
+          console.log("New task", newTask);
+          setProject(newTask);
+          return newTask;
+        }
+      } catch (e) {
+        console.error(e);
+      }
+    };
   };
 
   const toggleTaskStatus = () => {
