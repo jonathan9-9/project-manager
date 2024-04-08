@@ -130,6 +130,14 @@ export class TaskDto {
   userStoryId: number;
 }
 
+export class UpdateTaskDto {
+  @IsNotEmpty()
+  field: string;
+
+  @Transform((params) => sanitizeHtml(params.value))
+  value: string;
+}
+
 @Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
