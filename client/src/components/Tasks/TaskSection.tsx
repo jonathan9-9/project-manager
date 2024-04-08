@@ -9,14 +9,23 @@ interface Props {
 
 const TaskSection = ({ task, idx }: Props) => {
   const [taskStatus, setTaskStatus] = useState(task.status);
+
+  const updateTask = (field: "status" | "name", value: string) => {
+    return;
+  };
+
   const toggleTaskStatus = () => {
     if (taskStatus === "To Do") {
       setTaskStatus("In Progress");
+      updateTask("status", "In Progress");
     } else if (taskStatus === "In Progress") {
       setTaskStatus("Done");
+      updateTask("status", "Done");
     } else {
       setTaskStatus("To Do");
+      updateTask("status", "To Do");
     }
+    updateTask("status", taskStatus);
   };
   return (
     <Box
@@ -29,7 +38,7 @@ const TaskSection = ({ task, idx }: Props) => {
       py={2}
     >
       <Text>{task.name}</Text>
-      <Button onClick={toggleTaskStatus}>{task.status}</Button>
+      <Button onClick={toggleTaskStatus}>{taskStatus}</Button>
     </Box>
   );
 };
