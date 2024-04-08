@@ -1,4 +1,4 @@
-import { Box, Button, Text, VStack } from "@chakra-ui/react";
+import { Box, Button, Text } from "@chakra-ui/react";
 import { Task } from "../UserStories/UserStoryAccordion";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
@@ -15,62 +15,58 @@ const TaskSection = ({ task, idx }: Props) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const updateTask = (field: "status" | "name", value: string) => {
-    const onSubmitUpdateTaskStatus = async (e: any) => {
-      e.preventDefault();
+  const updateTask = async (field: "status" | "name", value: string) => {
+    try {
+      const token = localStorage.getItem("token");
 
-      try {
-        const token = localStorage.getItem("token");
+      const data = {
+        field: field,
+        value: value,
+      };
 
-        const data = {
-          field: field,
-          value: value,
-        };
+      const url = "http://localhost:3000/api/auth/update-task";
+      const fetchConfig = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
 
-        const url = "http://localhost:3000/api/auth/update-task";
-        const fetchConfig = {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        };
+      const res = await fetch(url, fetchConfig);
 
-        const res = await fetch(url, fetchConfig);
+      if (!res.ok) {
+        toast({
+          title: "Error",
+          description: "Unable to update task. Please try again.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
 
-        if (!res.ok) {
-          toast({
-            title: "Error",
-            description: "Unable to update task. Please try again.",
-            status: "error",
-            duration: 3000,
-            isClosable: true,
-            position: "top",
-          });
+        console.log("Error", res.statusText);
 
-          console.log("Error", res.statusText);
+        return;
+      } else {
+        toast({
+          title: "Success",
+          description: `Your task ${field} has been updated!`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
 
-          return;
-        } else {
-          toast({
-            title: "Success",
-            description: `Your task ${field} has been updated!`,
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-            position: "top-right",
-          });
+        const newTask = await res.json();
+        console.log("New task", newTask);
 
-          const newTask = await res.json();
-          console.log("New task", newTask);
-          setProject(newTask);
-          return newTask;
-        }
-      } catch (e) {
-        console.error(e);
+        return newTask;
       }
-    };
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const toggleTaskStatus = () => {

@@ -6,10 +6,9 @@ import {
   AccordionPanel,
   Text,
   Box,
-  Button,
 } from "@chakra-ui/react";
 import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
-import { useState } from "react";
+
 import { ProjectProps } from "../../pages/Projects";
 import TaskSection from "../Tasks/TaskSection";
 
@@ -39,9 +38,6 @@ const UserStoryAccordion = ({
   tasks,
   setProject,
 }: Props) => {
-  const toggleTaskStatus = () => {
-    return;
-  };
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">

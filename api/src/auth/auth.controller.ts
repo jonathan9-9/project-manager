@@ -255,4 +255,9 @@ export class AuthController {
       taskDto.userStoryId,
     );
   }
+
+  @Post('create-task')
+  updateTask(@Body() updateTaskDto: UpdateTaskDto, @Request() req) {
+    console.log('updateTaskDto: ', updateTaskDto, 'req:', req.user.sub);
+  }
 }
