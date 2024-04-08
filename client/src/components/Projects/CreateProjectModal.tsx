@@ -1,5 +1,4 @@
 import { useState } from "react";
-// import { UserProfileData } from "../../pages/Profile";
 import { ProjectProps } from "../../pages/Projects";
 import { useToast } from "@chakra-ui/react";
 import { GoPlus } from "react-icons/go";
@@ -148,6 +147,7 @@ const CreateProjectModal = ({ setProjects }: Props) => {
               >
                 Create
               </button>
+
               <button
                 onClick={closeModal}
                 className=" text-gray-400 hover:text-gray-100 px-3 ring-2 ring-offset-white"

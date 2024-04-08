@@ -11,6 +11,7 @@ import {
 import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
 import { useState } from "react";
 import { ProjectProps } from "../../pages/Projects";
+import TaskSection from "../Tasks/TaskSection";
 
 type Props = {
   name: string;
@@ -38,6 +39,9 @@ const UserStoryAccordion = ({
   tasks,
   setProject,
 }: Props) => {
+  const toggleTaskStatus = () => {
+    return;
+  };
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
@@ -55,20 +59,7 @@ const UserStoryAccordion = ({
         <AccordionPanel textColor="white" borderTop="1px" p={0}>
           <Box p={4}>{description}</Box>
           {tasks.map((task, idx) => {
-            return (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                border="1px"
-                alignItems="center"
-                key={idx}
-                px={4}
-                py={2}
-              >
-                <Text>{task.name}</Text>
-                <Button>{task.status}</Button>
-              </Box>
-            );
+            return <TaskSection task={task} idx={idx} />;
           })}
           <CreateTaskAccordion
             featureId={featureId}
