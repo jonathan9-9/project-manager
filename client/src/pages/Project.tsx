@@ -118,7 +118,7 @@ const Project = () => {
                 {column.name}
               </div>
               {project.features.map((feature, featureIdx) => {
-                feature.status = "To Do";
+                // feature.status = "To Do";
                 if (column.name === feature.status) {
                   return (
                     <FeatureSection

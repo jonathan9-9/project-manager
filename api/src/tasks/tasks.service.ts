@@ -33,22 +33,25 @@ export class TasksService {
   }
   async updateTask(field: string, value: string, taskId: number) {
     try {
-      // const taskToUpdate = await this.prisma.task.findUnique({
-      //   where: {
-      //     id: taskId,
-      //   },
-      // });
-      // if (!taskToUpdate) {
-      //   throw new Error('Task not found');
-      // }
+      const taskToUpdate = await this.prisma.task.findUnique({
+        where: {
+          id: taskId,
+        },
+      });
+      console.log('Task to update', taskToUpdate);
+      if (!taskToUpdate) {
+        console.log(`Task with ID ${taskId} not found`);
 
+        throw new Error('Task not found');
+      }
+
+      const updatedFields = {};
+      updatedFields[field] = value;
       const updatedTask = await this.prisma.task.update({
         where: {
           id: taskId,
         },
-        data: {
-          [field]: value,
-        },
+        data: updatedFields,
       });
       console.log('updated task', updatedTask);
     } catch (error) {

@@ -75,7 +75,7 @@ const Projects = () => {
                 <span className="inline-block bg-gray-700 rounded-full px-1  text-md font-semibold text-gray-700 mr-2 mb-2">
                   <div>
                     {project.status === "In Progress" ? (
-                      <Text color="orange">#{project.status}</Text>
+                      <Text color="orange"># {project.status}</Text>
                     ) : project.status === "Done" ? (
                       <Text color="green">#{project.status}</Text>
                     ) : project.status === "Testing" ? (

@@ -15,7 +15,10 @@ const TaskSection = ({ task, idx }: Props) => {
   const toast = useToast();
   const navigate = useNavigate();
 
-  const updateTask = async (field: "status" | "name", value: string) => {
+  const onSubmitUpdateTask = async (
+    field: "status" | "name",
+    value: string
+  ) => {
     try {
       const token = localStorage.getItem("token");
 
@@ -60,28 +63,27 @@ const TaskSection = ({ task, idx }: Props) => {
           position: "top-right",
         });
 
-        const newTask = await res.json();
-        console.log("New task", newTask);
+        const updatedTask = await res.json();
+        console.log("updatedTask", updatedTask);
 
-        return newTask;
+        return updatedTask;
       }
     } catch (e) {
       console.error(e);
     }
   };
 
-  const toggleTaskStatus = () => {
+  const toggleTaskStatus = async () => {
+    let newStatus = "";
     if (taskStatus === "To Do") {
-      setTaskStatus("In Progress");
-      updateTask("status", "In Progress");
+      newStatus = "In Progress";
     } else if (taskStatus === "In Progress") {
-      setTaskStatus("Done");
-      updateTask("status", "Done");
+      newStatus = "Done";
     } else {
-      setTaskStatus("To Do");
-      updateTask("status", "To Do");
+      newStatus = "To Do";
     }
-    updateTask("status", taskStatus);
+    setTaskStatus(newStatus);
+    await onSubmitUpdateTask("status", newStatus);
   };
   return (
     <Box
