@@ -31,14 +31,26 @@ export class TasksService {
       throw new Error(`Error creating task: ${error.message}`);
     }
   }
-  async updateTask(field: string, value: string, taskId: number, userId) {
+  async updateTask(field: string, value: string, taskId: number) {
     try {
-      const task = await this.prisma.task.findMany({
+      // const taskToUpdate = await this.prisma.task.findUnique({
+      //   where: {
+      //     id: taskId,
+      //   },
+      // });
+      // if (!taskToUpdate) {
+      //   throw new Error('Task not found');
+      // }
+
+      const updatedTask = await this.prisma.task.update({
         where: {
           id: taskId,
         },
+        data: {
+          [field]: value,
+        },
       });
-      console.log('task', task);
+      console.log('updated task', updatedTask);
     } catch (error) {
       throw new Error(`Error updating task: ${error.message}`);
     }

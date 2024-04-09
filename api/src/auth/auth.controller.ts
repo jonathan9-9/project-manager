@@ -267,9 +267,8 @@ export class AuthController {
   }
 
   @Post('update-task')
-  updateTask(@Body() updateTaskDto: UpdateTaskDto, @Request() req) {
+  updateTask(@Body() updateTaskDto: UpdateTaskDto) {
     return this.authService.updateTask(
-      req.user.sub,
       updateTaskDto.field,
       updateTaskDto.value,
       updateTaskDto.taskId,
