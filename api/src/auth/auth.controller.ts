@@ -254,7 +254,6 @@ export class AuthController {
   }
   @Post('create-task')
   createTask(@Body() taskDto: TaskDto, @Request() req) {
-    console.log('taskDto', taskDto, 'req', req.user.sub);
     return this.authService.createTask(
       taskDto.name,
       req.user.sub,
@@ -264,8 +263,13 @@ export class AuthController {
     );
   }
 
-  @Post('create-task')
+  @Post('update-task')
   updateTask(@Body() updateTaskDto: UpdateTaskDto, @Request() req) {
     console.log('updateTaskDto: ', updateTaskDto, 'req:', req.user.sub);
+    return this.authService.updateTask(
+      updateTaskDto.field,
+      updateTaskDto.value,
+      req.user.sub,
+    );
   }
 }
