@@ -22,6 +22,7 @@ const TaskSection = ({ task, idx }: Props) => {
       const data = {
         field: field,
         value: value,
+        taskId: task.id,
       };
 
       const url = "http://localhost:3000/api/auth/update-task";

@@ -26,6 +26,7 @@ type Props = {
 export type Task = {
   name: string;
   status: string;
+  id: number;
 };
 
 const UserStoryAccordion = ({

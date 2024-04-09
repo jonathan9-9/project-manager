@@ -136,6 +136,9 @@ export class UpdateTaskDto {
 
   @Transform((params) => sanitizeHtml(params.value))
   value: string;
+
+  @IsNotEmpty()
+  taskId: number;
 }
 
 @Controller('auth')
@@ -265,11 +268,11 @@ export class AuthController {
 
   @Post('update-task')
   updateTask(@Body() updateTaskDto: UpdateTaskDto, @Request() req) {
-    console.log('updateTaskDto: ', updateTaskDto, 'req:', req.user.sub);
     return this.authService.updateTask(
+      req.user.sub,
       updateTaskDto.field,
       updateTaskDto.value,
-      req.user.sub,
+      updateTaskDto.taskId,
     );
   }
 }

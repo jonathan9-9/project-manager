@@ -31,4 +31,16 @@ export class TasksService {
       throw new Error(`Error creating task: ${error.message}`);
     }
   }
+  async updateTask(field: string, value: string, taskId: number, userId) {
+    try {
+      const task = await this.prisma.task.findMany({
+        where: {
+          id: taskId,
+        },
+      });
+      console.log('task', task);
+    } catch (error) {
+      throw new Error(`Error updating task: ${error.message}`);
+    }
+  }
 }
