@@ -80,8 +80,8 @@ const Projects = () => {
                       <Text color="green">#{project.status}</Text>
                     ) : project.status === "Testing" ? (
                       <Text color="purple">#{project.status}</Text>
-                    ) : project.status === "To Do" ? (
-                      <Text color="red">#{project.status}</Text>
+                    ) : project.status === "To Do" || project.status == null ? (
+                      <Text color="red"># To Do</Text>
                     ) : null}
                   </div>
                 </span>
