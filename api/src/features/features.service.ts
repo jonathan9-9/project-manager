@@ -33,7 +33,7 @@ export class FeaturesService {
 
       return await this.getProjectFeatures(projectId);
     } catch (error) {
-      throw new Error(`Error creating project: ${error.message}`);
+      throw new Error(`Error creating feature: ${error.message}`);
     }
   }
 }

@@ -38,7 +38,7 @@ export class TasksService {
           id: taskId,
         },
       });
-      console.log('Task to update', taskToUpdate);
+
       if (!taskToUpdate) {
         console.log(`Task with ID ${taskId} not found`);
 

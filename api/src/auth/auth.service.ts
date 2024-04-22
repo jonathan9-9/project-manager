@@ -209,6 +209,7 @@ export class AuthService {
 
     if (project.id) {
       await this.featuresService.createFeature(name, description, projectId);
+
       return await this.projectsService.getProjectById(projectId);
     } else {
       throw new UnauthorizedException('Unauthorized');
