@@ -60,10 +60,9 @@ const Project = () => {
     console.log("PROJECT ID", project.id);
 
     if (featureName !== "") {
-      const token = localStorage.getItem("token");
       try {
-        console.log("Feature name", featureName);
-        console.log("Feature description", featureDescription);
+        const token = localStorage.getItem("token");
+
         const response = await fetch(
           "http://localhost:3000/api/auth/create-feature",
           {
@@ -85,6 +84,8 @@ const Project = () => {
           return;
         } else {
           const newFeature = await response.json();
+
+          console.log("new feature DEBUG", newFeature);
 
           setProject(newFeature);
           resetForm();

@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { Project } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
-// specify props
 export interface ProjectProps {
   id: number;
   name: string;
@@ -60,12 +59,12 @@ export class ProjectsService {
           projectStarted = true;
         }
 
-        if ((story['taskCount'] = completedTasks)) {
+        if (story['taskCount'] === completedTasks) {
           feature['completedUserStories']++;
         }
       });
       if (!featureStarted) {
-        feature['status'] === 'To Do';
+        feature['status'] = 'To Do';
       } else if (
         feature['userStoryCount'] === feature['completedUserStories']
       ) {
@@ -77,7 +76,7 @@ export class ProjectsService {
     });
 
     if (!projectStarted) {
-      project['status'] === 'To Do';
+      project['status'] = 'To Do';
     } else if (featureCount === completedFeatures) {
       project['status'] = 'Done';
     } else {
