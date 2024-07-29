@@ -28,7 +28,7 @@ const UserDetails = ({ field, value, username, setData }: Props) => {
       if (field === "Email") {
         if (isInvalidEmail(valueState)) {
           toast({
-            title: "Invalid Password",
+            title: "Invalid Email Address",
             description: "Please enter a valid email address",
             status: "error",
             duration: 3000,

@@ -74,16 +74,17 @@ const TaskSection = ({ task, idx }: Props) => {
   };
 
   const toggleTaskStatus = async () => {
-    let newStatus = "";
+    // let newStatus = "";
     if (taskStatus === "To Do") {
-      newStatus = "In Progress";
+      setTaskStatus("In Progress");
+      onSubmitUpdateTask("status", "In Progress");
     } else if (taskStatus === "In Progress") {
-      newStatus = "Done";
+      setTaskStatus("Done");
     } else {
-      newStatus = "To Do";
+      setTaskStatus("To Do");
     }
-    setTaskStatus(newStatus);
-    await onSubmitUpdateTask("status", newStatus);
+    // setTaskStatus(newStatus);
+    await onSubmitUpdateTask("status", taskStatus);
   };
   return (
     <Box
