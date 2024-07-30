@@ -80,8 +80,10 @@ const TaskSection = ({ task, idx }: Props) => {
       onSubmitUpdateTask("status", "In Progress");
     } else if (taskStatus === "In Progress") {
       setTaskStatus("Done");
+      onSubmitUpdateTask("status", "Done");
     } else {
       setTaskStatus("To Do");
+      onSubmitUpdateTask("status", "To Do");
     }
     // setTaskStatus(newStatus);
     await onSubmitUpdateTask("status", taskStatus);

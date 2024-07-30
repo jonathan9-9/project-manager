@@ -267,10 +267,11 @@ export class AuthController {
   }
 
   @Post('update-task')
-  updateTask(@Body() updateTaskDto: UpdateTaskDto) {
+  updateTask(@Body() updateTaskDto: UpdateTaskDto, @Request() req) {
     return this.authService.updateTask(
       updateTaskDto.field,
       updateTaskDto.value,
+      req.user.sub,
       updateTaskDto.taskId,
     );
   }

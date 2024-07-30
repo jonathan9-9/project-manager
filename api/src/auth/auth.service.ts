@@ -303,7 +303,12 @@ export class AuthService {
       throw new Error(`Failed to create to user task ${e.message}`);
     }
   }
-  async updateTask(field: string, value: string, taskId: number) {
-    return await this.tasksService.updateTask(field, value, taskId);
+  async updateTask(
+    field: string,
+    value: string,
+    userId: number,
+    taskId: number,
+  ) {
+    return await this.tasksService.updateTask(field, value, userId, taskId);
   }
 }
