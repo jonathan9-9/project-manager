@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Task } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
@@ -38,44 +38,107 @@ export class TasksService {
     taskId: number,
   ) {
     try {
-      const taskToUpdate = await this.prisma.task.findFirst({
+      const taskToUpdate = await this.prisma.task.findUniqueOrThrow({
         where: {
           id: taskId,
+        },
+        include: {
           userStory: {
-            feature: {
-              project: {
-                userId: userId,
+            include: {
+              feature: {
+                include: {
+                  project: true,
+                },
               },
             },
           },
         },
       });
 
-      if (!taskToUpdate) {
-        console.log(`Task with ID ${taskId} not found`);
-
-        throw new Error('Task not found');
+      if (taskToUpdate.userStory.feature.project.userId !== userId) {
+        throw new Error('You do not have access to this task');
       }
 
-      // dynamic key
-      // const updatedFields: { [key: string]: any } = {};
+      console.log('Task before update: ', taskToUpdate);
 
-      if (taskToUpdate) {
-        taskToUpdate[field] = value;
+      const updateData = { [field]: value };
 
-        const updatedTask = await this.prisma.task.update({
-          where: {
-            id: taskId,
+      const updatedTask = await this.prisma.task.update({
+        where: {
+          id: taskId,
+        },
+        data: updateData,
+        include: {
+          userStory: {
+            include: {
+              feature: {
+                include: {
+                  project: true,
+                },
+              },
+            },
           },
-          data: taskToUpdate,
-        });
+        },
+      });
 
-        return updatedTask;
-      } else {
-        throw new BadRequestException('Cannot edit that task');
-      }
+      console.log('Task after update: ', updatedTask);
+      return taskToUpdate.userStory.feature.project.id;
     } catch (error) {
-      throw new Error(`Error updating task: ${error.message}`);
+      console.error(`Error updating tasks ${error.message}`);
     }
   }
+
+  // async updateTask(
+  //   field: string,
+  //   value: string,
+  //   userId: number,
+  //   taskId: number,
+  // ) {
+  //   try {
+  //     const taskToUpdate = await this.prisma.task.findUniqueOrThrow({
+  //       where: {
+  //         id: taskId,
+  //       },
+  //       include: {
+  //         userStory: {
+  //           include: {
+  //             feature: {
+  //               include: {
+  //                 project: true,
+  //               },
+  //             },
+  //           },
+  //         },
+  //       },
+  //     });
+
+  //     if (taskToUpdate.userStory.feature.project.userId !== userId) {
+  //       throw new Error('Task not found or you do not have access to it');
+  //     }
+
+  //     const updateData = { [field]: value };
+
+  //     const updatedTask = await this.prisma.task.update({
+  //       where: {
+  //         id: taskId,
+  //       },
+  //       data: updateData,
+  //       include: {
+  //         userStory: {
+  //           include: {
+  //             feature: {
+  //               include: {
+  //                 project: true,
+  //               },
+  //             },
+  //           },
+  //         },
+  //       },
+  //     });
+
+  //     return updatedTask.userStory.feature.project.id;
+  //   } catch (error) {
+  //     throw new Error(`Error updating task: ${error.message}`);
+  //   }
+  // }
 }
