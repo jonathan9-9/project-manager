@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Task } from '@prisma/client';
 import { DatabaseService } from 'src/database/database.service';
 
@@ -58,16 +58,22 @@ export class TasksService {
       }
 
       // dynamic key
-      const updatedFields: { [key: string]: any } = {};
-      updatedFields[field] = value;
+      // const updatedFields: { [key: string]: any } = {};
 
-      const updatedTask = await this.prisma.task.update({
-        where: {
-          id: taskId,
-        },
-        data: updatedFields,
-      });
-      return updatedTask;
+      if (taskToUpdate) {
+        taskToUpdate[field] = value;
+
+        const updatedTask = await this.prisma.task.update({
+          where: {
+            id: taskId,
+          },
+          data: taskToUpdate,
+        });
+
+        return updatedTask;
+      } else {
+        throw new BadRequestException('Cannot edit that task');
+      }
     } catch (error) {
       throw new Error(`Error updating task: ${error.message}`);
     }
