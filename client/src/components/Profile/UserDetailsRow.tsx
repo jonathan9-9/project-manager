@@ -13,7 +13,7 @@ interface Props {
   setData: React.Dispatch<React.SetStateAction<UserProfileData>>;
 }
 
-const UserDetails = ({ field, value, username, setData }: Props) => {
+const UserDetailsRow = ({ field, value, username, setData }: Props) => {
   const [valueState, setValueState] = useState(value);
   const [editField, setEditField] = useState(false);
 
@@ -146,4 +146,4 @@ const UserDetails = ({ field, value, username, setData }: Props) => {
   );
 };
 
-export default UserDetails;
+export default UserDetailsRow;

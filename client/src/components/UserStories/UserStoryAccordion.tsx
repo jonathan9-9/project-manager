@@ -56,7 +56,9 @@ const UserStoryAccordion = ({
         <AccordionPanel textColor="white" borderTop="1px" p={0}>
           <Box p={4}>{description}</Box>
           {tasks.map((task, idx) => {
-            return <TaskSection task={task} idx={idx} />;
+            return (
+              <TaskSection task={task} idx={idx} setProject={setProject} />
+            );
           })}
           <CreateTaskAccordion
             featureId={featureId}

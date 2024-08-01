@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useLoaderData, useNavigate, useOutletContext } from "react-router";
 import { Context } from "../App";
-import UserDetails from "../components/Profile/UserDetails";
+import UserDetailsRow from "../components/Profile/UserDetailsRow";
 import { useState } from "react";
 
 export interface UserProfileData {
@@ -110,28 +110,28 @@ const Profile = () => {
           </Avatar>
         </Box>
         <Box w="100%" display="flex" flexDirection="column" gap={6}>
-          <UserDetails
+          <UserDetailsRow
             value={name}
             field="Name"
             username={username}
             setData={setData}
           />
 
-          <UserDetails
+          <UserDetailsRow
             value={email}
             field="Email"
             username={username}
             setData={setData}
           />
 
-          <UserDetails
+          <UserDetailsRow
             value={username}
             field="Username"
             username={username}
             setData={setData}
           />
 
-          <UserDetails
+          <UserDetailsRow
             value="***********"
             field="Password"
             username={username}

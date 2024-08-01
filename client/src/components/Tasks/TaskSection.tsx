@@ -3,13 +3,15 @@ import { Task } from "../UserStories/UserStoryAccordion";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
+import { ProjectProps } from "../../pages/Projects";
 
 interface Props {
   task: Task;
   idx: number;
+  setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
 }
 
-const TaskSection = ({ task, idx }: Props) => {
+const TaskSection = ({ task, idx, setProject }: Props) => {
   const [taskStatus, setTaskStatus] = useState(task.status);
 
   const toast = useToast();
@@ -65,7 +67,7 @@ const TaskSection = ({ task, idx }: Props) => {
 
         const updatedTask = await res.json();
         console.log("updatedTask", updatedTask);
-
+        setProject(updatedTask);
         return updatedTask;
       }
     } catch (e) {
