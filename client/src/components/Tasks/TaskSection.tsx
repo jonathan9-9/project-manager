@@ -1,4 +1,4 @@
-import { Box, Button, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Center, Input, Text } from "@chakra-ui/react";
 import { Task } from "../UserStories/UserStoryAccordion";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
@@ -105,11 +105,12 @@ const TaskSection = ({ task, idx, setProject }: Props) => {
     <Box
       display="flex"
       justifyContent="space-between"
-      border="1px"
+      // border="1px"
       alignItems="center"
       key={idx}
       px={4}
       py={2}
+      gap={4}
     >
       {updateName ? (
         <Input
@@ -121,26 +122,30 @@ const TaskSection = ({ task, idx, setProject }: Props) => {
           type="text"
         />
       ) : (
-        <Text>{task.name}</Text>
+        <Text flex={1}>{task.name}</Text>
       )}
-      <Box ml={8} className="text-gray-200">
-        {updateName ? (
-          <GiCheckMark
-            cursor="pointer"
-            onClick={
-              updateName
-                ? () => {
-                    onSubmitUpdateTask("name", taskName);
-                  }
-                : handleEditClick
-            }
-          />
-        ) : (
-          <FaUserEdit cursor="pointer" onClick={handleEditClick} />
-        )}
+      <Box display="flex" alignItems="center">
+        <Box className="text-gray-200" mr={1}>
+          {updateName ? (
+            <GiCheckMark
+              cursor="pointer"
+              onClick={
+                updateName
+                  ? () => {
+                      onSubmitUpdateTask("name", taskName);
+                    }
+                  : handleEditClick
+              }
+            />
+          ) : (
+            <FaUserEdit cursor="pointer" onClick={handleEditClick} />
+          )}
+        </Box>
       </Box>
 
-      <Button onClick={toggleTaskStatus}>{taskStatus}</Button>
+      <Button w="17%" onClick={toggleTaskStatus}>
+        {taskStatus}
+      </Button>
     </Box>
   );
 };

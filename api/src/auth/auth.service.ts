@@ -99,7 +99,6 @@ export class AuthService {
   }
 
   async getProfileInfo(id: number): Promise<object> {
-    console.log('id', id);
     const user = await this.usersService.findUserById(id);
 
     return {
@@ -309,13 +308,17 @@ export class AuthService {
     userId: number,
     taskId: number,
   ) {
-    const projectId = await this.tasksService.updateTask(
-      field,
-      value,
-      userId,
-      taskId,
-    );
+    try {
+      const projectId = await this.tasksService.updateTask(
+        field,
+        value,
+        userId,
+        taskId,
+      );
 
-    return await this.projectsService.getProjectById(projectId);
+      return await this.projectsService.getProjectById(projectId);
+    } catch (error) {
+      throw error;
+    }
   }
 }

@@ -59,15 +59,11 @@ export class TasksService {
         throw new Error('You do not have access to this task');
       }
 
-      console.log('Task before update: ', taskToUpdate);
-
-      const updateData = { [field]: value };
-
-      const updatedTask = await this.prisma.task.update({
+      await this.prisma.task.update({
         where: {
           id: taskId,
         },
-        data: updateData,
+        data: { [field]: value },
         include: {
           userStory: {
             include: {
@@ -81,7 +77,6 @@ export class TasksService {
         },
       });
 
-      console.log('Task after update: ', updatedTask);
       return taskToUpdate.userStory.feature.project.id;
     } catch (error) {
       console.error(`Error updating tasks ${error.message}`);
