@@ -35,6 +35,17 @@ const TaskSection = ({ task, idx, setProject }: Props) => {
     value: string
   ) => {
     try {
+      if (taskName === "") {
+        toast({
+          title: "Error",
+          description: "Enter a valid task name",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        setTaskName(task.name);
+        return;
+      }
       const token = localStorage.getItem("token");
 
       const data = {
