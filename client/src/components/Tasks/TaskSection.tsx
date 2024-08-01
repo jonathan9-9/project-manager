@@ -1,9 +1,11 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Button, Input, Text } from "@chakra-ui/react";
 import { Task } from "../UserStories/UserStoryAccordion";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
 import { ProjectProps } from "../../pages/Projects";
+import { GiCheckMark } from "react-icons/gi";
+import { FaUserEdit } from "react-icons/fa";
 
 interface Props {
   task: Task;
@@ -13,6 +15,17 @@ interface Props {
 
 const TaskSection = ({ task, idx, setProject }: Props) => {
   const [taskStatus, setTaskStatus] = useState(task.status);
+
+  const [taskName, setTaskName] = useState(task.name);
+  const [updateName, setUpdateName] = useState(false);
+
+  const handleEditClick = () => {
+    setUpdateName(!updateName);
+  };
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTaskName(e.target.value);
+  };
 
   const toast = useToast();
   const navigate = useNavigate();
@@ -67,6 +80,7 @@ const TaskSection = ({ task, idx, setProject }: Props) => {
 
         const updatedTask = await res.json();
         console.log("updatedTask", updatedTask);
+        setUpdateName(false);
         setProject(updatedTask);
         return updatedTask;
       }
@@ -97,7 +111,35 @@ const TaskSection = ({ task, idx, setProject }: Props) => {
       px={4}
       py={2}
     >
-      <Text>{task.name}</Text>
+      {updateName ? (
+        <Input
+          className="text-gray-200"
+          value={taskName}
+          onChange={handleValueChange}
+          flex={1}
+          height="28px"
+          type="text"
+        />
+      ) : (
+        <Text>{task.name}</Text>
+      )}
+      <Box ml={8} className="text-gray-200">
+        {updateName ? (
+          <GiCheckMark
+            cursor="pointer"
+            onClick={
+              updateName
+                ? () => {
+                    onSubmitUpdateTask("name", taskName);
+                  }
+                : handleEditClick
+            }
+          />
+        ) : (
+          <FaUserEdit cursor="pointer" onClick={handleEditClick} />
+        )}
+      </Box>
+
       <Button onClick={toggleTaskStatus}>{taskStatus}</Button>
     </Box>
   );
