@@ -2,6 +2,7 @@ import { Box, useDisclosure } from "@chakra-ui/react";
 import { Feature } from "../../pages/Project";
 import FeatureModal from "./FeatureModal";
 import { ProjectProps } from "../../pages/Projects";
+import { error } from "console";
 
 interface Props {
   feature: Feature;
@@ -12,9 +13,9 @@ interface Props {
 const FeatureSection = ({ feature, projectId, setProject }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const onCloseModal = () => {
+  const onCloseModal = async () => {
     const token = localStorage.getItem("token");
-    const response = fetch(
+    const response = await fetch(
       `http://localhost:3000/api/auth/project/${projectId}`,
       {
         headers: {
@@ -24,6 +25,12 @@ const FeatureSection = ({ feature, projectId, setProject }: Props) => {
         method: "GET",
       }
     );
+
+    if (response.ok) {
+      const project = await response.json();
+      setProject(project);
+      onClose();
+    }
   };
 
   console.log("FEATURE", feature);
@@ -44,7 +51,7 @@ const FeatureSection = ({ feature, projectId, setProject }: Props) => {
       </Box>
       <FeatureModal
         isOpen={isOpen}
-        onClose={onClose}
+        onClose={onCloseModal}
         featureName={feature ? feature.name : ""}
         featureDescription={
           (feature && feature.description) || "There is no feature description"

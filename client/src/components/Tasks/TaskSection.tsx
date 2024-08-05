@@ -3,18 +3,16 @@ import { Task } from "../UserStories/UserStoryAccordion";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
-import { ProjectProps } from "../../pages/Projects";
 import { GiCheckMark } from "react-icons/gi";
 import { FaUserEdit } from "react-icons/fa";
 
 interface Props {
   task: Task;
   idx: number;
-  setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
   setStoryStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TaskSection = ({ task, idx, setProject, setStoryStatus }: Props) => {
+const TaskSection = ({ task, idx, setStoryStatus }: Props) => {
   const [taskStatus, setTaskStatus] = useState(task.status);
 
   const [taskName, setTaskName] = useState(task.name);
@@ -93,7 +91,6 @@ const TaskSection = ({ task, idx, setProject, setStoryStatus }: Props) => {
         const updatedTask = await res.json();
         console.log("updatedTask", updatedTask);
         setUpdateName(false);
-        setProject(updatedTask);
         return updatedTask;
       }
     } catch (e) {

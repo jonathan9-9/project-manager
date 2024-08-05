@@ -62,7 +62,6 @@ const UserStoryAccordion = ({
               <TaskSection
                 task={task}
                 idx={idx}
-                setProject={setProject}
                 setStoryStatus={setStoryStatus}
               />
             );
