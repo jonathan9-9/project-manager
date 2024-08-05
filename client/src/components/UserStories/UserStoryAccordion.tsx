@@ -11,6 +11,7 @@ import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
 
 import { ProjectProps } from "../../pages/Projects";
 import TaskSection from "../Tasks/TaskSection";
+import { useState } from "react";
 
 type Props = {
   name: string;
@@ -39,6 +40,7 @@ const UserStoryAccordion = ({
   tasks,
   setProject,
 }: Props) => {
+  const [storyStatus, setStoryStatus] = useState(status);
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
@@ -48,7 +50,7 @@ const UserStoryAccordion = ({
               <div className="text-[#D8D8D8]">{name}</div>
             </Text>
 
-            <Text className="text-white">{status}</Text>
+            <Text className="text-white">{storyStatus}</Text>
 
             <AccordionIcon color="white" />
           </AccordionButton>
