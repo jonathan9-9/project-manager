@@ -1,8 +1,8 @@
-import { Box, useDisclosure } from "@chakra-ui/react";
+import { Box, useDisclosure, useToast } from "@chakra-ui/react";
 import { Feature } from "../../pages/Project";
 import FeatureModal from "./FeatureModal";
 import { ProjectProps } from "../../pages/Projects";
-import { error } from "console";
+import { useNavigate } from "react-router";
 
 interface Props {
   feature: Feature;
@@ -12,24 +12,39 @@ interface Props {
 
 const FeatureSection = ({ feature, projectId, setProject }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
+  const navigate = useNavigate();
 
   const onCloseModal = async () => {
     const token = localStorage.getItem("token");
-    const response = await fetch(
-      `http://localhost:3000/api/auth/project/${projectId}`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/auth/project/${projectId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
 
-        method: "GET",
+          method: "GET",
+        }
+      );
+
+      if (response.ok) {
+        const project = await response.json();
+        setProject(project);
+        onClose();
       }
-    );
-
-    if (response.ok) {
-      const project = await response.json();
-      setProject(project);
-      onClose();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      toast({
+        title: "An error occurred",
+        description: "Failed to load projects.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return navigate("/login");
     }
   };
 
