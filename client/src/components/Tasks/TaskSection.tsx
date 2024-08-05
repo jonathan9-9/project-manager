@@ -11,9 +11,10 @@ interface Props {
   task: Task;
   idx: number;
   setProject: React.Dispatch<React.SetStateAction<ProjectProps>>;
+  setStoryStatus: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TaskSection = ({ task, idx, setProject }: Props) => {
+const TaskSection = ({ task, idx, setProject, setStoryStatus }: Props) => {
   const [taskStatus, setTaskStatus] = useState(task.status);
 
   const [taskName, setTaskName] = useState(task.name);

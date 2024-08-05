@@ -12,6 +12,20 @@ interface Props {
 const FeatureSection = ({ feature, projectId, setProject }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const onCloseModal = () => {
+    const token = localStorage.getItem("token");
+    const response = fetch(
+      `http://localhost:3000/api/auth/project/${projectId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+
+        method: "GET",
+      }
+    );
+  };
+
   console.log("FEATURE", feature);
   return (
     <>
