@@ -34,6 +34,20 @@ export class UserStoriesService {
   }
 
   async getUserStoryStatusById(id: number) {
-    console.log(id);
+    const userStory = await this.prisma.userStory.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        tasks: true,
+      },
+    });
+    const tasks = userStory.tasks;
+
+    const taskCount = tasks.length;
+    const completedTasks = tasks.filter((task) => task.status === 'Done');
+    const numCompletedTasks = completedTasks.length;
+
+    return `${numCompletedTasks}/${taskCount}`;
   }
 }
