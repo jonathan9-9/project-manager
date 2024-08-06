@@ -1,4 +1,4 @@
-import { Box, Button, Center, Input, Text } from "@chakra-ui/react";
+import { Box, Button, Input, Text } from "@chakra-ui/react";
 import { Task } from "../UserStories/UserStoryAccordion";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
@@ -16,10 +16,10 @@ const TaskSection = ({ task, idx, setStoryStatus }: Props) => {
   const [taskStatus, setTaskStatus] = useState(task.status);
 
   const [taskName, setTaskName] = useState(task.name);
-  const [updateName, setUpdateName] = useState(false);
+  const [updateTaskName, setUpdateTaskName] = useState(false);
 
   const handleEditClick = () => {
-    setUpdateName(!updateName);
+    setUpdateTaskName(!updateTaskName);
   };
 
   const handleValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -91,7 +91,7 @@ const TaskSection = ({ task, idx, setStoryStatus }: Props) => {
         const updatedTask = await res.json();
 
         setStoryStatus(updatedTask);
-        setUpdateName(false);
+        setUpdateTaskName(false);
         return updatedTask;
       }
     } catch (e) {
@@ -122,7 +122,7 @@ const TaskSection = ({ task, idx, setStoryStatus }: Props) => {
       py={2}
       gap={4}
     >
-      {updateName ? (
+      {updateTaskName ? (
         <Input
           className="text-gray-200"
           value={taskName}
@@ -136,11 +136,11 @@ const TaskSection = ({ task, idx, setStoryStatus }: Props) => {
       )}
       <Box display="flex" alignItems="center">
         <Box className="text-gray-200" mr={1}>
-          {updateName ? (
+          {updateTaskName ? (
             <GiCheckMark
               cursor="pointer"
               onClick={
-                updateName
+                updateTaskName
                   ? () => {
                       onSubmitUpdateTask("name", taskName);
                     }

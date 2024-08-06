@@ -7,6 +7,7 @@ import {
   Text,
   Box,
   Input,
+  useToast,
 } from "@chakra-ui/react";
 import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
 
@@ -45,8 +46,9 @@ const UserStoryAccordion = ({
 }: Props) => {
   const [storyStatus, setStoryStatus] = useState(status);
   const [updateStoryName, setUpdateStoryName] = useState(false);
-
   const [storyName, setStoryName] = useState(name);
+
+  const toast = useToast();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStoryName(e.target.value);
@@ -54,6 +56,76 @@ const UserStoryAccordion = ({
 
   const handleEditClick = () => {
     setUpdateStoryName(!updateStoryName);
+  };
+
+  const onSubmitUpdateStory = async (
+    field: "name" | "description",
+    value: string
+  ) => {
+    try {
+      if (storyName === "") {
+        toast({
+          title: "Error",
+          description: "Enter a valid user story name",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+        });
+        setStoryName(name);
+        return;
+      }
+      const token = localStorage.getItem("token");
+
+      const data = {
+        field: field,
+        value: value,
+        userStoryId: userStoryId,
+      };
+
+      const url = "http://localhost:3000/api/auth/update-user-story";
+      const fetchConfig = {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      };
+
+      const res = await fetch(url, fetchConfig);
+
+      if (!res.ok) {
+        toast({
+          title: "Error",
+          description: "Unable to update task. Please try again.",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+
+        console.log("Error", res.statusText);
+
+        return;
+      } else {
+        toast({
+          title: "Success",
+          description: `Your task ${field} has been updated!`,
+          status: "success",
+          duration: 3000,
+          isClosable: true,
+          position: "top-right",
+        });
+
+        const updatedTask = await res.json();
+
+        setUpdateStoryName(false);
+
+        return updatedTask;
+      }
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -77,11 +149,18 @@ const UserStoryAccordion = ({
             )}
             {updateStoryName ? (
               <GiCheckMark
+                color="red"
+                className="mr-4"
                 cursor="pointer"
                 onClick={updateStoryName ? () => {} : handleEditClick}
               />
             ) : (
-              <FaUserEdit cursor="pointer" onClick={handleEditClick} />
+              <FaUserEdit
+                color="red"
+                cursor="pointer"
+                onClick={handleEditClick}
+                className="mr-4"
+              />
             )}
 
             <Text className="text-white">{storyStatus}</Text>
