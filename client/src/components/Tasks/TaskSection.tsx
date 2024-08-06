@@ -27,7 +27,7 @@ const TaskSection = ({ task, idx, setStoryStatus }: Props) => {
   };
 
   const toast = useToast();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const onSubmitUpdateTask = async (
     field: "status" | "name",

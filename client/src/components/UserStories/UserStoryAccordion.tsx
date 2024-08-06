@@ -13,6 +13,8 @@ import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
 import { ProjectProps } from "../../pages/Projects";
 import TaskSection from "../Tasks/TaskSection";
 import { useState } from "react";
+import { GiCheckMark } from "react-icons/gi";
+import { FaUserEdit } from "react-icons/fa";
 
 type Props = {
   name: string;
@@ -49,6 +51,11 @@ const UserStoryAccordion = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setStoryName(e.target.value);
   };
+
+  const handleEditClick = () => {
+    setUpdateStoryName(!updateStoryName);
+  };
+
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
@@ -67,6 +74,14 @@ const UserStoryAccordion = ({
               <Text flex={1} textAlign="left" textColor="white">
                 <div className="text-[#D8D8D8]">{name}</div>
               </Text>
+            )}
+            {updateStoryName ? (
+              <GiCheckMark
+                cursor="pointer"
+                onClick={updateStoryName ? () => {} : handleEditClick}
+              />
+            ) : (
+              <FaUserEdit cursor="pointer" onClick={handleEditClick} />
             )}
 
             <Text className="text-white">{storyStatus}</Text>
