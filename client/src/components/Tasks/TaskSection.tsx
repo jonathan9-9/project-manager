@@ -89,7 +89,8 @@ const TaskSection = ({ task, idx, setStoryStatus }: Props) => {
         });
 
         const updatedTask = await res.json();
-        console.log("updatedTask", updatedTask);
+
+        setStoryStatus(updatedTask);
         setUpdateName(false);
         return updatedTask;
       }

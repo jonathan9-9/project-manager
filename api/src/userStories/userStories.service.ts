@@ -32,4 +32,8 @@ export class UserStoriesService {
       throw new Error(`Error creating project: ${error.message}`);
     }
   }
+
+  async getUserStoryStatusById(id: number) {
+    console.log(id);
+  }
 }

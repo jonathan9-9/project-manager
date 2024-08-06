@@ -43,21 +43,9 @@ export class TasksService {
           id: taskId,
         },
         include: {
-          userStory: {
-            include: {
-              feature: {
-                include: {
-                  project: true,
-                },
-              },
-            },
-          },
+          userStory: true,
         },
       });
-
-      if (taskToUpdate.userStory.feature.project.userId !== userId) {
-        throw new Error('You do not have access to this task');
-      }
 
       await this.prisma.task.update({
         where: {
@@ -65,19 +53,11 @@ export class TasksService {
         },
         data: { [field]: value },
         include: {
-          userStory: {
-            include: {
-              feature: {
-                include: {
-                  project: true,
-                },
-              },
-            },
-          },
+          userStory: true,
         },
       });
 
-      return taskToUpdate.userStory.feature.project.id;
+      return taskToUpdate.userStory.id;
     } catch (error) {
       console.error(`Error updating tasks ${error.message}`);
     }

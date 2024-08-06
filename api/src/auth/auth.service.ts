@@ -309,14 +309,14 @@ export class AuthService {
     taskId: number,
   ) {
     try {
-      const projectId = await this.tasksService.updateTask(
+      const userStoryId = await this.tasksService.updateTask(
         field,
         value,
         userId,
         taskId,
       );
 
-      return await this.projectsService.getProjectById(projectId);
+      return await this.userStoriesService.getUserStoryStatusById(userStoryId);
     } catch (error) {
       throw error;
     }
