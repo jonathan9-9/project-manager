@@ -26,7 +26,7 @@ interface UserStoryProps {
 }
 
 // set project prop passed down to child components
-const MakeUserStoryAccordion = ({
+const CreateUserStoryAccordion = ({
   // userStories,
   // setUserStories,
   featureId,
@@ -156,4 +156,4 @@ const MakeUserStoryAccordion = ({
   );
 };
 
-export default MakeUserStoryAccordion;
+export default CreateUserStoryAccordion;

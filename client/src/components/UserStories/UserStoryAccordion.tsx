@@ -6,6 +6,7 @@ import {
   AccordionPanel,
   Text,
   Box,
+  Input,
 } from "@chakra-ui/react";
 import CreateTaskAccordion from "../Tasks/CreateTaskAccordion";
 
@@ -41,14 +42,32 @@ const UserStoryAccordion = ({
   setProject,
 }: Props) => {
   const [storyStatus, setStoryStatus] = useState(status);
+  const [updateStoryName, setUpdateStoryName] = useState(false);
+
+  const [storyName, setStoryName] = useState(name);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setStoryName(e.target.value);
+  };
   return (
     <Accordion allowToggle>
       <AccordionItem border="0px">
         <h2>
           <AccordionButton display="flex" justifyContent="space-between" p={4}>
-            <Text flex={1} textAlign="left" textColor="white">
-              <div className="text-[#D8D8D8]">{name}</div>
-            </Text>
+            {updateStoryName ? (
+              <Input
+                className="text-gray-200"
+                value={storyName}
+                onChange={onChange}
+                flex={1}
+                height="28px"
+                type="text"
+              />
+            ) : (
+              <Text flex={1} textAlign="left" textColor="white">
+                <div className="text-[#D8D8D8]">{name}</div>
+              </Text>
+            )}
 
             <Text className="text-white">{storyStatus}</Text>
 
