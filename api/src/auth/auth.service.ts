@@ -316,6 +316,7 @@ export class AuthService {
         taskId,
       );
 
+      // instead of returning project id update the user story status by its id
       return await this.userStoriesService.getUserStoryStatusById(userStoryId);
     } catch (error) {
       throw error;
