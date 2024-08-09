@@ -16,6 +16,7 @@ import TaskSection from "../Tasks/TaskSection";
 import { useState } from "react";
 import { GiCheckMark } from "react-icons/gi";
 import { FaUserEdit } from "react-icons/fa";
+import { redirect } from "react-router-dom";
 
 type Props = {
   name: string;
@@ -117,14 +118,23 @@ const UserStoryAccordion = ({
           position: "top-right",
         });
 
-        const updatedTask = await res.json();
+        const updatedUserStory = await res.json();
 
         setUpdateStoryName(false);
 
-        return updatedTask;
+        return updatedUserStory;
       }
     } catch (e) {
       console.error(e);
+      toast({
+        title: "An error occurred",
+        description: "Failed to load projects.",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return redirect("/login");
     }
   };
 

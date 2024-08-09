@@ -215,7 +215,6 @@ const router = createBrowserRouter([
 
               return data;
             } catch (error) {
-              console.error("Error fetching data:", error);
               toast({
                 title: "An error occurred",
                 description: "Failed to load projects.",
