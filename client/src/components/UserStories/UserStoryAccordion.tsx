@@ -128,7 +128,7 @@ const UserStoryAccordion = ({
       console.error(e);
       toast({
         title: "An error occurred",
-        description: "Failed to load projects.",
+        description: "Failed to load user stories.",
         status: "error",
         duration: 3000,
         isClosable: true,
@@ -162,7 +162,13 @@ const UserStoryAccordion = ({
                 color="red"
                 className="mr-4"
                 cursor="pointer"
-                onClick={updateStoryName ? () => {} : handleEditClick}
+                onClick={
+                  updateStoryName
+                    ? () => {
+                        onSubmitUpdateStory("name", storyName);
+                      }
+                    : handleEditClick
+                }
               />
             ) : (
               <FaUserEdit
