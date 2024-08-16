@@ -141,14 +141,37 @@ const UserStoryAccordion = ({
   return (
     <>
       {updateStoryName ? (
-        <Input
-          className="text-gray-200"
-          value={storyName}
-          onChange={onChange}
-          flex={1}
-          height="28px"
-          type="text"
-        />
+        <Box>
+          <Input
+            className="text-gray-200"
+            value={storyName}
+            onChange={onChange}
+            flex={1}
+            height="28px"
+            type="text"
+          />
+          {updateStoryName ? (
+            <GiCheckMark
+              color="red"
+              className="mr-4"
+              cursor="pointer"
+              onClick={
+                updateStoryName
+                  ? () => {
+                      onSubmitUpdateStory("name", storyName);
+                    }
+                  : handleEditClick
+              }
+            />
+          ) : (
+            <FaUserEdit
+              color="red"
+              cursor="pointer"
+              onClick={handleEditClick}
+              className="mr-4"
+            />
+          )}
+        </Box>
       ) : (
         <Accordion allowToggle>
           <AccordionItem border="0px">
@@ -162,27 +185,12 @@ const UserStoryAccordion = ({
                   <div className="text-[#D8D8D8]">{name}</div>
                 </Text>
 
-                {updateStoryName ? (
-                  <GiCheckMark
-                    color="red"
-                    className="mr-4"
-                    cursor="pointer"
-                    onClick={
-                      updateStoryName
-                        ? () => {
-                            onSubmitUpdateStory("name", storyName);
-                          }
-                        : handleEditClick
-                    }
-                  />
-                ) : (
-                  <FaUserEdit
-                    color="red"
-                    cursor="pointer"
-                    onClick={handleEditClick}
-                    className="mr-4"
-                  />
-                )}
+                <FaUserEdit
+                  color="red"
+                  cursor="pointer"
+                  onClick={handleEditClick}
+                  className="mr-4"
+                />
 
                 <Text className="text-white">{storyStatus}</Text>
 
