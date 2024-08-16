@@ -139,71 +139,78 @@ const UserStoryAccordion = ({
   };
 
   return (
-    <Accordion allowToggle>
-      <AccordionItem border="0px">
-        <h2>
-          <AccordionButton display="flex" justifyContent="space-between" p={4}>
-            {updateStoryName ? (
-              <Input
-                className="text-gray-200"
-                value={storyName}
-                onChange={onChange}
-                flex={1}
-                height="28px"
-                type="text"
-              />
-            ) : (
-              <Text flex={1} textAlign="left" textColor="white">
-                <div className="text-[#D8D8D8]">{name}</div>
-              </Text>
-            )}
-            {updateStoryName ? (
-              <GiCheckMark
-                color="red"
-                className="mr-4"
-                cursor="pointer"
-                onClick={
-                  updateStoryName
-                    ? () => {
-                        onSubmitUpdateStory("name", storyName);
-                      }
-                    : handleEditClick
-                }
-              />
-            ) : (
-              <FaUserEdit
-                color="red"
-                cursor="pointer"
-                onClick={handleEditClick}
-                className="mr-4"
-              />
-            )}
+    <>
+      {updateStoryName ? (
+        <Input
+          className="text-gray-200"
+          value={storyName}
+          onChange={onChange}
+          flex={1}
+          height="28px"
+          type="text"
+        />
+      ) : (
+        <Accordion allowToggle>
+          <AccordionItem border="0px">
+            <h2>
+              <AccordionButton
+                display="flex"
+                justifyContent="space-between"
+                p={4}
+              >
+                <Text flex={1} textAlign="left" textColor="white">
+                  <div className="text-[#D8D8D8]">{name}</div>
+                </Text>
 
-            <Text className="text-white">{storyStatus}</Text>
+                {updateStoryName ? (
+                  <GiCheckMark
+                    color="red"
+                    className="mr-4"
+                    cursor="pointer"
+                    onClick={
+                      updateStoryName
+                        ? () => {
+                            onSubmitUpdateStory("name", storyName);
+                          }
+                        : handleEditClick
+                    }
+                  />
+                ) : (
+                  <FaUserEdit
+                    color="red"
+                    cursor="pointer"
+                    onClick={handleEditClick}
+                    className="mr-4"
+                  />
+                )}
 
-            <AccordionIcon color="white" />
-          </AccordionButton>
-        </h2>
-        <AccordionPanel textColor="white" borderTop="1px" p={0}>
-          <Box p={4}>{description}</Box>
-          {tasks.map((task, idx) => {
-            return (
-              <TaskSection
-                task={task}
-                idx={idx}
-                setStoryStatus={setStoryStatus}
+                <Text className="text-white">{storyStatus}</Text>
+
+                <AccordionIcon color="white" />
+              </AccordionButton>
+            </h2>
+            <AccordionPanel textColor="white" borderTop="1px" p={0}>
+              <Box p={4}>{description}</Box>
+              {tasks.map((task, idx) => {
+                return (
+                  <TaskSection
+                    task={task}
+                    idx={idx}
+                    setStoryStatus={setStoryStatus}
+                  />
+                );
+              })}
+              <CreateTaskAccordion
+                featureId={featureId}
+                projectId={projectId}
+                userStoryId={userStoryId}
+                setProject={setProject}
               />
-            );
-          })}
-          <CreateTaskAccordion
-            featureId={featureId}
-            projectId={projectId}
-            userStoryId={userStoryId}
-            setProject={setProject}
-          />
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+            </AccordionPanel>
+          </AccordionItem>
+        </Accordion>
+      )}
+    </>
   );
 };
 
